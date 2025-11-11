@@ -1,9 +1,9 @@
 # shortest list
-
+0. python version should be 3.10.x-3.12.x
 1. download, or use git clone
 2. go to the <path>
-3. open with git bash (right click, more options, git bash here)
-4. Actice Virtual Environment( I am not sure if this step is necessary)
+3. open with git bash (right click on an empty space, click more options, click git bash here)
+4. Actice Virtual Environment
 ```bash
    source .venv/Scripts/activate
 ```
