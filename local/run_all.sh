@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ===== 基础设置 =====
-# 模板 notebook
+
+
 INPUT_NB="${INPUT_NB:-template.ipynb}"
-# 三列: FRAMEWORK,SOURCE,TOPIC
+
 CSV_FILE="${CSV_FILE:-input_fsource.csv}"
-# 生成的 .ipynb 输出目录
+
 OUT_DIR="${OUT_DIR:-runs}"
 KERNEL_NAME="${KERNEL_NAME:-python3}"
-# papermill 使用的 python
+
 PYTHON_BIN="${PYTHON_BIN:-python}"
-# 所有产物的根目录
+
 ARTIFACTS_ROOT="${ARTIFACTS_ROOT:-artifacts}"
 
 export PYTHONIOENCODING=UTF-8
