@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Hibernate,https://www.jetbrains.com/help/idea/hibernate-orm.html,Reports missing Hibernate XML configuration files. The quick-fix creates a facet if necessary and adds a configuration file to it.,"Rule missing-hibernate-xml-config {
+  for (file xml in getXMLs()) {
+    if (NOT pathExists(xml)) {
+      assert (false) {
+        msg(""Missing Hibernate XML configuration file: %s"", xml);
+      }
+    }
+  }
+}","This rule checks for missing Hibernate XML configuration files in the project. It iterates over all XML files and checks if the path to each file exists. If the path does not exist, it asserts false and reports the missing file.","No new built-in functions were introduced in this rule. The rule uses the following built-in functions: getXMLs, pathExists, and msg.",The rule is valid according to the RSL syntax and it correctly implements the logic described in the JetBrains web page. It checks for missing Hibernate XML configuration files and reports them.,"1. URL: https://stackoverflow.com/questions/4322893/hibernate-xml-not-found-exception
+Summary: This StackOverflow thread discusses a common issue where Hibernate cannot find the XML configuration file, which is similar to the problem addressed by the generated rule.
+
+2. URL: https://www.baeldung.com/hibernate-5-xml-configuration
+Summary: This tutorial on Baeldung explains how to configure Hibernate using XML files. It emphasizes the importance of correctly locating the XML configuration files, which aligns with the purpose of the generated rule.","The generated rule is valid and relevant to the topic. It checks for missing Hibernate XML configuration files, which is a common issue in Hibernate projects as evidenced by the discussions in the located 3rd-party web pages. Therefore, the rule can help developers identify and fix this issue in their projects.",https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846; https://medium.com/@AlexanderObregon/the-mechanics-of-request-mapping-in-spring-boot-92d1065cc0ad
