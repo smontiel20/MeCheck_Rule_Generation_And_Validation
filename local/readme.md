@@ -5,7 +5,7 @@
 3. open with git bash (right click on an empty space, click more options, click git bash here)
 4. Actice Virtual Environment
 ```bash
-   source .venv/Scripts/activate
+source .venv/Scripts/activate
 ```
 
 5. Install the Dependencies
