@@ -1,3 +1,0 @@
-{
-  "new_generated_rule_explanation": "This rule checks for missing Hibernate XML configuration files in the project. It iterates over all XML files and checks if the path to each file exists. If the path does not exist, it asserts false and reports the missing file."
-}

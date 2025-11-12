@@ -1,4 +1,0 @@
-FRAMEWORK,SOURCE,TOPIC,
-Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateFindAnnotationInspection.html,Incorrect use of @Find annotation﻿,
-Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomFacetInspection.html,Hibernate configuration XML is not added to facet﻿,
-AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ArgNamesErrorsInspection.html,"Advice parameters (argNames, returning, throwing) consistency check",
