@@ -1,0 +1,17 @@
+Rule incorrect-use-of-find-annotation {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Find')) {
+        String returnType = getReturnType(m);
+        assert (returnType == 'E' OR returnType == 'java.util.List<E>' OR returnType == 'org.hibernate.query.Query<E>' OR returnType == 'org.hibernate.query.SelectionQuery<E>' OR returnType == 'jakarta.persistence.Query<E>' OR returnType == 'jakarta.persistence.TypedQuery<E>') {
+          msg('The return type of method: %s in class: %s is not valid for @Find annotation', getName(m), getFQN(c));
+        }
+        for (String param in getParams(m)) {
+          assert (exists(field f in getFields(c)) (getName(f) == param AND getType(f) == getType(param))) {
+            msg('The parameter: %s of method: %s in class: %s does not match with any persistent field', param, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

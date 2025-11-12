@@ -1,0 +1,9 @@
+Rule missing-hibernate-config {
+  for (file xml in getXMLs()) {
+    if (NOT pathExists(xml)) {
+      assert (elementExists(xml, "<hibernate-configuration>")) {
+        msg("Missing Hibernate XML configuration file: %s", getName(xml));
+      }
+    }
+  }
+}

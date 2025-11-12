@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'missing-hibernate-config' checks for each XML file in the project. If the file does not exist, it asserts that the file should contain a '<hibernate-configuration>' element. If this assertion fails, it means the Hibernate XML configuration file is missing, and a message is displayed with the name of the missing file."
+}

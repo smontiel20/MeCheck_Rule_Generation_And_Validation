@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ArgNamesErrorsInspection.html,The source URL from JetBrains provides information about an inspection that reports if an @AspectJ argNames attribute value does not correspond to the actual method parameter name. This is a common issue in Aspect Oriented Programming (AOP) where the argNames attribute in an advice annotation does not match the actual parameter names in the method signature.,"Rule advice_argNames_consistency_check {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@AspectJ')) {
+        String argNames = getAnnoAttr(m, 'argNames');
+        if (NOT isEmpty(argNames)) {
+          assert ( exists(String paramName in getParamNames(m)) ( argNames == paramName ) ) {
+            msg(""The argNames attribute: %s in method: %s does not correspond to the actual method parameter name"",
+                argNames, getName(m));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'advice_argNames_consistency_check' checks all classes and their methods. If a method has an @AspectJ annotation, it retrieves the 'argNames' attribute from the annotation. If the 'argNames' attribute is not empty, it asserts that there exists a parameter name in the method's parameter names that matches the 'argNames' attribute. If the assertion fails, it generates a message indicating that the 'argNames' attribute does not correspond to the actual method parameter name.",,"The generated rule is valid according to the syntax of RSL and the content addressed in the JetBrains web page. It uses only the built-in functions and does not introduce any new ones. The rule checks for the consistency between the 'argNames' attribute in an @AspectJ annotation and the actual parameter names in the method, which is the topic addressed in the JetBrains web page.","1. URL: https://www.baeldung.com/aspectj
+Summary: This page provides a comprehensive guide to AspectJ, including how to define aspects, pointcuts, and advice. It mentions the use of 'argNames' in advice annotations, which is relevant to the generated rule.
+
+2. URL: https://www.eclipse.org/aspectj/doc/released/progguide/semantics-advice.html
+Summary: This page from the official AspectJ documentation explains the semantics of advice, including the use of 'argNames'. It provides examples of advice where 'argNames' are used, which is relevant to the generated rule.","The generated rule is valid and relevant to the topic and content addressed in the JetBrains web page and the 3rd-party web pages. The rule checks for the consistency between the 'argNames' attribute in an @AspectJ annotation and the actual parameter names in the method, which is a common issue in AOP as mentioned in the 3rd-party web pages.",https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846; https://medium.com/@AlexanderObregon/the-mechanics-of-request-mapping-in-spring-boot-92d1065cc0ad
