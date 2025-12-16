@@ -1,0 +1,34 @@
+FRAMEWORK,SOURCE,TOPIC,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTransactionalComponentInspection.html,Invalid 'PlatformTransactionManager' declaration in @Transactional component﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringContextConfigurationInspection.html,Invalid @ContextConfiguration﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingDirtiesContextInspection.html,Invalid @DirtiesContext 'mode' configuration,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingSqlInspection.html,Invalid @Sql and @SqlGroup configurations﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringComponentScan.html,Invalid package in @ComponentScan or its meta annotation﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingTransactionalInspection.html,Invalid transactional lifecycle method declaration﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringJavaAutowiredFieldsWarningInspection.html,Non recommended 'field' injections﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ContextJavaBeanUnresolvedMethodsInspection.html,Unknown init/destroy method in the @Bean annotation﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringImportResource.html,Unresolved file references in @ImportResource locations,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringPropertySource.html,Unresolved file references in @PropertySource and @TestPropertySource locations﻿,
+Spring Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDataMongoDBJsonFieldInspection.html,Spring Data MongoDB JSON unresolved fields﻿,Example
+Spring Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDataModifyingAnnotationMissing.html,"Update/Delete queries must be annotated with @Modifying, otherwise an InvalidDataAccessApiUsageException will be thrown.﻿",
+Spring Integration,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnresolvedMessageChannel.html,Incorrect 'channel' attribute in an endpoint method annotation﻿,Example
+Spring Integration,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringIntegrationMethodEndpointInconsistency.html,Incorrect Spring Integration endpoint method,Example
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MVCPathVariableInspection.html,Mismatch in @PathVariable declarations and usages﻿,Example
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringMVCInitBinder.html,Non-void @InitBinder method﻿,
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringMVCViewInspection.html,Unresolved view reference﻿,Example
+Spring Security,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringSecurityMethodCallsInspection.html,@PreFilter/@PreAuthorize/@PostFilter self-invocation method calls﻿,Example
+Spring Security,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringSecurityAnnotationBeanPointersResolveInspection.html,Incorrect configuration of Spring beans referenced in the Spring Security annotation﻿,Two Examples
+Micronaut,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnELInspection.html,Incorrect Micronaut Expression Language (MicronautEl) syntax﻿,Example
+Micronaut Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnUnresolvedPathVariable.html,Unresolved @PathVariable reference,Example
+Micronaut Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnCacheAnnotationParameters.html,Unresolved cache annotation parameter reference﻿,Example
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiInterceptorInspection.html,@Interceptor class without binding types,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiNormalScopeInspection.html,Bean with non-default scope declares public fields﻿,Example
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDecoratorInspection.html,Incorrect @Decorator class﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiSpecializesInspection.html,Incorrect @Specializes usage﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiStereotypeInspection.html,Incorrect @Stereotype annotation class﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiTypedAnnotationInspection.html,Incorrect @Typed annotation usage﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDomBeans.html,Incorrect bean definitions in beans.xml﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiInjectInspection.html,Incorrect dependency injection place﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDisposerMethodInspection.html,Incorrect disposer method﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiManagedBeanInconsistencyInspection.html,Incorrect managed bean definition﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiObservesInspection.html,Incorrect observer method﻿,
