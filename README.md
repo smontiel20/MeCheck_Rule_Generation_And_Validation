@@ -38,7 +38,7 @@ Each subfolder includes:
 
 ### 📂 `dataset/`
 
-This directory is organized to correspond to the structure of artifact-submission and provides:
+This directory is organized to correspond to the structure of artifact-submission and provides: 
 
 - Code snippet collections used to test each library/framework  
 - Coverage examples for validating rule behavior  
