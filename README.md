@@ -5,15 +5,15 @@ This repository is an enhanced duplicate of the original **MeCheck** engine, ava
 
 We extend the MeCheck framework by adding:
 
-- ✨ New analysis rules  
-- ✨ Additional code snippet datasets  
-- ✨ A Bash-based pipeline implementation under `MeCheck_GPT_Rule_Generation/`
+- New analysis rules  
+- Additional code snippet datasets  
+- A Bash-based pipeline implementation under `MeCheck_GPT_Rule_Generation/`
 
 ---
 
 ## 🚀 Project Structure
 
-### 📂 `MeCheck_GPT_Rule_Generation/`
+### `MeCheck_GPT_Rule_Generation/`
 
 This directory contains our pipeline implementation, including:
 
@@ -30,9 +30,9 @@ This directory contains our pipeline implementation, including:
 This folder contains newly created rule directories, organized by library or framework.  
 Each subfolder includes:
 
-- 📘 The rule definition  
-- 🧩 Supporting metadata  
-- 🔧 Any additional files needed for MeCheck to evaluate that rule  
+- The rule definition  
+- Supporting metadata  
+- Any additional files needed for MeCheck to evaluate that rule  
 
 ---
 
@@ -40,8 +40,8 @@ Each subfolder includes:
 
 This directory mirrors the structure of `artifact-submission/` and provides:
 
-- 🧪 Code snippet collections used to test each library/framework  
-- 🎯 Coverage examples for validating rule behavior  
+- Code snippet collections used to test each library/framework  
+- Coverage examples for validating rule behavior  
 
 Each dataset folder corresponds directly to a rule folder in `artifact-submission/`.
 
@@ -51,9 +51,9 @@ Each dataset folder corresponds directly to a rule folder in `artifact-submissio
 
 When rules are executed in the current implementation, their results are written here:
 
-- 📝 Rule evaluation outputs  
-- 🔍 Diagnostics and logs  
-- 📊 Generated summaries or result bundles  
+- Rule evaluation outputs  
+- Diagnostics and logs  
+- Generated summaries or result bundles  
 
 This folder helps track the outcome of running each of the generated rules.
 
@@ -63,8 +63,8 @@ This folder helps track the outcome of running each of the generated rules.
 
 This repository extends the original MeCheck engine with:
 
-- ✔️ New rules  
-- ✔️ Framework-specific datasets  
-- ✔️ A runnable rule-generation and evaluation pipeline  
+- New rules  
+- Framework-specific datasets  
+- A runnable rule-generation and evaluation pipeline  
 
 Please check the `MeCheck_GPT_Rule_Generation/README/` folder for detailed execution instructions.
