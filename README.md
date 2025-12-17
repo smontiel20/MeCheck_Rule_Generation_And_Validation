@@ -1,4 +1,4 @@
-# 📘 MeCheck Engine Extended – with new GPT-4-generated-then-human-modified rules and an LLM-powered rule generation/validation pipeline
+# 📘 MeCheck Engine Extended – with new GPT-4-generated-then-human-modified rules and an LLM-powered rule generation/validation pipeline ✔️
 
 This repository is an enhanced duplicate of the original **MeCheck** engine, available at:  
 🔗 https://zenodo.org/records/15205192
