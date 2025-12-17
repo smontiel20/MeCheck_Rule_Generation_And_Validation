@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringComponentScan.html,The source URL provides information about the @ComponentScan annotation in Spring Core. It reports unresolved packages in @ComponentScan annotations and corresponding aliased attributes of @ComponentScan meta annotations.,"Rule invalid-package-in-componentscan {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ComponentScan')) {
+      String[] packages = getAnnoAttr(c, '@ComponentScan', 'basePackages');
+      for (String pkg in packages) {
+        assert (classExists(pkg) OR isLibraryClass(pkg)) {
+          msg(""Package: %s in @ComponentScan of class: %s does not exist"", pkg, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'invalid-package-in-componentscan' checks all classes in the application. If a class has the @ComponentScan annotation, it retrieves the 'basePackages' attribute of the annotation which should contain the packages to scan. For each package in the 'basePackages', it asserts that the package exists as a class or is a library class. If the package does not exist, it generates a message indicating the package and the class with the @ComponentScan annotation.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new functions. The rule checks for the existence of packages specified in the @ComponentScan annotation of classes, which aligns with the topic and content provided.","1. URL: https://www.baeldung.com/spring-componentscan-filter Summary: This page from Baeldung explains the usage of @ComponentScan and its 'basePackages' attribute. It also discusses how to filter the components to be scanned. This is relevant to the rule as it deals with the same annotation and attribute.
+2. URL: https://stackoverflow.com/questions/39112039/componentscan-not-working Summary: This StackOverflow thread discusses a problem where @ComponentScan is not working as expected. The answers provide insights into possible reasons, including incorrect package names, which is what the rule checks for.",

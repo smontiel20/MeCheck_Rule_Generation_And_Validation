@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unknown_init_destroy_method' checks all classes in the project. If a class has the @Bean annotation, it retrieves the values of the 'initMethod' and 'destroyMethod' attributes. If these attributes are not empty, it asserts that the methods specified by these attributes exist in the class. If they do not exist, it generates a message indicating that the method cannot be resolved in the class."
+}

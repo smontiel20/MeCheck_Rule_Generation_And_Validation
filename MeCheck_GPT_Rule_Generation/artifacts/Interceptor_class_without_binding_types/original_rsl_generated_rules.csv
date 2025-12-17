@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+CDI,https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiInterceptorInspection.html,"The source URL provides information about a specific inspection in the CDI framework. It reports @Interceptor classes that do not specify at least one interceptor binding type, which is a requirement for proper functioning.","Rule interceptor_without_binding_type {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Interceptor')) {
+      assert ( exists(String bindingType in getAnnoAttrNames(c, '@Interceptor')) ( NOT isEmpty(bindingType) ) ) {
+        msg(""@Interceptor class: %s does not specify any binding type"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'interceptor_without_binding_type' checks all classes in the project. If a class has the '@Interceptor' annotation, it asserts that there exists at least one binding type specified in the '@Interceptor' annotation. If no binding type is found, it generates a message indicating that the '@Interceptor' class does not specify any binding type.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as 'getClasses', 'hasAnnotation', 'exists', 'getAnnoAttrNames', 'NOT', 'isEmpty', and 'getFQN'. The rule logic is sound as it checks for the existence of at least one binding type in '@Interceptor' annotated classes.","1. URL: https://docs.jboss.org/weld/reference/latest/en-US/html/interceptors.html
+Summary: This page from JBoss Weld documentation provides detailed information about interceptors in CDI, including the requirement for specifying binding types.
+
+2. URL: https://www.baeldung.com/java-cdi
+Summary: This tutorial on Baeldung explains the basics of CDI, including the use of interceptors and the importance of binding types.",

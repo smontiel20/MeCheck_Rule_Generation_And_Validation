@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiScopeInspection.html,"The source URL provides information about a rule that checks for incorrect bean scopes in CDI. Specifically, it states that a Singleton bean must be either @ApplicationScoped or @Dependent, and a Session stateless bean must be @Dependent.","Rule incorrect-bean-scope {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Singleton')) {
+      assert (hasAnnotation(c, '@ApplicationScoped') OR hasAnnotation(c, '@Dependent')) {
+        msg('Singleton bean: %s must be either @ApplicationScoped or @Dependent', getFQN(c));
+      }
+    }
+    if (hasAnnotation(c, '@Stateless') AND hasAnnotation(c, '@Session')) {
+      assert (hasAnnotation(c, '@Dependent')) {
+        msg('Session stateless bean: %s must be @Dependent', getFQN(c));
+      }
+    }
+  }
+}","The rule 'incorrect-bean-scope' checks all classes in the application. If a class is annotated as a Singleton, the rule asserts that it must also be annotated as either @ApplicationScoped or @Dependent. If a class is annotated as both Stateless and Session, the rule asserts that it must also be annotated as @Dependent. If these conditions are not met, a message is generated indicating the fully qualified name of the class and the required annotation.",,"The generated rule appears to be syntactically correct and follows the RSL syntax. It uses the built-in functions 'getClasses', 'hasAnnotation', 'getFQN', and 'msg', which are all valid and do not introduce any new functions. The rule also seems to correctly implement the logic described in the source URL.","1. https://www.baeldung.com/cdi-scopes: This page provides a detailed explanation of different CDI scopes, including @Singleton, @Dependent, and @SessionScoped. It explains how these annotations affect the lifecycle of beans and how they should be used correctly.
+2. https://docs.jboss.org/weld/reference/latest/en-US/html/scopescontexts.html: This page from the official JBoss Weld documentation provides a comprehensive overview of CDI scopes and contexts. It explains the purpose of each scope, including @Singleton, @Dependent, and @SessionScoped, and provides examples of their usage.",

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect_stereotype_annotation' checks all classes in the project. If a class has the @Stereotype annotation, the rule checks if it also has a @Named annotation. If it does, the rule asserts that the value of the @Named annotation should be empty. If it's not empty, an error message is generated. The rule also checks all annotations of the class. If any annotation has a 'Qualifier' attribute, an error message is generated because qualifier annotations are not allowed for stereotypes."
+}

@@ -1,0 +1,10 @@
+Rule missing-or-empty-prefix-in-configmapping {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@io.smallrye.config.ConfigMapping')) {
+      String prefix = getAnnoAttr(c, '@io.smallrye.config.ConfigMapping', 'prefix');
+      assert (NOT isEmpty(prefix)) {
+        msg("Missing or empty 'prefix' attribute value in the '@ConfigMapping' annotation in class: %s", getFQN(c));
+      }
+    }
+  }
+}

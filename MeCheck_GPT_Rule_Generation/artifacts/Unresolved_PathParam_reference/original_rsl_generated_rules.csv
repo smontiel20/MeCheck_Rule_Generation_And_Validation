@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+RESTful Web Service (JAX-RS),https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnresolvedRestParam.html,The source URL provides information about a common issue in RESTful web services where @PathParam parameters are declared in a method signature but are missing in the URL path or vice versa.,"Rule unresolved-path-param-reference {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PathParam')) {
+        String pathParam = getAnnoAttr(m, '@PathParam', 'value');
+        if (NOT isEmpty(pathParam)) {
+          assert ( exists(String url in getFQN(c)) ( url.indexOf(pathParam) != -1 ) ) {
+            msg('@PathParam: %s declared in method: %s of class: %s is not found in the URL path',
+                pathParam, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-path-param-reference' checks all classes and their methods. If a method has the '@PathParam' annotation, it retrieves the value of the '@PathParam'. If the '@PathParam' is not empty, it asserts that the '@PathParam' exists in the Fully Qualified Name (FQN) of the class (which represents the URL path). If the '@PathParam' is not found in the URL path, it generates a message indicating the '@PathParam', the method, and the class where the issue was found.",,,"1. https://www.baeldung.com/jax-rs-path-param: This page provides a comprehensive guide on how to use @PathParam in JAX-RS. It explains how to declare @PathParam in method signatures and how to include them in the URL path.
+2. https://stackoverflow.com/questions/17157806/jax-rs-pathparam-how-to-pass-a-string-with-slash-into-a-path-param: This StackOverflow thread discusses issues related to passing strings with slashes as @PathParam, which could lead to unresolved @PathParam references.",

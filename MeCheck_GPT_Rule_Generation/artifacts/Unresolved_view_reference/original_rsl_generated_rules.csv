@@ -1,0 +1,19 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringMVCViewInspection.html,The source URL provides information about a rule in JetBrains Inspectopedia that reports unresolved Spring MVC View references.,"Rule unresolved-view-reference {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<mvc:view>"") OR elementExists(xml, ""<mvc:view-resolver>"")) {
+      for (<mvc:view> view in getElms(xml, ""<mvc:view>"")) {
+        String viewName = getAttr(view, ""name"");
+        if (NOT isEmpty(viewName)) {
+          assert ( callExists(viewName) OR isLibraryClass(viewName) ) {
+            msg(""Unresolved view reference: %s in view: %s"", viewName, getName(view));
+          }
+        }
+      }
+    }
+  }
+}","This rule checks for unresolved view references in Spring MVC. It iterates over all XML files and checks if they contain '<mvc:view>' or '<mvc:view-resolver>' elements. For each '<mvc:view>' element, it retrieves the 'name' attribute and checks if it is not empty. If the 'name' attribute is not empty, it asserts that a call to this view exists or it is a library class. If the assertion fails, it generates a message indicating the unresolved view reference.",,"The rule syntax is correct according to the RSL syntax. The rule uses only the built-in functions and does not introduce any new functions. The rule checks for unresolved view references in Spring MVC, which is the intended purpose of the rule.","1. URL: https://www.baeldung.com/spring-mvc-view-resolver-tutorial
+Summary: This page provides a tutorial on how to use view resolvers in Spring MVC. It explains how view resolvers work and how to configure them in a Spring MVC application.
+
+2. URL: https://stackoverflow.com/questions/36724322/spring-mvc-unresolved-view
+Summary: This StackOverflow thread discusses a problem related to unresolved views in Spring MVC. The answers provide solutions and explanations for the problem.",

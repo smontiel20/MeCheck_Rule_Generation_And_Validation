@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Security,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringSecurityMethodCallsInspection.html,"The source URL explains a common issue in Spring Security where self-invocation of methods marked with @PreFilter, @PostFilter, or @PreAuthorize annotations do not work at runtime in proxy mode. This is because only external method calls coming through the proxy are intercepted, not the internal calls within the target object.","Rule self_invocation_method_calls {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PreFilter') OR hasAnnotation(m, '@PreAuthorize') OR hasAnnotation(m, '@PostFilter')) {
+        for (method innerM in getMethods(c)) {
+          if (callExists(innerM, getName(m))) {
+            assert (NOT isIterable(innerM)) {
+              msg('Method: %s in class: %s is self-invoked and may not work at runtime', getName(m), getFQN(c));
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'self_invocation_method_calls' checks all classes and their methods. If a method is annotated with @PreFilter, @PreAuthorize, or @PostFilter, it checks all other methods in the same class. If any of these methods call the annotated method, an assertion is made to ensure that the calling method is not iterable. If it is, a message is displayed indicating that the method is self-invoked and may not work at runtime.","The rule uses the following built-in functions: getClasses, getMethods, hasAnnotation, callExists, getName, isIterable, getFQN, and msg. No new functions were introduced.","The rule should correctly identify methods that are self-invoked and are annotated with @PreFilter, @PreAuthorize, or @PostFilter. It should also correctly identify if the calling method is iterable.","1. https://www.baeldung.com/spring-security-method-security: This page explains how to use method security in Spring Security, including the use of @PreAuthorize, @PostFilter, and @PreFilter annotations. It also mentions the issue of self-invocation not working in proxy mode.
+2. https://stackoverflow.com/questions/16899604/spring-security-preauthorize-annotation-returns-403-forbidden: This StackOverflow thread discusses issues with the @PreAuthorize annotation, including a case where a method is not being secured as expected due to self-invocation.",

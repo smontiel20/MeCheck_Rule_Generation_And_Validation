@@ -1,0 +1,14 @@
+Rule replace_code_with_javadoc_tag {
+  for (file javaFile in getFiles()) {
+    for (class c in getClasses(javaFile)) {
+      for (method m in getMethods(c)) {
+        String comment = getComment(m);
+        if (contains(comment, "<code>")) {
+          assert (NOT contains(comment, "<code>")) {
+            msg("The <code> tag in comment of method: %s in class: %s can be replaced with {@code ...} construct", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

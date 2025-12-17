@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "This rule checks for unresolved view references in Spring MVC. It iterates over all XML files and checks if they contain '<mvc:view>' or '<mvc:view-resolver>' elements. For each '<mvc:view>' element, it retrieves the 'name' attribute and checks if it is not empty. If the 'name' attribute is not empty, it asserts that a call to this view exists or it is a library class. If the assertion fails, it generates a message indicating the unresolved view reference."
+}

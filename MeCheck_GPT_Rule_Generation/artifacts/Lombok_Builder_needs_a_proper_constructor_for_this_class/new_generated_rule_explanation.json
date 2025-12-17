@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "This rule, named 'lombok-builder-all-args-constructor', iterates over all classes in the project. If a class is annotated with '@lombok.Builder', it asserts that there exists a constructor method in the class that takes all fields of the class as arguments. If such a constructor does not exist, it generates a message indicating that the class does not have a proper all-args constructor."
+}

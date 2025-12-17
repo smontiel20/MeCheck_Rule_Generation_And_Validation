@@ -1,0 +1,10 @@
+Rule check_converter_annotation {
+  for (class c in getClasses()) {
+    if (endsWith(getName(c), "Converter")) {
+      assert (hasAnnotation(c, "@Converter")) {
+        msg("The class: %s is a JPA converter but is not annotated with @Converter",
+            getFQN(c));
+      }
+    }
+  }
+}

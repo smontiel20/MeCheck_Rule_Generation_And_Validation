@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiAlternativeInspection.html,The source URL provides information about a rule that reports vetoed @Alternative beans in CDI. A bean is considered vetoed when it is annotated with @Vetoed or it is declared in a vetoed package.,"Rule vetoed-alternative-bean {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Vetoed') OR hasAnnotation(getFamily(c), '@Vetoed')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Alternative')) {
+          assert (false) {
+            msg('Vetoed @Alternative bean detected: %s in class: %s', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'vetoed-alternative-bean' checks all classes in the application. If a class or its package is annotated with '@Vetoed', it then checks all methods in that class. If any method is annotated with '@Alternative', it asserts false and generates a message indicating that a vetoed @Alternative bean has been detected, specifying the method and class names.","The rule uses the following built-in functions: getClasses, hasAnnotation, getFamily, getMethods, getName, getFQN. No new functions were introduced.",The rule syntax appears to be correct according to the RSL syntax. It uses only existing built-in functions and follows the structure of the provided example rules.,"1. 'https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#alternative_stereotypes': This page from the official CDI specification discusses the use of @Alternative and @Vetoed annotations, which is directly relevant to the rule.
+2. 'https://www.baeldung.com/java-cdi': This tutorial from Baeldung provides a practical example of using CDI, including the use of @Alternative and @Vetoed, which helps in understanding the context of the rule.",

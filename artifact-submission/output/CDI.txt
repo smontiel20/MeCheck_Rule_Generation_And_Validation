@@ -1,0 +1,3 @@
+[artifact-submission\dataset\CDI](afc5bc)	incorrectBeanScope.txt	Singleton bean: ScopedBeanA must be either @ApplicationScoped or @Dependent
+[artifact-submission\dataset\CDI](afc5bc)	incorrectBeanScope.txt	Session stateless bean: ScopedBeanE must be @Dependent
+[artifact-submission\dataset\CDI](afc5bc)	vetoedAlternativeBean.txt	Vetoed @Alternative bean detected: Vetoed

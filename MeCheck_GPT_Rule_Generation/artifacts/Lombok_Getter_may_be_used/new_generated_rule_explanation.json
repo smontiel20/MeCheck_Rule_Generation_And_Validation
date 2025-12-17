@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'lombok-getter-may-be-used' checks all classes in the project. For each class, it checks all methods. If a method's name starts with 'get' and the class does not have the Lombok @Getter annotation, it asserts that the return type of the method is the same as the type of the method. If the assertion fails, it generates a message indicating that the standard getter method can be replaced by the Lombok @Getter annotation."
+}

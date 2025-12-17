@@ -1,0 +1,22 @@
+Rule incorrect-specializes-usage {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Specializes')) {
+      assert (exists(class superclass in getFamily(c)) (isUniqueSN(superclass))) {
+        msg('Two or more classes cannot specialize the same superclass: %s', getFQN(superclass));
+      }
+      assert (NOT hasAnnotation(c, '@Named')) {
+        msg('@Named annotation cannot be used on the specializing class: %s', getFQN(c));
+      }
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Specializes')) {
+          assert (exists(method superMethod in getMethods(getFamily(c))) (hasAnnotation(superMethod, '@Produces'))) {
+            msg('Specializing method: %s must override a @Produces method of its direct superclass', getName(m));
+          }
+          assert (NOT getType(m).equals('static')) {
+            msg('Specializing method: %s cannot be static', getName(m));
+          }
+        }
+      }
+    }
+  }
+}

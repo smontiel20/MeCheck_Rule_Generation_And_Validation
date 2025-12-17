@@ -1,0 +1,26 @@
+Rule persistence_xml_problems {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<class>")) {
+      for (<class> class in getElms(xml, "<class>")) {
+        String className = getAttr(class, "name");
+        if (NOT isEmpty(className)) {
+          assert ( classExists(className) AND NOT isLibraryClass(className) ) {
+            msg("Class: %s mentioned in persistence.xml, is either non-instantiable or does not extend required class or has inappropriate scope", className);
+          }
+        }
+        if (hasAttr(class, "scope")) {
+          String scope = getAttr(class, "scope");
+          assert ( scope == "singleton" OR scope == "prototype" ) {
+            msg("Class: %s has inappropriate scope: %s", className, scope);
+          }
+        }
+        if (hasAttr(class, "name")) {
+          String name = getAttr(class, "name");
+          assert ( isUniqueSN(name) ) {
+            msg("Duplicate name: %s found in persistence.xml", name);
+          }
+        }
+      }
+    }
+  }
+}

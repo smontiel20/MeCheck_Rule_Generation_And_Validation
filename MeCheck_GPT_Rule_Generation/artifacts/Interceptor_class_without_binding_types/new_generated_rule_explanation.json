@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'interceptor_without_binding_type' checks all classes in the project. If a class has the '@Interceptor' annotation, it asserts that there exists at least one binding type specified in the '@Interceptor' annotation. If no binding type is found, it generates a message indicating that the '@Interceptor' class does not specify any binding type."
+}

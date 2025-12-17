@@ -1,0 +1,15 @@
+Rule unresolved-database-references {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<persistence-unit>")) {
+      for (<persistence-unit> unit in getElms(xml, "<persistence-unit>")) {
+        String dataSource = getAttr(unit, "jta-data-source");
+        if (NOT isEmpty(dataSource)) {
+          assert ( classExists(dataSource) OR isLibraryClass(dataSource) ) {
+            msg("Data source: %s mentioned in persistence unit: %s, cannot be resolved",
+                dataSource, getName(unit));
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTransactionalComponentInspection.html,The source URL provides information about a JetBrains inspection that reports PlatformTransactionManager classes that are not correctly defined in the application context for the current @Transactional component.,"Rule invalid-transaction-manager-declaration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Transactional')) {
+      String transactionManager = getAnnoAttr(c, '@Transactional', 'transactionManager');
+      if (NOT isEmpty(transactionManager)) {
+        assert ( exists(class tm in getClasses()) ( getName(tm) == transactionManager ) ) {
+          msg(""PlatformTransactionManager: %s is not correctly defined in the application context for the @Transactional component: %s"",
+              transactionManager, getName(c));
+        }
+      }
+    }
+  }
+}","The rule 'invalid-transaction-manager-declaration' checks all classes in the application. If a class has the '@Transactional' annotation, it retrieves the 'transactionManager' attribute from the annotation. If the 'transactionManager' attribute is not empty, it asserts that there exists a class in the application with the same name as the 'transactionManager'. If such a class does not exist, it generates a message indicating that the 'PlatformTransactionManager' is not correctly defined in the application context for the '@Transactional' component.",,,"1. URL: https://www.baeldung.com/spring-transactional-propagation-isolation
+Summary: This page provides a comprehensive guide on how to use the @Transactional annotation in Spring, including how to specify the transaction manager.
+
+2. URL: https://stackoverflow.com/questions/3423972/spring-transactional-what-happens-when-no-transaction-manager-is-configured
+Summary: This StackOverflow thread discusses what happens when no transaction manager is configured in a Spring application, which is relevant to the rule generated.",

@@ -1,0 +1,11 @@
+Rule obsolete-junit-assert-method-usage {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (getFQN(m) startsWith 'junit.framework.Assert') {
+        assert (NOT callExists(m)) {
+          msg('Obsolete junit.framework.Assert method: %s is called in class: %s', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

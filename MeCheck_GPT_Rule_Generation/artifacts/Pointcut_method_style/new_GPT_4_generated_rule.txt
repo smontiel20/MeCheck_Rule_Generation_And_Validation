@@ -1,0 +1,11 @@
+Rule pointcut-method-style {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Pointcut')) {
+        assert (getReturnType(m) == 'void' AND NOT hasParamType(m, 'throws') AND isEmpty(getBody(m))) {
+          msg('Method: %s in class: %s is a @Pointcut method but does not follow the style: void return type, no throws clause, and an empty method body', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomFacetInspection.html,"The source URL provides information about a JetBrains inspection that checks for missing Hibernate XML configuration files. If such files are missing, the inspection offers a quick-fix that creates a facet if necessary and adds a configuration file to it.","Rule hibernate-config-not-added-to-facet {
+  for (file xml in getXMLs()) {
+    if (NOT pathExists(xml)) {
+      assert (false) {
+        msg(""Hibernate configuration XML file: %s is not added to facet"", getName(xml));
+      }
+    }
+  }
+}","The rule 'hibernate-config-not-added-to-facet' checks all XML files in the project. If a Hibernate configuration XML file does not exist in the project, it asserts a failure and generates a message indicating that the Hibernate configuration XML file is not added to the facet.","The built-in functions used in this rule are 'getXMLs', 'pathExists', and 'getName'. No new functions were introduced.","The rule should correctly identify cases where Hibernate configuration XML files are missing from the project. It uses the 'getXMLs' function to retrieve all XML files, 'pathExists' to check if the file exists, and 'getName' to retrieve the name of the file for the error message.","1. URL: https://www.baeldung.com/hibernate-5-xml-configuration
+Summary: This page provides a comprehensive guide on how to configure Hibernate using XML files. It does not directly address the issue of missing configuration files but provides context on the importance of these files in a Hibernate project.
+
+2. URL: https://stackoverflow.com/questions/4322893/hibernate-xml-configuration-file-not-found
+Summary: This StackOverflow thread discusses issues related to Hibernate not finding the XML configuration file. It provides various solutions and insights from different users, which can be helpful in understanding the problem that the rule is trying to address.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

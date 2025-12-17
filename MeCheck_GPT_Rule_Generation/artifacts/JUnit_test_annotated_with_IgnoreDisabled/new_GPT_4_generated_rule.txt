@@ -1,0 +1,12 @@
+Rule ignored_or_disabled_junit_test {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Ignore') OR hasAnnotation(m, '@Disabled')) {
+        assert (NOT isEmpty(getAnnoAttr(m, 'value'))) {
+          msg("Test method: %s in class: %s is annotated with @Ignore or @Disabled without specifying a reason",
+              getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

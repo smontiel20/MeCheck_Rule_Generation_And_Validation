@@ -1,0 +1,11 @@
+Rule incorrect_MicronautEL_syntax {
+  for (file source in getFiles()) {
+    if (elementExists(source, "MicronautEL")) {
+      for (String expression in getElms(source, "MicronautEL")) {
+        assert ( NOT isEmpty(expression) AND (classExists(expression) OR methodExists(expression) OR fieldExists(expression)) ) {
+          msg("Syntax error in MicronautEL expression: %s in file: %s", expression, getName(source));
+        }
+      }
+    }
+  }
+}

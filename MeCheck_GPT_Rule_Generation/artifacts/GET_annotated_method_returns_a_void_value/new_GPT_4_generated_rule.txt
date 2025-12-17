@@ -1,0 +1,11 @@
+Rule voidMethodAnnotatedWithGET {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@GET')) {
+        assert (NOT getReturnType(m) == 'void') {
+          msg('Method: %s in class: %s annotated with @GET returns void', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'undeclared_path_mime_types_inspection' checks all classes and their methods in the application. If a method has the '@Path' annotation, the rule asserts that it should also have either the '@Produces' or '@Consumes' annotation. If this is not the case, it generates a message indicating the method and class that violate this rule."
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'entity-multiple-id-attributes' checks all classes in the project. If a class has the 'Entity' annotation, it then checks all fields in that class. If a field has the 'Id' annotation, it increments a counter. Finally, it asserts that the counter is less than or equal to 1, meaning there is at most one id attribute in the entity. If the assertion fails, it outputs a message indicating the fully qualified name of the entity class that has more than one id attribute."
+}

@@ -1,0 +1,14 @@
+Rule multiple_exceptions_declared_on_test_method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), "test")) {
+        if (getReturnType(m) == 'void') {
+          String[] exceptions = getExceptions(m);
+          assert (length(exceptions) <= 1) {
+            msg("Test method: %s in class: %s declares more than one exception. Consider replacing with a single exception.", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

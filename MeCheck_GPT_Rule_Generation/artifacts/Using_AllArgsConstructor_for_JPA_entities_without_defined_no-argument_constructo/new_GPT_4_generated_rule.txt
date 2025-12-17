@@ -1,0 +1,9 @@
+Rule lombok_all_args_no_default_constructor {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@AllArgsConstructor')) {
+      assert ( exists(method m in getMethods(c)) ( getName(m) == '<init>' AND hasParam(m, 0) ) ) {
+        msg("Class: %s uses @AllArgsConstructor but does not define a no-argument constructor, which breaks JPA specification", getFQN(c));
+      }
+    }
+  }
+}

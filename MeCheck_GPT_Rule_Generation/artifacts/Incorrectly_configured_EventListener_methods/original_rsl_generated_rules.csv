@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringEventListenerInspection.html,The source URL provides information about a JetBrains inspection tool that reports incorrectly configured @EventListener methods in Spring applications.,"Rule incorrectly-configured-eventlistener-methods {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@EventListener')) {
+        assert (getReturnType(m).equals('void') AND (getArg(m).size() == 1 OR getArg(m).size() == 0)) {
+          msg(""Method: %s in class: %s is incorrectly configured as an @EventListener method"", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrectly-configured-eventlistener-methods' checks all classes and their methods in a Spring application. If a method is annotated with @EventListener, the rule asserts that the return type of the method is void and it either has no arguments or only one argument. If these conditions are not met, the rule generates a message indicating that the method is incorrectly configured as an @EventListener method.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as getClasses, getMethods, hasAnnotation, getReturnType, getArg, getName, and getFQN. The rule does not introduce any new built-in functions.","1. URL: https://www.baeldung.com/spring-events
+Summary: This page provides a comprehensive guide on how to use Spring Events, including the correct configuration of @EventListener methods.
+
+2. URL: https://stackoverflow.com/questions/36968963/how-to-configure-eventlistener-in-spring
+Summary: This StackOverflow thread discusses how to correctly configure @EventListener methods in Spring, which is directly relevant to the generated rule.",

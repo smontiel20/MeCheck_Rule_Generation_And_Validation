@@ -1,0 +1,12 @@
+Rule unresolved-file-references-in-importresource {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "@ImportResource")) {
+      String[] locations = getAnnoAttr(c, "@ImportResource", "locations");
+      for (String location in locations) {
+        assert (pathExists(location)) {
+          msg("Unresolved file or directory: %s in @ImportResource annotation in class: %s", location, getFQN(c));
+        }
+      }
+    }
+  }
+}

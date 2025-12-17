@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Integration,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringIntegrationMethodEndpointInconsistency.html,The source URL provides information about a common inconsistency issue in Spring Integration endpoint method declarations. It reports incorrect method declarations and provides examples of such inconsistencies.,"Rule incorrect-endpoint-method-declaration {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<endpoint>"")) {
+      for (<endpoint> endpoint in getElms(xml, ""<endpoint>"")) {
+        String endpointMethod = getAttr(endpoint, ""method"");
+        if (NOT isEmpty(endpointMethod)) {
+          assert ( exists(method m in getMethods(locateClassFQN(getAttr(endpoint, ""class"")))) ( getName(m) == endpointMethod ) ) {
+            msg(""Incorrect method: %s declared in endpoint: %s"", endpointMethod, getName(endpoint));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-endpoint-method-declaration' checks all XML files for endpoint elements. For each endpoint, it retrieves the 'method' attribute and checks if it is not empty. If the method attribute is not empty, it asserts that a method with the same name exists in the class specified in the 'class' attribute of the endpoint. If such a method does not exist, it generates a message indicating the incorrect method declaration in the endpoint.",,,"https://www.baeldung.com/spring-integration: This page provides a comprehensive guide to Spring Integration, including endpoint configuration. It does not specifically address incorrect method declarations, but it provides context for understanding the rule.
+
+https://docs.spring.io/spring-integration/docs/current/reference/html/overview.html: This is the official Spring Integration reference documentation. It provides detailed information about endpoint configuration and could be used to understand the implications of incorrect method declarations.",

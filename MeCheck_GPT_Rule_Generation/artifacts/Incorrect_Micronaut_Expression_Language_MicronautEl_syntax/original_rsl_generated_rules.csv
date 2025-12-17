@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Micronaut,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnELInspection.html,"The source URL provides information about a JetBrains inspection tool that reports syntax errors in the Micronaut Expression Language (MicronautEL) code, such as unresolved references.","Rule incorrect_MicronautEL_syntax {
+  for (file source in getFiles()) {
+    if (elementExists(source, ""MicronautEL"")) {
+      for (String expression in getElms(source, ""MicronautEL"")) {
+        assert ( NOT isEmpty(expression) AND (classExists(expression) OR methodExists(expression) OR fieldExists(expression)) ) {
+          msg(""Syntax error in MicronautEL expression: %s in file: %s"", expression, getName(source));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect_MicronautEL_syntax' checks each file in the project for elements of Micronaut Expression Language (MicronautEL). For each MicronautEL expression found, it asserts that the expression is not empty and that it corresponds to an existing class, method, or field. If the assertion fails, it generates a message reporting a syntax error in the MicronautEL expression, specifying the expression and the file where it was found.",,"The rule 'incorrect_MicronautEL_syntax' is syntactically correct according to the Rule-Specific Language (RSL) syntax. It uses only the built-in functions 'getFiles', 'elementExists', 'getElms', 'isEmpty', 'classExists', 'methodExists', 'fieldExists', and 'getName'.","1. URL: https://micronaut-projects.github.io/micronaut-el/latest/guide/index.html
+Summary: This is the official documentation for Micronaut Expression Language (MicronautEL). It provides a comprehensive guide on how to use MicronautEL, which can be useful for understanding the context of the generated rule.
+
+2. URL: https://stackoverflow.com/questions/62538303/micronaut-data-jpa-query-syntax-error
+Summary: This StackOverflow thread discusses a syntax error in a Micronaut Data JPA query, which is similar to the kind of errors the generated rule is designed to catch in MicronautEL code.",

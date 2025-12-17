@@ -1,0 +1,13 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+RESTful Web Service (JAX-RS),https://www.jetbrains.com.cn/en-us/help/inspectopedia/VoidMethodAnnotatedWithGET.html,"The source URL provides information about a common issue in RESTful Web Services where methods annotated with @GET do not return anything. According to the source, methods annotated with @GET must have a non-void return type.","Rule voidMethodAnnotatedWithGET {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@GET')) {
+        assert (NOT getReturnType(m) == 'void') {
+          msg('Method: %s in class: %s annotated with @GET returns void', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'voidMethodAnnotatedWithGET' checks all classes and their methods. If a method is annotated with @GET, it asserts that the return type of the method is not void. If the return type is void, it generates a message indicating the method and class where this issue occurs.","The rule uses the following built-in functions: getClasses, getMethods, hasAnnotation, getReturnType, getName, getFQN. No new functions were introduced.",,"1. https://www.baeldung.com/jax-rs-response: This page from Baeldung discusses how to properly use the @GET annotation in JAX-RS. It emphasizes that methods annotated with @GET should return a Response object, not void.
+2. https://stackoverflow.com/questions/20193003/how-to-return-nothing-with-a-get-restful-service-method: This StackOverflow thread discusses the issue of methods returning void in a RESTful service. The consensus is that it's not good practice for a method with a @GET annotation to return void.",

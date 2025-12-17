@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaModelReferenceInspection.html,"The source URL provides information about a JetBrains inspection that reports unresolved symbols in JPA annotations and API methods such as AttributeOverride, AssociationOverride, MapsId, MapKey, and Criteria API methods.","Rule unresolved-references-in-queries {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'AttributeOverride') OR hasAnnotation(c, 'AssociationOverride') OR hasAnnotation(c, 'MapsId') OR hasAnnotation(c, 'MapKey')) {
+      String attrName = getAnnoAttr(c, 'name');
+      if (NOT isEmpty(attrName)) {
+        assert ( exists(field f in getFields(c)) ( getName(f) == attrName ) ) {
+          msg(""Unresolved reference: %s in class: %s"", attrName, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-references-in-queries' checks for each class in the project. If the class has any of the annotations 'AttributeOverride', 'AssociationOverride', 'MapsId', or 'MapKey', it retrieves the attribute name from the annotation. If the attribute name is not empty, it asserts that a field with the same name exists in the class. If the field does not exist, it generates a message indicating the unresolved reference and the class where it was found.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as getClasses, hasAnnotation, getAnnoAttr, isEmpty, exists, getFields, getName, and getFQN. The rule logic is sound as it checks for unresolved references in JPA annotations and API methods as per the JetBrains inspection.","1. https://www.baeldung.com/jpa-attribute-overrides: This page provides a detailed explanation of the AttributeOverride annotation in JPA, which is one of the annotations checked in the rule.
+2. https://www.objectdb.com/java/jpa/query/criteria: This page explains the Criteria API in JPA, which is also checked in the rule. Both pages are relevant as they provide information about the JPA annotations and API methods that the rule checks for unresolved references.",

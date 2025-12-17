@@ -1,0 +1,9 @@
+Rule old-configuration-annotation-used {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Configuration')) {
+      assert ( NOT hasAnnotation(c, '@Configuration') ) {
+        msg('The class: %s uses the outdated @Configuration annotation. Consider using the modern @BeforeXXX / @AfterXXX annotations.', getFQN(c));
+      }
+    }
+  }
+}

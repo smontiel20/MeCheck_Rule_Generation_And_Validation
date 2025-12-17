@@ -1,0 +1,15 @@
+Rule invalid-context-configuration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ContextConfiguration')) {
+      String[] locations = getAnnoAttr(c, '@ContextConfiguration', 'locations');
+      for (String location in locations) {
+        assert (pathExists(location)) {
+          msg("Unresolved file or directory in @ContextConfiguration locations attribute: %s in class: %s", location, getFQN(c));
+        }
+      }
+      if (NOT exists(file defaultContextFile in getXMLs()) (getName(defaultContextFile) == 'applicationContext.xml')) {
+        msg("Missing default application context file 'applicationContext.xml' in class: %s", getFQN(c));
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MetaAnnotationWithoutRuntimeRetention.html,"The source URL describes a common issue in JUnit where annotations with a SOURCE or CLASS retention policy are used. These annotations are not available at runtime and should be fixed to be accessible through reflection. If the retention policy is not specified, the default retention policy CLASS is used.","Rule TestAnnotationWithoutRuntimeRetention {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'Test')) {
+      if (NOT hasAnnoAttr(c, 'Retention(RUNTIME)')) {
+        assert ( hasAnnoAttr(c, 'Retention(CLASS)') OR hasAnnoAttr(c, 'Retention(SOURCE)') ) {
+          msg(""Annotation: %s in class: %s does not have '@Retention(RUNTIME)' annotation"", 'Test', getName(c));
+        }
+      }
+    }
+  }
+}","The rule 'TestAnnotationWithoutRuntimeRetention' checks for each class in the project if it has the 'Test' annotation. If the class has the 'Test' annotation but does not have the '@Retention(RUNTIME)' annotation, it asserts whether the class has either the 'Retention(CLASS)' or 'Retention(SOURCE)' annotation. If the assertion is true, it generates a message indicating that the 'Test' annotation in the class does not have the '@Retention(RUNTIME)' annotation.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions: getClasses, hasAnnotation, hasAnnoAttr, and getName. The rule logic is sound as it checks for the presence of the 'Test' annotation and the absence of the '@Retention(RUNTIME)' annotation, and then asserts the presence of either 'Retention(CLASS)' or 'Retention(SOURCE)' annotations.","1. URL: https://www.baeldung.com/junit-5
+Summary: This page provides a comprehensive guide to JUnit 5, including the use of annotations. It explains the importance of the 'Test' annotation and the '@Retention(RUNTIME)' annotation for runtime reflection.
+
+2. URL: https://www.javatpoint.com/java-annotations
+Summary: This page explains Java annotations, including retention policies. It mentions that the '@Retention(RUNTIME)' annotation makes the annotation accessible at runtime, which is crucial for JUnit testing.",

@@ -1,0 +1,11 @@
+Rule TestAnnotationWithoutRuntimeRetention {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'Test')) {
+      if (NOT hasAnnoAttr(c, 'Retention(RUNTIME)')) {
+        assert ( hasAnnoAttr(c, 'Retention(CLASS)') OR hasAnnoAttr(c, 'Retention(SOURCE)') ) {
+          msg("Annotation: %s in class: %s does not have '@Retention(RUNTIME)' annotation", 'Test', getName(c));
+        }
+      }
+    }
+  }
+}

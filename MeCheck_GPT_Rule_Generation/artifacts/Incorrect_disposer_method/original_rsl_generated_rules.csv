@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+CDI,https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDisposerMethodInspection.html,The source URL provides information about a rule that checks for incorrect disposer methods in CDI. The rule states that disposer methods cannot be abstract and must have exactly one disposed parameter annotated with @Disposes.,"Rule incorrect-disposer-method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Disposes')) {
+        assert (NOT isAbstract(m) AND hasParamType(m, '@Disposes') AND getArg(m) == 1) {
+          msg('Incorrect disposer method: %s in class: %s. It is either abstract, does not have exactly one disposed parameter annotated with @Disposes, or both.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-disposer-method' checks all classes and their methods. If a method has the annotation '@Disposes', it asserts that the method is not abstract, has a parameter type of '@Disposes', and has exactly one argument. If these conditions are not met, it generates a message indicating the incorrect disposer method and the class it belongs to.",,"The rule 'incorrect-disposer-method' is syntactically correct and follows the RSL syntax. It uses the built-in functions 'getClasses', 'getMethods', 'hasAnnotation', 'isAbstract', 'hasParamType', 'getArg', 'getName', and 'getFQN'. No new functions were introduced.","1. URL: https://www.baeldung.com/cdi-produce-dispose
+Summary: This page provides a detailed explanation of CDI's producer and disposer methods, including the use of the @Disposes annotation. It explains that a disposer method must have exactly one parameter annotated with @Disposes.
+
+2. URL: https://docs.jboss.org/weld/reference/latest/en-US/html/injection.html
+Summary: This official documentation from JBoss explains how CDI works, including the use of disposer methods. It states that disposer methods cannot be abstract and must have exactly one parameter annotated with @Disposes.",

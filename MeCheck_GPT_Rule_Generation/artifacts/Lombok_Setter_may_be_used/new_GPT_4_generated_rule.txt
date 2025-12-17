@@ -1,0 +1,11 @@
+Rule lombok-setter-may-be-used {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), "set") AND hasParamType(m, 0, "Object")) {
+        assert ( hasAnnotation(m, "lombok.Setter") ) {
+          msg("Standard setter method: %s in class: %s can be replaced by lombok @Setter annotation", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

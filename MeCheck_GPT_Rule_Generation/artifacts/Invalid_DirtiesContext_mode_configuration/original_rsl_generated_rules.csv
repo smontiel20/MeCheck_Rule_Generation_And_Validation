@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingDirtiesContextInspection.html,The source URL provides information about a JetBrains Inspectopedia rule that reports incorrect 'mode' configuration in the @DirtiesContext annotation in Spring Testing.,"Rule invalid-dirtiescontext-mode-configuration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@DirtiesContext')) {
+      String mode = getAnnoAttr(c, '@DirtiesContext', 'mode');
+      assert (mode == 'AFTER_EACH_TEST_METHOD' OR mode == 'AFTER_CLASS' OR mode == 'BEFORE_EACH_TEST_METHOD' OR mode == 'BEFORE_CLASS') {
+        msg('Invalid mode configuration: %s in @DirtiesContext annotation in class: %s', mode, getFQN(c));
+      }
+    }
+  }
+}","The rule 'invalid-dirtiescontext-mode-configuration' checks all classes in the project. If a class has the @DirtiesContext annotation, it retrieves the 'mode' attribute of the annotation. It then asserts that the 'mode' attribute is one of the valid values: 'AFTER_EACH_TEST_METHOD', 'AFTER_CLASS', 'BEFORE_EACH_TEST_METHOD', or 'BEFORE_CLASS'. If the 'mode' attribute is not one of these values, it reports an error message indicating the invalid mode configuration in the @DirtiesContext annotation for the class.",,"The rule is syntactically correct and uses only the built-in functions. It follows the RSL syntax and uses the functions getClasses, hasAnnotation, getAnnoAttr, and getFQN. The rule checks for the @DirtiesContext annotation in all classes and validates the 'mode' attribute of the annotation.","1. URL: https://www.baeldung.com/spring-dirtiescontext
+Summary: This page provides a detailed explanation of the @DirtiesContext annotation in Spring Testing. It explains the different modes that can be configured in the 'mode' attribute of the annotation.
+
+2. URL: https://stackoverflow.com/questions/48714116/what-is-the-use-of-dirtiescontext-in-spring
+Summary: This StackOverflow thread discusses the use of the @DirtiesContext annotation in Spring Testing. It also mentions the 'mode' attribute and its possible values.",

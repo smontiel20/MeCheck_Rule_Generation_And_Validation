@@ -1,0 +1,20 @@
+Rule serial-annotation-usage {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Serial')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Serial')) {
+          assert (getReturnType(m) == 'void' AND hasParamType(m, 'java.io.ObjectOutputStream')) {
+            msg("Method: %s in class: %s is not suitable to be annotated with @Serial", getName(m), getFQN(c));
+          }
+        }
+        for (field f in getFields(c)) {
+          if (hasAnnotation(f, '@Serial')) {
+            assert (getType(f) == 'long' AND getName(f) == 'serialVersionUID') {
+              msg("Field: %s in class: %s is not suitable to be annotated with @Serial", getName(f), getFQN(c));
+            }
+          }
+        }
+      }
+    }
+  }
+}

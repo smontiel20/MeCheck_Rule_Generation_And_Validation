@@ -1,0 +1,9 @@
+Rule JUnit4_to_JUnit5_conversion {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'org.junit.Test')) {
+      assert (NOT exists(method m in getMethods(c)) (hasAnnotation(m, 'org.junit.runners.Parameterized')) OR hasAnnotation(m, 'org.junit.runners.BlockJUnit4ClassRunner')) {
+        msg('Class: %s contains JUnit 4 tests that cannot be automatically migrated to JUnit 5 due to custom runners, method- or field- rules.', getFQN(c));
+      }
+    }
+  }
+}

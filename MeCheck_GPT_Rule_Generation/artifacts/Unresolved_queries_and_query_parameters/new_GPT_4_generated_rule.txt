@@ -1,0 +1,21 @@
+Rule unresolved-queries-and-parameters {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, "NamedQuery") OR hasAnnotation(m, "NativeQuery")) {
+        String queryName = getAnnoAttr(m, "name");
+        if (NOT isEmpty(queryName)) {
+          assert ( callExists(queryName) ) {
+            msg("Unknown named query: %s in method: %s", queryName, getName(m));
+          }
+        }
+        if (hasParam(m)) {
+          for (String param in getArg(m)) {
+            assert ( hasParamType(m, param) ) {
+              msg("Unknown query parameter: %s in method: %s", param, getName(m));
+            }
+          }
+        }
+      }
+    }
+  }
+}

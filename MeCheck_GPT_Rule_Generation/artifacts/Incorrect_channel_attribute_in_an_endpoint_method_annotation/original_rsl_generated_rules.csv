@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Integration,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnresolvedMessageChannel.html,"The source URL provides information about a common issue in Spring Integration where incorrect channel attributes are used in endpoint method annotations such as @Gateway, @ServiceActivator, @Filter, etc. The page provides an example of this issue and explains how it can be resolved.","Rule incorrect-channel-attribute {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Gateway') OR hasAnnotation(m, '@ServiceActivator') OR hasAnnotation(m, '@Filter')) {
+        String channelAttr = getAnnoAttr(m, 'channel');
+        if (NOT isEmpty(channelAttr)) {
+          assert ( exists(field f in getFields(c)) ( getName(f) == channelAttr ) ) {
+            msg(""Incorrect 'channel' attribute: %s in method: %s of class: %s"", channelAttr, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-channel-attribute' checks all classes and their methods. If a method has either @Gateway, @ServiceActivator, or @Filter annotation, it retrieves the 'channel' attribute from the annotation. If the 'channel' attribute is not empty, it asserts that a field with the same name as the 'channel' attribute exists in the class. If the assertion fails, it generates a message indicating the incorrect 'channel' attribute in the method of the class.",,,"https://docs.spring.io/spring-integration/docs/current/reference/html/messaging-endpoints-chapter.html: This page provides detailed information about messaging endpoints in Spring Integration, including the use of @Gateway, @ServiceActivator, and @Filter annotations and their 'channel' attributes.
+https://stackoverflow.com/questions/39122914/spring-integration-gateway-no-replychannel-header-available: This StackOverflow thread discusses a specific issue related to the 'channel' attribute in the @Gateway annotation in Spring Integration, which is relevant to the rule generated.",

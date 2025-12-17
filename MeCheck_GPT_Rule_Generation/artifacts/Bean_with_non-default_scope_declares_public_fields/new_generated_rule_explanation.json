@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'bean-with-non-default-scope-declares-public-fields' checks for each class in the application. If a class does not have the '@Dependent' annotation, it checks for each field in the class. If a field is public, it asserts that the class does not have '@RequestScoped', '@ApplicationScoped', '@SessionScoped', or 'ConversationScoped' annotations. If the assertion fails, it generates a message indicating that the managed bean with the public field is not in the default @Dependent scope."
+}

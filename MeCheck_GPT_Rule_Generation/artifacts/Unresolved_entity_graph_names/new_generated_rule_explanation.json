@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-entity-graph-names' checks for Hibernate XML configuration errors. It iterates over all XML files and checks for the existence of '<class>' elements. For each '<class>' element, it retrieves the 'name' attribute and checks if the class exists or is a library class. If the class does not exist or is not instantiable, it reports an error. The rule also checks if the class extends another class by checking the 'extends' attribute. If the superclass does not exist, it reports an error."
+}

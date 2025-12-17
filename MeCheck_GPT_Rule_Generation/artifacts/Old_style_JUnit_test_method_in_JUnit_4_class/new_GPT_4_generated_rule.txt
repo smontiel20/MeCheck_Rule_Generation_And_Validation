@@ -1,0 +1,13 @@
+Rule old_style_junit_test_method_in_junit4_class {
+  for (class c in getClasses()) {
+    if (NOT hasAnnotation(c, 'org.junit.Test')) {
+      for (method m in getMethods(c)) {
+        if (startsWith(getName(m), 'test') AND NOT hasAnnotation(m, 'org.junit.Test')) {
+          assert (getSuperclass(c) == 'junit.framework.TestCase') {
+            msg('JUnit 3 style test method: %s in JUnit 4 class: %s cannot be run', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

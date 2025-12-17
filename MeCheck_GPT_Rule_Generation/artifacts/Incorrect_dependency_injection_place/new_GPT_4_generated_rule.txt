@@ -1,0 +1,18 @@
+Rule incorrect-injection-place {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, '@Inject')) {
+        assert (NOT (isFinal(f) OR isStatic(f) OR hasAnnotation(f, '@Produces'))) {
+          msg('Field: %s in class: %s is incorrectly injected', getName(f), getFQN(c));
+        }
+      }
+    }
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Inject')) {
+        assert (NOT (isAbstract(m) OR isStatic(m) OR hasParamType(m, '@Disposes') OR hasParamType(m, '@Observes'))) {
+          msg('Method: %s in class: %s is incorrectly injected', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

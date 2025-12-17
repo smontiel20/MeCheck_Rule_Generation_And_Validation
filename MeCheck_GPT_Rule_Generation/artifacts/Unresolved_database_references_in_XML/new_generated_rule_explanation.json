@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-database-references' checks all XML files for the existence of '<persistence-unit>' elements. For each persistence unit, it retrieves the 'jta-data-source' attribute, which should represent a data source. If the data source is not empty, the rule asserts that the data source either exists as a class or is a library class. If the data source cannot be resolved, it generates a message indicating the data source and the persistence unit where it was mentioned."
+}

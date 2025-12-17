@@ -1,0 +1,12 @@
+Rule invalid-configuration-properties {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ConfigurationProperties')) {
+      if (NOT (hasAnnotation(c, '@EnableConfigurationProperties') OR isIterable(getAnnoAttrNames(c)))) {
+        String prefix = getAnnoAttr(c, 'prefix');
+        assert (NOT isEmpty(prefix) AND isUniqueSN(prefix) AND startsWith(prefix, '-')) {
+          msg('Invalid prefix: %s in @ConfigurationProperties annotation in class: %s', prefix, getFQN(c));
+        }
+      }
+    }
+  }
+}

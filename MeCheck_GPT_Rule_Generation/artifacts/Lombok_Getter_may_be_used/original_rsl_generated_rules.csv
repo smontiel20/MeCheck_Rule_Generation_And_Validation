@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-Verbose,https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokGetterMayBeUsed.html,The source URL provides information about a rule that reports standard getter methods in Java that can be replaced by the Lombok @Getter annotation. The rule only applies when the Lombok library is configured in the project. The page also provides a link to the Lombok site for more information on how to unlombok.,"Rule lombok-getter-may-be-used {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), ""get"") AND hasAnnotation(c, ""lombok.Getter"") == false) {
+        assert (getReturnType(m) == getType(m)) {
+          msg(""Standard getter method: %s in class: %s can be replaced by Lombok @Getter annotation"", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'lombok-getter-may-be-used' checks all classes in the project. For each class, it checks all methods. If a method's name starts with 'get' and the class does not have the Lombok @Getter annotation, it asserts that the return type of the method is the same as the type of the method. If the assertion fails, it generates a message indicating that the standard getter method can be replaced by the Lombok @Getter annotation.",,,"1. URL: https://projectlombok.org/features/Getter
+Summary: This page provides detailed information about the Lombok @Getter annotation, including how to use it and its benefits in reducing boilerplate code in Java.
+
+2. URL: https://www.baeldung.com/intro-to-project-lombok
+Summary: This page provides a comprehensive introduction to Project Lombok, including its setup, various annotations like @Getter, and how it helps in reducing verbose code in Java.",

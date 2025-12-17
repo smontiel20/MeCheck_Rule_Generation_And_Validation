@@ -1,0 +1,15 @@
+Rule pointcut-expression-errors {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, 'Pointcut')) {
+        String pointcutExpression = getAnnoAttr(m, 'value');
+        if (NOT isEmpty(pointcutExpression)) {
+          assert ( callExists(pointcutExpression) OR classExists(pointcutExpression) ) {
+            msg("Pointcut expression: %s in method: %s of class: %s is unresolved or has incompatible arguments",
+                pointcutExpression, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

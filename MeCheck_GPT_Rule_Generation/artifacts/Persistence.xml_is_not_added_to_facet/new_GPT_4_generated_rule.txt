@@ -1,0 +1,9 @@
+Rule persistence_xml_not_added_to_facet {
+  for (file xml in getXMLs()) {
+    if (NOT pathExists(xml, "persistence.xml")) {
+      assert (false) {
+        msg("Missing persistence.xml configuration file in: %s. Consider adding the file to the persistence facet.", getName(xml));
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'invalid-hibernate-xml-configuration' checks for errors in Hibernate XML configuration. It iterates over all XML files and checks for each class element. If the class name is not empty, it asserts that the class exists and is not a library class. If the assertion fails, it generates a message indicating that the class is either non-instantiable, does not extend the required class, or has inappropriate scope. It also checks if the scope attribute of the class is empty and generates a message if it is. Furthermore, it checks if the class element includes the required children tags or attributes and generates a message if it does not. Finally, it checks if the class name is unique and generates a message if it is not."
+}

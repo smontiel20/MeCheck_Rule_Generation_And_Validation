@@ -1,0 +1,12 @@
+Rule unresolved-references-in-queries {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'AttributeOverride') OR hasAnnotation(c, 'AssociationOverride') OR hasAnnotation(c, 'MapsId') OR hasAnnotation(c, 'MapKey')) {
+      String attrName = getAnnoAttr(c, 'name');
+      if (NOT isEmpty(attrName)) {
+        assert ( exists(field f in getFields(c)) ( getName(f) == attrName ) ) {
+          msg("Unresolved reference: %s in class: %s", attrName, getFQN(c));
+        }
+      }
+    }
+  }
+}

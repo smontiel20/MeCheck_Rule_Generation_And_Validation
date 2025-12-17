@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringContextConfigurationInspection.html,"The source URL provides information about the Spring Context Configuration Inspection. It reports incorrect Spring context configurations, unresolved files and directories in locations attributes and corresponding aliased attributes of @ContextConfiguration meta annotations, and missing default application context file.","Rule invalid-context-configuration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ContextConfiguration')) {
+      String[] locations = getAnnoAttr(c, '@ContextConfiguration', 'locations');
+      for (String location in locations) {
+        assert (pathExists(location)) {
+          msg(""Unresolved file or directory in @ContextConfiguration locations attribute: %s in class: %s"", location, getFQN(c));
+        }
+      }
+      if (NOT exists(file defaultContextFile in getXMLs()) (getName(defaultContextFile) == 'applicationContext.xml')) {
+        msg(""Missing default application context file 'applicationContext.xml' in class: %s"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'invalid-context-configuration' checks each class in the project. If a class has the @ContextConfiguration annotation, it retrieves the 'locations' attribute of the annotation, which should contain paths to context configuration files. For each location, it asserts that the path exists. If the path does not exist, it reports an error message. Furthermore, it checks if the default application context file 'applicationContext.xml' exists. If it does not exist, it reports an error message.",,The rule 'invalid-context-configuration' is syntactically correct and uses only the built-in functions. It follows the syntax of RSL and does not introduce any new built-in functions.,"1. URL: https://www.baeldung.com/spring-contextconfiguration
+Summary: This page provides a comprehensive guide on using @ContextConfiguration in Spring. It explains how to specify context configuration locations and how to use the default context configuration file.
+
+2. URL: https://stackoverflow.com/questions/42822875/springboot-contextconfiguration-locations-file-not-found
+Summary: This StackOverflow thread discusses a problem where the @ContextConfiguration annotation cannot find the specified context configuration file. The answers suggest checking the file path and making sure the file exists.",

@@ -1,0 +1,9 @@
+Rule pathClassWithoutResourceMethods {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Path')) {
+      assert ( exists(method m in getMethods(c)) ( hasAnnotation(m, '@Path') OR hasAnnotation(m, '@GET') OR hasAnnotation(m, '@POST') ) ) {
+        msg('Class: %s annotated with @Path does not have any resource methods', getFQN(c));
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ExpectedExceptionNeverThrownTestNG.html,The source URL provides information about a specific issue in TestNG test methods where checked exceptions that are expected are not actually thrown within the method body.,"Rule expected-exception-never-thrown {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, 'Test')) {
+        String expectedException = getAnnoAttr(m, 'expectedExceptions');
+        if (NOT isEmpty(expectedException)) {
+          assert ( exists(String stmt in getStatements(m)) ( stmt.contains('throw ' + expectedException) ) ) {
+            msg(""Expected exception: %s is never thrown in test method: %s in class: %s"",
+                expectedException, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'expected-exception-never-thrown' checks all classes and their methods. If a method has a 'Test' annotation and it expects an exception (as indicated by the 'expectedExceptions' attribute), the rule asserts that there is a statement in the method body that throws the expected exception. If the expected exception is not thrown, a message is generated indicating the expected exception, the test method name, and the fully qualified name of the class.",,"The rule is syntactically correct and uses only the built-in functions. It follows the RSL syntax and uses the functions getClasses, getMethods, hasAnnotation, getAnnoAttr, isEmpty, exists, contains, getName, and getFQN. The rule checks for the existence of a throw statement for the expected exception in the method body.","1. URL: https://www.baeldung.com/testng-expected-exceptions
+Summary: This page provides a detailed explanation of how to use the 'expectedExceptions' attribute in TestNG to specify that a test method is expected to throw certain exceptions. It also explains how TestNG handles the situation when the expected exception is not thrown.
+
+2. URL: https://www.tutorialspoint.com/testng/testng_exception_test.htm
+Summary: This page provides a tutorial on how to test exceptions in TestNG. It explains how to use the 'expectedExceptions' attribute and what happens when the expected exception is not thrown.",

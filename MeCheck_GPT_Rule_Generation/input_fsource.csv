@@ -1,0 +1,130 @@
+FRAMEWORK,SOURCE,TOPIC,
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateFindAnnotationInspection.html,Incorrect use of @Find annotation﻿,
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaQueryApiInspection.html,Invalid Hibernate DB-related XML mappings﻿,
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomInspection.html,Invalid Hibernate XML configuration﻿,
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomFacetInspection.html,Hibernate configuration XML is not added to facet﻿,
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ArgNamesErrorsInspection.html,"Advice parameters (argNames, returning, throwing) consistency check",
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/AroundAdviceStyleInspection.html,Around advice style inspection,
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/DeclareParentsInspection.html,Introductions (declare parents) errors,
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/AopLanguageInspection.html,Pointcut expression errors﻿,
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/PointcutMethodStyleInspection.html,Pointcut method style﻿,
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ArgNamesWarningsInspection.html,Warning: argNames not defined,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/AssociationFieldHasColumnAnnotation.html,Association field marked with @Colum,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/AssociationNotMarkedInspection.html,Entity attribute is not marked with association annotation,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/MoreThanOneIdInspection.html,Entity has more than one id attribute.﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaEntityListenerInspection.html,Entity listener problems﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaEntityListenerWarningsInspection.html,Entity listener warnings﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/ManyToManyCascadeRemove.html,"For @ManyToMany associations, the REMOVE entity state transition doesn't make sense to be cascaded because it will propagate beyond the link table.﻿",
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConverterNotAnnotatedInspection.html,JPA converter must be annotated with @Converter annotation﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokBuilderAllArgsInspection.html,Lombok @Builder needs a proper constructor for this class﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaORMDomInspection.html,Orm.xml problems﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaConfigDomFacetInspection.html,Persistence.xml is not added to facet﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaDomInspection.html,persistence.xml problems﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaAttributeMemberSignatureInspection.html,Persistent attribute signature checks﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaAttributeTypeInspection.html,Persistent attribute type checks﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaMissingIdInspection.html,Persistent entity misses primary key﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaObjectClassSignatureInspection.html,Persistent object class signature checks﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/OneToOneWithLazy.html,Specifying FetchType.LAZY for the non-owning side of the @OneToOne association will not affect the loading. The related entity will still be loaded as if the FetchType.EAGER is defined.﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaDataSourceORMInspection.html,Unresolved database references in annotations﻿,Two Examples
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaDataSourceORMDomInspection.html,Unresolved database references in XML﻿,Two Examples
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomInspection.html,Unresolved entity graph names﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaQueryApiInspection.html,Unresolved queries and query parameters﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaModelReferenceInspection.html,Unresolved references in queries﻿,Example
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokAllArgsInspection.html,Using @AllArgsConstructor for JPA entities without defined no-argument constructor breaks JPA specification.﻿,
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokBuilderInspection.html,Using @Builder for JPA entities without defined no-argument constructor breaks JPA specification.﻿,
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/Junit4RunWithInspection.html,UAST '@RunWith' annotation already exists in a parent class﻿,Example
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ExpectedExceptionNeverThrown.html,Expected exception never thrown in test method body﻿,Example
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SuperTearDownInFinally.html,JUnit 3 'super.tearDown()' is not called from 'finally' block﻿,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/Junit4Converter.html,JUnit 3 test can be JUnit 4,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnit5Converter.html,"JUnit 4 test can be JUnit 5﻿
+
+",Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnit5AssertionsConverter.html,JUnit 5 obsolete assertions﻿,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnitMixedFramework.html#locating-this-inspection,JUnit API usage from multiple versions in a single TestCase﻿,Four Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MigrateAssertToMatcherAssert.html,JUnit assertion can be 'assertThat()' call﻿,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnitMalformedDeclaration.html,JUnit malformed declaration﻿,Four Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/IgnoredJUnitTest.html#locating-this-inspection,JUnit test annotated with '@Ignore'/'@Disabled'﻿,Example
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MultipleExceptionsDeclaredOnTestMethod.html,Multiple exceptions declared on test method﻿,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnit3StyleTestMethodInJUnit4Class.html,Old style JUnit test method in JUnit 4 class﻿,
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ParameterizedParametersStaticCollection.html,Parameterized test class without data provider method﻿,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UseOfObsoleteAssert.html,Usage of obsolete 'junit.framework.Assert' method﻿,Two Examples
+Junit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MetaAnnotationWithoutRuntimeRetention.html,Test annotation without '@Retention(RUNTIME)' annotation﻿,Two Examples
+Java-Javadoc,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HtmlTagCanBeJavadocTag.html,<code>…</code>' can be replaced with '{@code …}'﻿,Two Examples
+Java-Javadoc,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnnecessaryInheritDoc.html,Unnecessary '{@inheritDoc}' Javadoc comment﻿,Two Examples
+Java-Lombok,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringQualifierCopyableLombok.html,@Qualifier not copyable by Lombok,
+Java-Verbose or redundant code constructs,https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokGetterMayBeUsed.html,Lombok @Getter may be used﻿,Two Examples
+Java-Verbose or redundant code constructs,https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokSetterMayBeUsed.html#locating-this-inspection,Lombok @Setter may be used﻿,Two Examples
+Java-Serialization Issues,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MissingSerialAnnotation.html,Java '@Serial' annotation can be used﻿,Two Examples
+Java-Serialization Issues,https://www.jetbrains.com.cn/en-us/help/inspectopedia/serial.html,@Serial' annotation used on wrong member﻿,
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ExpectedExceptionNeverThrownTestNG.html,Expected exception never thrown in test method body﻿,
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/dependsOnMethodTestNG.html,Illegal method name passed to 'dependsOnMethods'﻿,
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/DataProviderReturnType.html,Invalid data provider return type﻿,
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnitTestNG.html,JUnit Test can be converted to TestNG﻿,Two Examples
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConvertOldAnnotations.html,Old TestNG annotation @Configuration is used﻿,Two Examples
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConvertJavadoc.html,TestNG Javadoc can be converted to annotations﻿,Example
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/groupsTestNG.html,Undefined group name﻿,
+Quarkus,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SmallRyeConfigMappingMissingPrefixInspection.html,Missing or empty 'prefix' attribute value in the '@ConfigMapping' annotation﻿,
+Quarkus,https://www.jetbrains.com.cn/en-us/help/inspectopedia/QsUndeclaredPathMimeTypesInspection.html,Undeclared '@Produces' / '@Consumes' MIME types for '@Path'﻿,
+RESTful Web Service (JAX-RS)﻿,https://www.jetbrains.com.cn/en-us/help/inspectopedia/VoidMethodAnnotatedWithGET.html,@GET annotated method returns a void value﻿,
+RESTful Web Service (JAX-RS)﻿,https://www.jetbrains.com.cn/en-us/help/inspectopedia/RestResourceMethodInspection.html,@Path class without resource methods﻿,
+RESTful Web Service (JAX-RS)﻿,https://www.jetbrains.com.cn/en-us/help/inspectopedia/PathAnnotation.html,Incorrect @Path URI template﻿,Example
+RESTful Web Service (JAX-RS)﻿,https://www.jetbrains.com.cn/en-us/help/inspectopedia/RestWrongDefaultValueInspection.html,Incorrect value of @DefaultValue parameter﻿,Example
+RESTful Web Service (JAX-RS)﻿,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MultipleMethodDesignatorsInspection.html,Resource method with multiple HTTP method annotations﻿,
+RESTful Web Service (JAX-RS)﻿,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnresolvedRestParam.html,Unresolved @PathParam reference﻿,Example
+Spring AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MissingAspectjAutoproxyInspection.html,Missing aspectj-autoproxy﻿,Example
+Spring Boot,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConfigurationProperties.html,Invalid @ConfigurationProperties﻿,
+Spring Boot,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringBootApplicationSetup.html,Invalid Spring Boot application setup﻿,Example
+Spring Cloud Stream,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCloudStreamInconsistencyInspection.html,Stream handler method error﻿,
+Spring Cloud Stream,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCloudStreamMessageChannelInspection.html,Unresolved message channel﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheableMethodCallsInspection.html,@Cacheable self-invocation method calls﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringConfigurationProxyMethods.html,@Configuration proxyMethods usage warnings﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringRequiredAnnotationInspection.html,@Required Spring bean property is not injected﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTransactionalMethodCallsInspection.html,@Transactional self-invocation method calls,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheAnnotationsOnInterfaceInspection.html,Cache* annotations defined on interfaces/interface methods﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/AsyncMethodInspection.html,Incorrect @Async method signature﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ScheduledMethodInspection.html,Incorrect @Scheduled method signature,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheNamesInspection.html,Incorrect autowiring in Spring bean components﻿,Three Examples
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheNamesInspection.html,Incorrect required cache names definition﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringJavaStaticMembersAutowiringInspection.html,Incorrect Spring component autowiring or injection on a static class member﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheableAndCachePutInspection.html,Incorrect usage of @CachePut and @Cacheable on the same method﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringEventListenerInspection.html,Incorrectly configured @EventListener methods﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheableComponentsInspection.html,Incorrectly configured 'caching' annotation﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringProfileExpression.html,Incorrectly configured @Profile expression﻿,Examples
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDependsOnUnresolvedBeanInspection.html,Incorrectly referenced bean in @DependsOn annotation,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringLookupInjectionInspection.html,Incorrectly referenced bean in @Lookup annotation of Spring component﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringScheduledMethodsInspection.html,Incorrectly referenced bean in @Scheduled annotation﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTransactionalComponentInspection.html,Invalid 'PlatformTransactionManager' declaration in @Transactional component﻿,
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringContextConfigurationInspection.html,Invalid @ContextConfiguration﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingDirtiesContextInspection.html,Invalid @DirtiesContext 'mode' configuration,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingSqlInspection.html,Invalid @Sql and @SqlGroup configurations﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringComponentScan.html,Invalid package in @ComponentScan or its meta annotation﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingTransactionalInspection.html,Invalid transactional lifecycle method declaration﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringJavaAutowiredFieldsWarningInspection.html,Non recommended 'field' injections﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ContextJavaBeanUnresolvedMethodsInspection.html,Unknown init/destroy method in the @Bean annotation﻿,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringImportResource.html,Unresolved file references in @ImportResource locations,Example
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringPropertySource.html,Unresolved file references in @PropertySource and @TestPropertySource locations﻿,
+Spring Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDataMongoDBJsonFieldInspection.html,Spring Data MongoDB JSON unresolved fields﻿,Example
+Spring Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDataModifyingAnnotationMissing.html,"Update/Delete queries must be annotated with @Modifying, otherwise an InvalidDataAccessApiUsageException will be thrown.﻿",
+Spring Integration,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnresolvedMessageChannel.html,Incorrect 'channel' attribute in an endpoint method annotation﻿,Example
+Spring Integration,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringIntegrationMethodEndpointInconsistency.html,Incorrect Spring Integration endpoint method,Example
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MVCPathVariableInspection.html,Mismatch in @PathVariable declarations and usages﻿,Example
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringMVCInitBinder.html,Non-void @InitBinder method﻿,
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringMVCViewInspection.html,Unresolved view reference﻿,Example
+Spring Security,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringSecurityMethodCallsInspection.html,@PreFilter/@PreAuthorize/@PostFilter self-invocation method calls﻿,Example
+Spring Security,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringSecurityAnnotationBeanPointersResolveInspection.html,Incorrect configuration of Spring beans referenced in the Spring Security annotation﻿,Two Examples
+Micronaut,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnELInspection.html,Incorrect Micronaut Expression Language (MicronautEl) syntax﻿,Example
+Micronaut Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnUnresolvedPathVariable.html,Unresolved @PathVariable reference,Example
+Micronaut Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnCacheAnnotationParameters.html,Unresolved cache annotation parameter reference﻿,Example
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiInterceptorInspection.html,@Interceptor class without binding types,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiNormalScopeInspection.html,Bean with non-default scope declares public fields﻿,Example
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDecoratorInspection.html,Incorrect @Decorator class﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiSpecializesInspection.html,Incorrect @Specializes usage﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiStereotypeInspection.html,Incorrect @Stereotype annotation class﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiTypedAnnotationInspection.html,Incorrect @Typed annotation usage﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDomBeans.html,Incorrect bean definitions in beans.xml﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiScopeInspection.html,Incorrect bean scope﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiInjectInspection.html,Incorrect dependency injection place﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDisposerMethodInspection.html,Incorrect disposer method﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiManagedBeanInconsistencyInspection.html,Incorrect managed bean definition﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiObservesInspection.html,Incorrect observer method﻿,
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiAlternativeInspection.html,Vetoed @Alternative bean﻿,

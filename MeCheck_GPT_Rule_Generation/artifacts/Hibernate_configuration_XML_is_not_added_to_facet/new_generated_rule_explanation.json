@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'hibernate-config-not-added-to-facet' checks all XML files in the project. If a Hibernate configuration XML file does not exist in the project, it asserts a failure and generates a message indicating that the Hibernate configuration XML file is not added to the facet."
+}

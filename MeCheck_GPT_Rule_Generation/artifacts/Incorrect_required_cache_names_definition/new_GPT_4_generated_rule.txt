@@ -1,0 +1,10 @@
+Rule incorrect-cache-names-definition {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "@Cacheable") OR hasAnnotation(c, "@CacheConfig")) {
+      String[] cacheNames = getAnnoAttrNames(c, "cacheNames");
+      assert (NOT isEmpty(cacheNames[0])) {
+        msg("Incorrect cache name definition in class: %s. At least one cache name should be provided per cache operation.", getFQN(c));
+      }
+    }
+  }
+}

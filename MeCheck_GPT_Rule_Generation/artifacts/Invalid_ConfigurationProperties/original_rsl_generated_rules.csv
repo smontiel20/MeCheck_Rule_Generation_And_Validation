@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Boot,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConfigurationProperties.html,"The JetBrains Inspectopedia page describes a rule that checks for invalid prefixes in the @ConfigurationProperties annotations in Spring Boot. The rule triggers for classes annotated with @ConfigurationProperties that are not registered via @EnableConfigurationProperties, marked as a Spring component, or scanned via @ConfigurationPropertiesScan. The invalid prefixes include missing, empty, duplicate prefixes, and prefixes in a notation other than kebab-case.","Rule invalid-configuration-properties {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ConfigurationProperties')) {
+      if (NOT (hasAnnotation(c, '@EnableConfigurationProperties') OR isIterable(getAnnoAttrNames(c)))) {
+        String prefix = getAnnoAttr(c, 'prefix');
+        assert (NOT isEmpty(prefix) AND isUniqueSN(prefix) AND startsWith(prefix, '-')) {
+          msg('Invalid prefix: %s in @ConfigurationProperties annotation in class: %s', prefix, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'invalid-configuration-properties' checks all classes in the application. If a class is annotated with @ConfigurationProperties and is not registered via @EnableConfigurationProperties or does not have any other annotations, it retrieves the 'prefix' attribute from the @ConfigurationProperties annotation. It then asserts that the prefix is not empty, is unique, and starts with a hyphen (indicating kebab-case). If the assertion fails, it generates a message indicating the invalid prefix and the fully qualified name of the class.",,,"https://www.baeldung.com/configuration-properties-in-spring-boot: This Baeldung article provides a comprehensive guide on using @ConfigurationProperties in Spring Boot, including how to define and validate properties. It does not specifically address the rule generated but provides context for understanding its importance.
+
+https://reflectoring.io/validate-spring-boot-configuration-parameters-at-startup/: This Reflectoring article discusses how to validate configuration parameters at startup in Spring Boot, which is relevant to the rule generated as it involves checking the validity of @ConfigurationProperties.",

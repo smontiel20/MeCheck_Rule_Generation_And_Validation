@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/Junit4Converter.html,The source URL provides information about a JetBrains tool that identifies JUnit 3 test classes that can be converted to JUnit 4 test classes. It also provides an example of how the tool works after the quick-fix is applied.,"Rule JUnit3_to_JUnit4_conversion {
+  for (class c in getClasses()) {
+    if (getAnnoAttr(c, 'Test') == 'junit.framework') {
+      assert (classExists(getFQN(c) + 'Test')) {
+        msg('JUnit 3 test class: %s can be converted to JUnit 4', getFQN(c));
+      }
+    }
+  }
+}","The rule 'JUnit3_to_JUnit4_conversion' checks all classes in the project. If a class has an annotation attribute 'Test' from the 'junit.framework' package, it asserts that a corresponding JUnit 4 test class exists. If the assertion fails, it generates a message indicating that the JUnit 3 test class can be converted to JUnit 4.",,The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for the existence of a JUnit 4 test class for each JUnit 3 test class in the project.,"1. URL: https://www.baeldung.com/junit-5-migration
+Summary: This page provides a guide on how to migrate from JUnit 4 to JUnit 5, which includes converting tests from JUnit 3 to JUnit 4. It also explains the differences between the versions and the benefits of upgrading.
+
+2. URL: https://www.tutorialspoint.com/junit/junit_test_framework.htm
+Summary: This page provides an overview of the JUnit testing framework, including the differences between JUnit 3 and JUnit 4. It also provides examples of how to write tests in both versions.",

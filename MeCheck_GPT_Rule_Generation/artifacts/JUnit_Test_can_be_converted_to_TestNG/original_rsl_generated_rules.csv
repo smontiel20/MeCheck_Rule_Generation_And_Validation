@@ -1,0 +1,11 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnitTestNG.html,The source URL provides information about a JetBrains inspection that reports any JUnit-based test class that can be converted into a TestNG based unit test.,"Rule junit_to_testng_conversion {
+  for (class c in getClasses()) {
+    if (getAnnotated(c, 'org.junit.Test')) {
+      assert (NOT getAnnotated(c, 'org.testng.annotations.Test')) {
+        msg('JUnit test class: %s can be converted to TestNG', getFQN(c));
+      }
+    }
+  }
+}","The rule 'junit_to_testng_conversion' checks all classes in the project. If a class is annotated with 'org.junit.Test' (indicating it's a JUnit test class), it asserts that the class is not also annotated with 'org.testng.annotations.Test' (indicating it's a TestNG test class). If the assertion fails, it means the class is a JUnit test class that can be converted to a TestNG test class, and a message is generated with the fully qualified name of the class.","The built-in functions used in this rule are: getClasses, getAnnotated, getFQN, and msg. No new functions were introduced.","The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new functions. The rule checks for classes that are annotated with 'org.junit.Test' and ensures they are not also annotated with 'org.testng.annotations.Test', indicating they can be converted from JUnit to TestNG.","1. URL: https://www.guru99.com/junit-vs-testng.html - This page provides a comparison between JUnit and TestNG, explaining the differences and similarities, which can help in understanding the conversion process.
+2. URL: https://www.toolsqa.com/testng/testng-vs-junit/ - This page also provides a detailed comparison between JUnit and TestNG, including the different annotations used, which is relevant to the rule that checks for these annotations.",

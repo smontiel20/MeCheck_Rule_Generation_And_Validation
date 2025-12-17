@@ -1,0 +1,14 @@
+Rule unresolved-view-reference {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<mvc:view>") OR elementExists(xml, "<mvc:view-resolver>")) {
+      for (<mvc:view> view in getElms(xml, "<mvc:view>")) {
+        String viewName = getAttr(view, "name");
+        if (NOT isEmpty(viewName)) {
+          assert ( callExists(viewName) OR isLibraryClass(viewName) ) {
+            msg("Unresolved view reference: %s in view: %s", viewName, getName(view));
+          }
+        }
+      }
+    }
+  }
+}

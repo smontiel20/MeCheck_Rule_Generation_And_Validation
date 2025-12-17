@@ -1,0 +1,25 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringJavaStaticMembersAutowiringInspection.html,"The source URL provides information about a JetBrains inspection rule that reports instances where autowiring or injection is applied to static methods or fields in Spring components, which is not recommended.","Rule incorrect_static_member_autowiring {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""Component"")) {
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, ""Autowired"") OR hasAnnotation(f, ""Inject"")) {
+          assert (NOT isStatic(f)) {
+            msg(""Field: %s in class: %s is a static member and should not be autowired or injected"", getName(f), getFQN(c));
+          }
+        }
+      }
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, ""Autowired"") OR hasAnnotation(m, ""Inject"")) {
+          assert (NOT isStatic(m)) {
+            msg(""Method: %s in class: %s is a static member and should not be autowired or injected"", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'incorrect_static_member_autowiring' checks all classes in the project. If a class is annotated as a Spring Component, it checks all fields and methods of the class. If a field or method is annotated with 'Autowired' or 'Inject', it asserts that the field or method is not static. If the assertion fails, it generates a message indicating that the static field or method should not be autowired or injected.",,"The generated rule seems to be logically correct and follows the syntax of RSL. It uses only the built-in functions and does not introduce any new ones. The rule checks for the incorrect usage of autowiring or injection on static members in Spring components, which aligns with the topic and content provided.","1. URL: https://www.baeldung.com/spring-inject-static-field
+Summary: This article from Baeldung explains why it's not recommended to autowire static fields in Spring. It provides an example of how to do it, but also explains the problems associated with it, such as the inability to manage the lifecycle of the static field.
+
+2. URL: https://stackoverflow.com/questions/7026507/why-are-spring-private-fields-injected
+Summary: This StackOverflow thread discusses why private fields are injected in Spring and the problems associated with injecting static fields. The consensus is that static fields should not be injected as it goes against the principles of dependency injection.",

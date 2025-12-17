@@ -1,0 +1,19 @@
+Rule persistent-attribute-signature-checks {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, 'Embeddable')) {
+        assert (NOT exists(String attr in getAnnoAttrNames(f)) (hasField(c, attr))) {
+          msg('Illegal attribute: %s is used in Embeddable object: %s', attr, getName(f));
+        }
+      }
+      if (hasAnnotation(f, 'Persistent')) {
+        assert (getType(f) == 'field' OR hasMethod(c, 'get' + upperCase(getName(f)))) {
+          msg('Persistent attribute metadata is specified not on a field or property getter: %s', getName(f));
+        }
+        assert (hasMethod(c, 'set' + upperCase(getName(f)))) {
+          msg('No setter with property-based access for: %s', getName(f));
+        }
+      }
+    }
+  }
+}

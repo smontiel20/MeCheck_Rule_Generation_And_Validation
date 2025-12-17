@@ -1,0 +1,20 @@
+Rule invalid-hibernate-db-xml-mappings {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<named-query>")) {
+      for (<named-query> namedQuery in getElms(xml, "<named-query>")) {
+        String queryName = getAttr(namedQuery, "name");
+        assert ( callExists(queryName) ) {
+          msg("Unknown named query: %s in xml: %s", queryName, getName(xml));
+        }
+        if (elementExists(namedQuery, "<query-param>")) {
+          for (<query-param> queryParam in getElms(namedQuery, "<query-param>")) {
+            String paramName = getAttr(queryParam, "name");
+            assert ( hasParam(queryName, paramName) ) {
+              msg("Unknown query parameter: %s in named query: %s in xml: %s", paramName, queryName, getName(xml));
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaDataSourceORMInspection.html,"The source URL describes a rule that checks for unresolved database references in various Persistence ORM annotations within a configured datasource. If such references are found, it suggests refreshing the datasource or assigning a different one.","Rule unresolved-database-references-in-annotations {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""Table"") OR hasAnnotation(c, ""Column"") OR hasAnnotation(c, ""JoinColumn"") OR hasAnnotation(c, ""JoinTable"") OR hasAnnotation(c, ""NamedQuery"") OR hasAnnotation(c, ""NativeQuery"") OR hasAnnotation(c, ""Embeddable"")) {
+      String annotationValue = getAnnoAttr(c, ""name"");
+      if (NOT isEmpty(annotationValue)) {
+        assert ( elementExists(annotationValue) ) {
+          msg(""Unresolved database reference: %s in annotation of class: %s"", annotationValue, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-database-references-in-annotations' checks all classes in the project. If a class has any of the specified annotations (Table, Column, JoinColumn, JoinTable, NamedQuery, NativeQuery, Embeddable), it retrieves the value of the annotation. If the annotation value is not empty, it asserts that the element (database reference) exists. If the element does not exist, it generates a message indicating the unresolved database reference in the annotation of the class.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for unresolved database references in various Persistence ORM annotations within a configured datasource, which aligns with the description provided in the source URL.","1. URL: https://www.baeldung.com/jpa-join-column - This page provides a detailed explanation of the JoinColumn annotation in JPA, which is one of the annotations checked in the rule.
+2. URL: https://www.objectdb.com/java/jpa/persistence/annotations - This page provides a comprehensive list of JPA annotations, including those checked in the rule, and explains their usage and purpose.",

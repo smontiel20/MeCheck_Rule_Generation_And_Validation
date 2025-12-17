@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'non_recommended_field_injections' checks all classes in the project. If a class has the 'Autowired' annotation, it checks all fields in that class. If a field has the 'Autowired' annotation, it asserts that this is not the case and generates a message indicating that the field is autowired, which is not recommended, and suggests using constructor-based dependency injection instead."
+}

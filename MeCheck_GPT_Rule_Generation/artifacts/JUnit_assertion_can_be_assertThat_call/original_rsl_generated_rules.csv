@@ -1,0 +1,13 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MigrateAssertToMatcherAssert.html,"The source page describes a rule that identifies calls to Assert.assertEquals(), Assert.assertTrue(), and similar methods that can be migrated to the Hamcrest declarative style Assert.assertThat() calls. It also provides a quick-fix to perform this migration.","Rule migrateAssertToMatcherAssert {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (callExists(m, 'Assert.assertEquals') OR callExists(m, 'Assert.assertTrue')) {
+        assert (NOT callExists(m, 'Assert.assertThat')) {
+          msg('Method: %s in class: %s can be migrated to Hamcrest declarative style Assert.assertThat() call', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'migrateAssertToMatcherAssert' checks all classes and their methods. If a method contains calls to 'Assert.assertEquals' or 'Assert.assertTrue', it asserts that the same method does not contain a call to 'Assert.assertThat'. If the assertion fails, it generates a message indicating that the method can be migrated to use 'Assert.assertThat' in Hamcrest declarative style.",,"The rule uses built-in functions such as 'getClasses', 'getMethods', 'callExists', 'getName', and 'getFQN'. It does not introduce any new built-in functions. The rule follows the syntax of RSL and does not contain any comments or BOM.","1. URL: https://www.baeldung.com/hamcrest-collections-array - This page provides a detailed guide on using Hamcrest for assertions in JUnit tests, including the use of 'Assert.assertThat'.
+2. URL: https://www.javacodegeeks.com/2015/11/why-we-should-love-hamcrests-assertthat.html - This page explains the benefits of using 'Assert.assertThat' over traditional JUnit assertions like 'Assert.assertEquals' and 'Assert.assertTrue'.",

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-file-references-in-importresource' checks each class in the project. If a class has the @ImportResource annotation, it retrieves the 'locations' attribute of the annotation. It then checks each location in the 'locations' attribute to see if the path exists. If the path does not exist, it asserts an error message indicating the unresolved file or directory in the @ImportResource annotation in the class."
+}

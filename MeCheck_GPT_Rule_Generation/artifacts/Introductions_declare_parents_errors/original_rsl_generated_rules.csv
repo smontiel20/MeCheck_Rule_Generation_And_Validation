@@ -1,0 +1,19 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/DeclareParentsInspection.html,"The JetBrains Inspectopedia page describes a rule that checks for inconsistencies in @AspectJ Introduction. Specifically, it verifies if the defaultImpl is required and if so, whether it implements the given interface.","Rule declare_parents_inspection {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@AspectJ')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, 'declare parents')) {
+          String defaultImpl = getAnnoAttr(m, 'defaultImpl');
+          if (NOT isEmpty(defaultImpl)) {
+            assert (classExists(defaultImpl) AND implementsInterface(defaultImpl, getReturnType(m))) {
+              msg('Inconsistency in @AspectJ Introduction: defaultImpl: %s does not implement the given interface: %s', defaultImpl, getReturnType(m));
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'declare_parents_inspection' checks all classes in the project. If a class has the '@AspectJ' annotation, it then checks all methods within that class. If a method has the 'declare parents' annotation, it retrieves the 'defaultImpl' attribute from the annotation. If 'defaultImpl' is not empty, it asserts that a class with the name 'defaultImpl' exists and that it implements the interface that is the return type of the method. If this assertion fails, it generates a message indicating the inconsistency.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for the existence of a class, checks for annotations, retrieves annotation attributes, checks if a class implements an interface, and generates a message if the assertion fails.","1. URL: https://www.baeldung.com/aspectj - This page provides a comprehensive guide to AspectJ, including introductions and the 'declare parents' annotation. It explains how to use AspectJ to implement cross-cutting concerns in a Java application.
+
+2. URL: https://www.eclipse.org/aspectj/doc/released/progguide/semantics-declare.html - This page from the official AspectJ documentation explains the semantics of the 'declare' statement, including 'declare parents'. It provides examples and explains the implications of using 'declare parents'.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

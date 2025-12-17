@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'persistent-object-class-signature-checks' checks all classes in the project that are not part of a library. It asserts that a class is not final, is not annotated multiple times, and is not defined as both a persistent entity and an entity listener. If any of these conditions are not met, a message is generated with the fully qualified name of the class and a description of the issue."
+}

@@ -1,0 +1,5 @@
+[
+  "https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Transactional.html",
+  "https://stackoverflow.com/questions/3423972/spring-transactional-what-happens-when-no-transaction-manager-is-configured",
+  "https://www.baeldung.com/spring-transactional-propagation-isolation"
+]

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'entity-listener-problems' checks all classes in the project. If a class is annotated with 'EntityListener', it checks all methods of the class. If a method has a return type other than 'void' or has parameters, it reports an error message indicating that the Entity listener method has an incorrect signature. The rule also checks all constructors of the class. If a constructor has parameters or is not public, it reports an error message indicating that the Entity listener class does not have a public no-argument constructor."
+}

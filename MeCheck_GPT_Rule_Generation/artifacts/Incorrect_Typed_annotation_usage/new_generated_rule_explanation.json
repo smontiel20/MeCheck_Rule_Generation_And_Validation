@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-typed-annotation-usage' checks all classes in the project. If a class has the @Typed annotation, it asserts that the attribute of the @Typed annotation is iterable (meaning it can be looped over, which is a requirement for @Typed as it can specify multiple types) and that the class has methods annotated with @Produces (meaning they are producer methods). If these conditions are not met, it generates a message indicating the incorrect usage of the @Typed annotation in the class."
+}

@@ -1,0 +1,12 @@
+Rule modifying-annotation-missing {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), "update") OR startsWith(getName(m), "delete")) {
+        assert ( hasAnnotation(m, "@Modifying") ) {
+          msg("Method: %s in class: %s is a delete/update query and must be annotated with @Modifying",
+              getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiStereotypeInspection.html,"The source URL provides information about a rule in JetBrains Inspectopedia that reports incorrect @Stereotype annotation classes. Specifically, it mentions that non-empty @Named annotations and qualifier annotations are not allowed for stereotypes.","Rule incorrect_stereotype_annotation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Stereotype')) {
+      if (hasAnnotation(c, '@Named')) {
+        String namedValue = getAnnoAttr(c, '@Named', 'value');
+        assert (isEmpty(namedValue)) {
+          msg(""Non-empty @Named annotation is not allowed for stereotypes in class: %s"", getFQN(c));
+        }
+      }
+      for (⟨annotation⟩ a in getAnnotated(c)) {
+        if (hasAnnoAttr(a, 'Qualifier')) {
+          assert (false) {
+            msg(""Qualifier annotations are not allowed for stereotypes in class: %s"", getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'incorrect_stereotype_annotation' checks all classes in the project. If a class has the @Stereotype annotation, the rule checks if it also has a @Named annotation. If it does, the rule asserts that the value of the @Named annotation should be empty. If it's not empty, an error message is generated. The rule also checks all annotations of the class. If any annotation has a 'Qualifier' attribute, an error message is generated because qualifier annotations are not allowed for stereotypes.",,"The generated rule seems to be logically correct and follows the syntax of RSL. It uses the built-in functions getClasses, hasAnnotation, getAnnoAttr, isEmpty, getFQN, and getAnnotated, which are all part of the RSL language. The rule does not introduce any new built-in functions.","1. https://docs.jboss.org/weld/reference/latest/en-US/html/annotations.html: This page from JBoss Weld documentation provides a detailed explanation of CDI annotations, including @Stereotype and @Named. It explains that @Stereotype is a marker annotation indicating that an annotated type is a stereotype and that @Named is a qualifier type.
+2. https://www.baeldung.com/cdi-qualifiers: This page from Baeldung provides a tutorial on CDI qualifiers. It explains how qualifiers are used to disambiguate beans for injection and how they can be combined with other annotations.",

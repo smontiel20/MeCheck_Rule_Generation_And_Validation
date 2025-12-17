@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'cacheable_self_invocation' checks all classes and their methods in the application. If a method is annotated with @Cacheable, it checks for any calls within that method to other methods in the same class (self-invocation). If such a call exists, it asserts that the invoked method is not unique. If the assertion fails, it means that the self-invocation will not lead to actual caching at runtime even though it's marked with @Cacheable, and a message is displayed with the method and class names."
+}

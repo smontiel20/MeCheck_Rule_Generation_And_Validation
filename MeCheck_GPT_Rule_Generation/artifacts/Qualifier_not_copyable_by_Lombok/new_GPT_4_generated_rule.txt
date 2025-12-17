@@ -1,0 +1,13 @@
+Rule qualifier_not_copyable_by_lombok {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@RequiredArgsConstructor') OR hasAnnotation(c, '@AllArgsConstructor')) {
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, '@Qualifier')) {
+          assert (getAnnoAttr(f, 'lombok.copyableAnnotations') == '@Qualifier') {
+            msg('Field: %s in class: %s has @Qualifier annotation that is not copyable by Lombok', getName(f), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-spring-beans-in-annotations' checks all classes in the project. If a class has any annotations, it retrieves the names of all attributes in the annotations. For each attribute, it gets its value. If the value is not empty, it asserts that the value either exists as a class or is a library class. If the assertion fails, it generates a message indicating that the Spring bean referenced in the annotation does not exist."
+}

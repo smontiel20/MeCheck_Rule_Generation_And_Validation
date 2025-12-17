@@ -1,0 +1,11 @@
+Rule cacheable_and_cacheput_on_same_method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Cacheable') AND hasAnnotation(m, '@CachePut')) {
+        assert (NOT (getAnnoAttr(m, '@Cacheable', 'condition') AND getAnnoAttr(m, '@CachePut', 'condition'))) {
+          msg("Method: %s in class: %s uses both @Cacheable and @CachePut annotations which can lead to unexpected behavior.", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

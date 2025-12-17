@@ -1,0 +1,15 @@
+Rule persistent-attribute-type-checks {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, "@javax.persistence.Column")) {
+        String expectedType = getAnnoAttr(f, "columnDefinition");
+        if (NOT isEmpty(expectedType)) {
+          assert (getType(f) == expectedType) {
+            msg("Persistent attribute: %s in class: %s has a type mismatch. Expected: %s, Found: %s",
+                getName(f), getFQN(c), expectedType, getType(f));
+          }
+        }
+      }
+    }
+  }
+}

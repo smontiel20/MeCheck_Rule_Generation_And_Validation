@@ -1,0 +1,12 @@
+Rule invalid-package-in-componentscan {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ComponentScan')) {
+      String[] packages = getAnnoAttr(c, '@ComponentScan', 'basePackages');
+      for (String pkg in packages) {
+        assert (classExists(pkg) OR isLibraryClass(pkg)) {
+          msg("Package: %s in @ComponentScan of class: %s does not exist", pkg, getFQN(c));
+        }
+      }
+    }
+  }
+}

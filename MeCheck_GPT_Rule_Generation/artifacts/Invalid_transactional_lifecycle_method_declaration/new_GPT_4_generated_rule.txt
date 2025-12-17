@@ -1,0 +1,13 @@
+Rule invalid-transactional-lifecycle-method-declaration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Transactional')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@BeforeTransaction') OR hasAnnotation(m, '@AfterTransaction')) {
+          assert (isEmpty(getArg(m)) AND getReturnType(m) == 'void') {
+            msg('Invalid transactional lifecycle method declaration: %s in class: %s. The method must have no arguments and no return type.', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

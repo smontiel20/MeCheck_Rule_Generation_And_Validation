@@ -1,0 +1,19 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JavaDoc,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HtmlTagCanBeJavadocTag.html,"The source URL provides information about the usage of <code> tags in Javadoc comments. It suggests that since Java 5, these tags can be replaced with {@code ...} constructs, which allows using angle brackets < and > inside the comment instead of HTML character entities.","Rule replace_code_with_javadoc_tag {
+  for (file javaFile in getFiles()) {
+    for (class c in getClasses(javaFile)) {
+      for (method m in getMethods(c)) {
+        String comment = getComment(m);
+        if (contains(comment, ""<code>"")) {
+          assert (NOT contains(comment, ""<code>"")) {
+            msg(""The <code> tag in comment of method: %s in class: %s can be replaced with {@code ...} construct"", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'replace_code_with_javadoc_tag' checks all the Java files for any usage of <code> tags in Javadoc comments of methods. If it finds any, it asserts that the comment should not contain the <code> tag and suggests replacing it with the {@code ...} construct. The rule uses the built-in functions getFiles(), getClasses(), getMethods(), getComment(), contains(), getName(), and getFQN().",,The rule 'replace_code_with_javadoc_tag' is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new functions. The rule checks for the usage of <code> tags in Javadoc comments and suggests replacing them with {@code ...} constructs.,"1. URL: https://stackoverflow.com/questions/541920/multiple-line-code-example-in-javadoc-comment
+Summary: This StackOverflow thread discusses how to include multiple line code examples in Javadoc comments. It suggests using the {@code ...} construct instead of the <code> tag.
+
+2. URL: https://www.baeldung.com/javadoc
+Summary: This tutorial on Baeldung explains how to write and generate Javadoc. It mentions the use of {@code ...} for code snippets in Javadoc comments.",

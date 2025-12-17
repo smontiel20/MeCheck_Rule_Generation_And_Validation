@@ -1,0 +1,13 @@
+Rule bean-with-non-default-scope-declares-public-fields {
+  for (class c in getClasses()) {
+    if (NOT hasAnnotation(c, '@Dependent')) {
+      for (field f in getFields(c)) {
+        if (getType(f) == 'public') {
+          assert (NOT (hasAnnotation(c, '@RequestScoped') OR hasAnnotation(c, '@ApplicationScoped') OR hasAnnotation(c, '@SessionScoped') OR hasAnnotation(c, 'ConversationScoped'))) {
+            msg('Managed bean: %s with public field: %s is not in the default @Dependent scope', getName(c), getName(f));
+          }
+        }
+      }
+    }
+  }
+}

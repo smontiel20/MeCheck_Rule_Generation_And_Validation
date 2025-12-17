@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'persistence_xml_problems' checks for various issues in the persistence.xml file. It iterates over all XML files and checks for the existence of '<class>' elements. For each '<class>' element, it retrieves the 'name' attribute and checks if the class exists and is not a library class. If the class does not exist or is a library class, it raises an error message. The rule also checks the 'scope' attribute of the class, asserting that it should be either 'singleton' or 'prototype'. If the scope is inappropriate, it raises an error message. Finally, the rule checks for duplicate names in the 'name' attribute of the class, raising an error message if duplicates are found."
+}

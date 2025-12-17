@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'replace_code_with_javadoc_tag' checks all the Java files for any usage of <code> tags in Javadoc comments of methods. If it finds any, it asserts that the comment should not contain the <code> tag and suggests replacing it with the {@code ...} construct. The rule uses the built-in functions getFiles(), getClasses(), getMethods(), getComment(), contains(), getName(), and getFQN()."
+}

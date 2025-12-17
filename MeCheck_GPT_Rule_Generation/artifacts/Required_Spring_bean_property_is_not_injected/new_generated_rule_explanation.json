@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'requiredSetterBeanNotInjected' checks all XML files for beans. For each bean, it retrieves the fully qualified class name and checks if the class exists. If the class exists, it retrieves all methods of the class. For each method, it checks if the method has the @Required annotation. If the method has the @Required annotation, it asserts that there exists a field in the class that has either the @Autowired or @Inject annotation. If this assertion fails, it generates a message indicating that the @Required setter method is not autowired or injected."
+}

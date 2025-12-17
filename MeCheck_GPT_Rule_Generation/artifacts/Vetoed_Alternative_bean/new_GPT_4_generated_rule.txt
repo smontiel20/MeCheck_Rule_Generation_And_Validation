@@ -1,0 +1,13 @@
+Rule vetoed-alternative-bean {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Vetoed') OR hasAnnotation(getFamily(c), '@Vetoed')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Alternative')) {
+          assert (false) {
+            msg('Vetoed @Alternative bean detected: %s in class: %s', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'convertJavadocToAnnotations' checks each Java file for TestNG test methods. If a test method has a Javadoc annotation, it asserts that the method also has a JDK annotation. If the assertion fails, it generates a message indicating that the Javadoc annotation can be converted to a JDK annotation."
+}

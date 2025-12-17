@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/AsyncMethodInspection.html,"The source URL provides information about a rule that checks for incorrect return types of @Async methods in Spring Core. The rule states that any parameter types are allowed for the target method signatures, but the return type should be either void or Future. It also mentions that it is possible to return the more specific ListenableFuture or CompletableFuture types, which allow for richer interaction with the asynchronous task and for immediate composition with further processing steps.","Rule incorrect-async-method-signature {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, ""Async"")) {
+        String returnType = getReturnType(m);
+        assert (returnType == ""void"" OR returnType == ""Future"" OR returnType == ""ListenableFuture"" OR returnType == ""CompletableFuture"") {
+          msg(""Incorrect return type: %s for @Async method: %s in class: %s"", returnType, getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-async-method-signature' checks all classes and their methods. If a method has the @Async annotation, it checks the return type of the method. The return type should be either 'void', 'Future', 'ListenableFuture', or 'CompletableFuture'. If the return type is not one of these, it asserts an error message indicating the incorrect return type for the @Async method in the class.",,,"https://www.baeldung.com/spring-async: This page provides a comprehensive guide on using @Async annotation in Spring. It explains how to correctly use the @Async annotation and the importance of the return types of the methods annotated with @Async.
+
+https://www.javadevjournal.com/spring/spring-async-and-spring-boot/: This page explains how to use Spring's @Async annotation in a Spring Boot application. It also discusses the correct method signatures and return types for @Async methods.",

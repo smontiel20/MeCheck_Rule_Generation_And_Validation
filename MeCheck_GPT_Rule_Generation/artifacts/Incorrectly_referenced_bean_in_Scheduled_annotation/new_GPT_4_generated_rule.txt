@@ -1,0 +1,12 @@
+Rule incorrectly_referenced_bean_in_scheduled {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Scheduled')) {
+      String schedulerBean = getAnnoAttr(c, '@Scheduled', 'scheduler');
+      if (NOT isEmpty(schedulerBean)) {
+        assert ( classExists(schedulerBean) OR isLibraryClass(schedulerBean) ) {
+          msg("Incorrectly referenced bean: %s in @Scheduled annotation in class: %s", schedulerBean, getFQN(c));
+        }
+      }
+    }
+  }
+}

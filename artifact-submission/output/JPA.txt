@@ -1,0 +1,2 @@
+[artifact-submission\dataset\JPA](afc5bc)	check_converter_annotation.txt	The class: com.example.converter.LowercaseStringConverter is a JPA converter but is not annotated with @Converter
+[artifact-submission\dataset\JPA](afc5bc)	persistent-entity-misses-primary-key.txt	Persistent entity: com.example.jpa.NoIdEntity does not have a primary key

@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Data MongoDB,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDataMongoDBJsonFieldInspection.html,The JetBrains Inspectopedia page describes a rule that checks for unresolved document fields specified inside the org.springframework.data.mongodb.repository.Query annotation in Spring Data MongoDB.,"Rule unresolved-json-fields {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'org.springframework.data.mongodb.repository.Query')) {
+      String queryValue = getAnnoAttr(c, 'org.springframework.data.mongodb.repository.Query', 'value');
+      if (NOT isEmpty(queryValue)) {
+        assert ( exists(field f in getFields(c)) ( queryValue == getName(f) ) ) {
+          msg(""Unresolved field: %s in Query annotation in class: %s"", queryValue, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-json-fields' checks all classes in the project. If a class has the 'org.springframework.data.mongodb.repository.Query' annotation, it retrieves the value of the annotation. If the value is not empty, it asserts that there exists a field in the class with the same name as the value of the annotation. If such a field does not exist, it generates a message indicating the unresolved field in the Query annotation.",,"The rule uses built-in functions such as getClasses, hasAnnotation, getAnnoAttr, isEmpty, exists, getFields, getName, and getFQN. It does not introduce any new functions. The rule follows the syntax of RSL and does not contain any comments or BOM.","1. URL: https://www.baeldung.com/spring-data-mongodb-tutorial
+Summary: This tutorial on Baeldung provides a comprehensive guide on using Spring Data MongoDB, including the use of the @Query annotation. It can be used to understand the context of the generated rule.
+
+2. URL: https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mongodb.repositories.queries
+Summary: The official Spring Data MongoDB documentation explains how to declare queries directly on repository methods. It includes details about the @Query annotation, which is relevant to the generated rule.",

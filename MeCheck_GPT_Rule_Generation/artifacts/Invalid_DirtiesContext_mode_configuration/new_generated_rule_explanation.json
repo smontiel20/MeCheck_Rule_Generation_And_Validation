@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'invalid-dirtiescontext-mode-configuration' checks all classes in the project. If a class has the @DirtiesContext annotation, it retrieves the 'mode' attribute of the annotation. It then asserts that the 'mode' attribute is one of the valid values: 'AFTER_EACH_TEST_METHOD', 'AFTER_CLASS', 'BEFORE_EACH_TEST_METHOD', or 'BEFORE_CLASS'. If the 'mode' attribute is not one of these values, it reports an error message indicating the invalid mode configuration in the @DirtiesContext annotation for the class."
+}

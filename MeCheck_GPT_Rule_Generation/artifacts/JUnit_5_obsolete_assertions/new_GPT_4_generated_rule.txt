@@ -1,0 +1,11 @@
+Rule JUnit5ObsoleteAssertions {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (callExists(m, 'junit.framework.Assert') OR callExists(m, 'org.junit.Assert') OR callExists(m, 'org.junit.Assume')) {
+        assert (NOT callExists(m, 'org.junit.jupiter.api.Assertions') AND NOT callExists(m, 'org.junit.jupiter.api.Assumptions')) {
+          msg('Method: %s in class: %s uses obsolete JUnit assertions. Consider migrating to org.junit.jupiter.api.Assertions / org.junit.jupiter.api.Assumptions.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

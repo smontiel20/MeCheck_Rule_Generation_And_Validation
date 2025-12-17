@@ -1,0 +1,14 @@
+Rule unresolved-cache-annotation-parameter-reference {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, 'io.micronaut.cache.annotation.Cacheable') OR hasAnnotation(m, 'io.micronaut.cache.annotation.CachePut') OR hasAnnotation(m, 'io.micronaut.cache.annotation.CacheInvalidate')) {
+        String[] params = getAnnoAttr(m, 'parameters');
+        for (String param in params) {
+          assert ( hasParam(m, param) ) {
+            msg('Undefined parameter: %s in method: %s of class: %s', param, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

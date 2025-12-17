@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-endpoint-method-declaration' checks all XML files for endpoint elements. For each endpoint, it retrieves the 'method' attribute and checks if it is not empty. If the method attribute is not empty, it asserts that a method with the same name exists in the class specified in the 'class' attribute of the endpoint. If such a method does not exist, it generates a message indicating the incorrect method declaration in the endpoint."
+}

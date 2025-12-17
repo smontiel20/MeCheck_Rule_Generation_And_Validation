@@ -1,0 +1,12 @@
+Rule entity-listener-problems {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "EntityListener")) {
+      assert ( exists(method m in getMethods(c)) ( hasParamType(m, "void") AND NOT hasParam(m) ) ) {
+        msg("Entity listener method: %s in class: %s has incorrect signature", getName(m), getFQN(c));
+      }
+      assert ( exists(method constructor in getConstructors(c)) ( NOT hasParam(constructor) AND getType(constructor) == "public" ) ) {
+        msg("Entity listener class: %s does not have a public no-argument constructor", getFQN(c));
+      }
+    }
+  }
+}

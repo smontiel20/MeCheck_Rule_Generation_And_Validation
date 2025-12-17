@@ -1,0 +1,13 @@
+Rule FetchTypeLazyNonOwningOneToOne {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@OneToOne')) {
+      for (field f in getFields(c)) {
+        if (hasAnnoAttr(f, 'fetch', 'FetchType.LAZY')) {
+          assert (NOT isIterable(getType(f))) {
+            msg('The field: %s in class: %s has FetchType.LAZY in a @OneToOne association but it will not affect the loading. The related entity will still be loaded as if FetchType.EAGER is defined.', getName(f), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

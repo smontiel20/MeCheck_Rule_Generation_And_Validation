@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'non_void_initbinder_method' checks all classes and their methods in the Spring MVC application. If a method is annotated with @InitBinder, it asserts that the return type of the method should be 'void'. If the return type is not 'void', it generates a message indicating the method and class where the violation occurred."
+}

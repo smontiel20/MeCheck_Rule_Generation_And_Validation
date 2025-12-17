@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-bean-scope' checks all classes in the application. If a class is annotated as a Singleton, the rule asserts that it must also be annotated as either @ApplicationScoped or @Dependent. If a class is annotated as both Stateless and Session, the rule asserts that it must also be annotated as @Dependent. If these conditions are not met, a message is generated indicating the fully qualified name of the class and the required annotation."
+}

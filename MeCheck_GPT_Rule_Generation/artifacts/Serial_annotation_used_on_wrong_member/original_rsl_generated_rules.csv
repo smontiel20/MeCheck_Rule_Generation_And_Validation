@@ -1,0 +1,23 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-Serialization Issues,https://www.jetbrains.com.cn/en-us/help/inspectopedia/serial.html,The source URL provides information about the @Serial annotation in Java. It reports methods and fields in the Serializable and Externalizable classes that are not suitable to be annotated with the java.io.Serial annotation. It refers to the Javadoc of the java.io.Serial class for all valid cases.,"Rule serial-annotation-usage {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Serial')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Serial')) {
+          assert (getReturnType(m) == 'void' AND hasParamType(m, 'java.io.ObjectOutputStream')) {
+            msg(""Method: %s in class: %s is not suitable to be annotated with @Serial"", getName(m), getFQN(c));
+          }
+        }
+        for (field f in getFields(c)) {
+          if (hasAnnotation(f, '@Serial')) {
+            assert (getType(f) == 'long' AND getName(f) == 'serialVersionUID') {
+              msg(""Field: %s in class: %s is not suitable to be annotated with @Serial"", getName(f), getFQN(c));
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'serial-annotation-usage' checks all classes in the project. If a class is annotated with '@Serial', it checks all methods and fields of the class. If a method is annotated with '@Serial', it asserts that the return type of the method is 'void' and it has a parameter of type 'java.io.ObjectOutputStream'. If the assertion fails, it generates a message indicating that the method is not suitable to be annotated with '@Serial'. Similarly, if a field is annotated with '@Serial', it asserts that the type of the field is 'long' and its name is 'serialVersionUID'. If the assertion fails, it generates a message indicating that the field is not suitable to be annotated with '@Serial'.",,,"https://www.baeldung.com/java-serialization: This page provides a comprehensive guide to Java Serialization, including the use of serialVersionUID, which is relevant to the generated rule. It does not specifically mention the @Serial annotation, but it provides context for understanding serialization in Java.
+
+https://stackoverflow.com/questions/285793/what-is-a-serialversionuid-and-why-should-i-use-it: This StackOverflow thread discusses the serialVersionUID field in Java, which is relevant to the generated rule. It explains why this field is important in Java serialization.",

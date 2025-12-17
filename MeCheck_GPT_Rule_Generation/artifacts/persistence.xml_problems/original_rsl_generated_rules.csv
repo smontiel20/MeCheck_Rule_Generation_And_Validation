@@ -1,0 +1,28 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaDomInspection.html,"The source URL provides information about the JPA DOM Inspection tool, which reports problems in XML configuration files. These problems include references to non-instantiable classes, classes that do not extend the required class, classes with inappropriate scope, tag and attribute values that do not match the required pattern (like Java Identifiers), tags that do not include required children tags or attributes, and tags that define objects with duplicate names.","Rule persistence_xml_problems {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<class>"")) {
+      for (<class> class in getElms(xml, ""<class>"")) {
+        String className = getAttr(class, ""name"");
+        if (NOT isEmpty(className)) {
+          assert ( classExists(className) AND NOT isLibraryClass(className) ) {
+            msg(""Class: %s mentioned in persistence.xml, is either non-instantiable or does not extend required class or has inappropriate scope"", className);
+          }
+        }
+        if (hasAttr(class, ""scope"")) {
+          String scope = getAttr(class, ""scope"");
+          assert ( scope == ""singleton"" OR scope == ""prototype"" ) {
+            msg(""Class: %s has inappropriate scope: %s"", className, scope);
+          }
+        }
+        if (hasAttr(class, ""name"")) {
+          String name = getAttr(class, ""name"");
+          assert ( isUniqueSN(name) ) {
+            msg(""Duplicate name: %s found in persistence.xml"", name);
+          }
+        }
+      }
+    }
+  }
+}","The rule 'persistence_xml_problems' checks for various issues in the persistence.xml file. It iterates over all XML files and checks for the existence of '<class>' elements. For each '<class>' element, it retrieves the 'name' attribute and checks if the class exists and is not a library class. If the class does not exist or is a library class, it raises an error message. The rule also checks the 'scope' attribute of the class, asserting that it should be either 'singleton' or 'prototype'. If the scope is inappropriate, it raises an error message. Finally, the rule checks for duplicate names in the 'name' attribute of the class, raising an error message if duplicates are found.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses the built-in functions getXMLs, elementExists, getElms, getAttr, isEmpty, classExists, isLibraryClass, isUniqueSN, and hasAttr. The rule does not introduce any new built-in functions.","1. https://www.baeldung.com/jpa-entities: This page provides a comprehensive guide on JPA entities, including how to define and configure them in the persistence.xml file. It also discusses the scope of classes and the importance of unique names for entities.
+2. https://www.objectdb.com/java/jpa/persistence/overview: This page provides an overview of the persistence.xml file in JPA, including its structure, the elements it contains, and their attributes. It also discusses common issues and best practices when configuring the persistence.xml file.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "This rule, named 'incorrect-bean-definitions', checks all XML files for bean elements. For each bean element, it retrieves the fully qualified name of the bean class. If the bean class name is not empty, it asserts that the class either exists or is a library class. If the assertion fails, it generates a message indicating an incorrect bean definition, specifying the fully qualified name of the bean class and the name of the bean."
+}

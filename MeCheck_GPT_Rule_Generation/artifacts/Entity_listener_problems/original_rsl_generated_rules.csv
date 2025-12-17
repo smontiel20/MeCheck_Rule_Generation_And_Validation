@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaEntityListenerInspection.html,The source URL provides information about JPA specification errors related to Entity listener classes. It reports errors when Entity listener classes do not have public no-argument constructors and when Entity listener methods have incorrect signatures.,"Rule entity-listener-problems {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""EntityListener"")) {
+      assert ( exists(method m in getMethods(c)) ( hasParamType(m, ""void"") AND NOT hasParam(m) ) ) {
+        msg(""Entity listener method: %s in class: %s has incorrect signature"", getName(m), getFQN(c));
+      }
+      assert ( exists(method constructor in getConstructors(c)) ( NOT hasParam(constructor) AND getType(constructor) == ""public"" ) ) {
+        msg(""Entity listener class: %s does not have a public no-argument constructor"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'entity-listener-problems' checks all classes in the project. If a class is annotated with 'EntityListener', it checks all methods of the class. If a method has a return type other than 'void' or has parameters, it reports an error message indicating that the Entity listener method has an incorrect signature. The rule also checks all constructors of the class. If a constructor has parameters or is not public, it reports an error message indicating that the Entity listener class does not have a public no-argument constructor.",,"The generated rule seems to be logically correct and follows the syntax of RSL. It uses the built-in functions correctly to check for the specified conditions. However, the rule's effectiveness can only be confirmed by running it on a project and checking if it correctly identifies the specified JPA specification errors.","1. URL: https://www.baeldung.com/jpa-entity-lifecycle-events-and-listeners
+Summary: This page provides a detailed explanation of JPA Entity listeners and lifecycle events. It explains how to define Entity listener classes and methods, which is relevant to the generated rule as it checks for errors in these definitions.
+
+2. URL: https://www.objectdb.com/java/jpa/listener
+Summary: This page provides a tutorial on using JPA Entity listeners. It explains the requirements for Entity listener classes and methods, including the need for a no-argument constructor and the correct method signatures, which is exactly what the generated rule checks for.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

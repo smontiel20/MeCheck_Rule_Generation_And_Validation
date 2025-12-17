@@ -1,0 +1,11 @@
+Rule lombok-getter-may-be-used {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), "get") AND hasAnnotation(c, "lombok.Getter") == false) {
+        assert (getReturnType(m) == getType(m)) {
+          msg("Standard getter method: %s in class: %s can be replaced by Lombok @Getter annotation", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

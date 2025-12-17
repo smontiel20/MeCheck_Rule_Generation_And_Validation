@@ -1,0 +1,23 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ContextJavaBeanUnresolvedMethodsInspection.html,"The source URL provides information about a specific inspection in JetBrains that reports unresolved method references on initMethod and destroyMethod parameters of the @Bean annotation. For instance, if a class annotated with @Bean does not define a method specified in the initMethod or destroyMethod parameters, the inspection will report an unresolved method reference.","Rule unknown_init_destroy_method {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Bean')) {
+      String initMethod = getAnnoAttr(c, '@Bean', 'initMethod');
+      String destroyMethod = getAnnoAttr(c, '@Bean', 'destroyMethod');
+      if (NOT isEmpty(initMethod)) {
+        assert (methodExists(c, initMethod)) {
+          msg('Cannot resolve initMethod: %s in class: %s', initMethod, getFQN(c));
+        }
+      }
+      if (NOT isEmpty(destroyMethod)) {
+        assert (methodExists(c, destroyMethod)) {
+          msg('Cannot resolve destroyMethod: %s in class: %s', destroyMethod, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unknown_init_destroy_method' checks all classes in the project. If a class has the @Bean annotation, it retrieves the values of the 'initMethod' and 'destroyMethod' attributes. If these attributes are not empty, it asserts that the methods specified by these attributes exist in the class. If they do not exist, it generates a message indicating that the method cannot be resolved in the class.",,,"1. URL: https://www.baeldung.com/spring-bean-lifecycle
+Summary: This page provides a comprehensive guide to the lifecycle of a Spring Bean, including the use of initMethod and destroyMethod attributes in the @Bean annotation. It explains how these methods are used in the initialization and destruction phases of a bean's lifecycle.
+
+2. URL: https://stackoverflow.com/questions/3437059/does-spring-destroy-method-annotation-ensure-a-bean-is-destroyed
+Summary: This StackOverflow thread discusses the destroyMethod attribute of the @Bean annotation. It clarifies that the method specified by destroyMethod is called when the application context is closed, providing a way to clean up resources before the bean is destroyed.",

@@ -1,0 +1,25 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JPA,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomInspection.html,"The source URL provides information about Hibernate XML configuration errors. These errors include references to non-instantiable classes, classes that do not extend the required class, classes with inappropriate scope, empty tag and attribute values, tag and attribute values that do not match the required pattern (like Java Identifiers), tags that do not include the required children tags or attributes, and tags that define objects with duplicate names.","Rule unresolved-entity-graph-names {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<class>"")) {
+      for (<class> class in getElms(xml, ""<class>"")) {
+        String className = getAttr(class, ""name"");
+        if (NOT isEmpty(className)) {
+          assert ( classExists(className) OR isLibraryClass(className) ) {
+            msg(""Class: %s mentioned in class: %s, does not exist or is not instantiable"",
+                className, getName(class));
+          }
+        }
+        if (hasAttr(class, ""extends"")) {
+          String superClass = getAttr(class, ""extends"");
+          assert ( classExists(superClass) ) {
+            msg(""Super class: %s mentioned in class: %s, does not exist"",
+                superClass, getName(class));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-entity-graph-names' checks for Hibernate XML configuration errors. It iterates over all XML files and checks for the existence of '<class>' elements. For each '<class>' element, it retrieves the 'name' attribute and checks if the class exists or is a library class. If the class does not exist or is not instantiable, it reports an error. The rule also checks if the class extends another class by checking the 'extends' attribute. If the superclass does not exist, it reports an error.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided and does not introduce any new functions. The rule checks for the existence of classes and superclasses in XML files, which aligns with the requirements of the prompt.","1. https://www.baeldung.com/hibernate-5-xml-configuration: This page provides a comprehensive guide on Hibernate 5 XML Configuration. It explains how to configure Hibernate using XML, which is relevant to the generated rule as it checks for errors in Hibernate XML configuration.
+
+2. https://www.javatpoint.com/hibernate-tutorial: This tutorial covers various aspects of Hibernate including configuration, mapping, HQL, and criteria. It provides a good understanding of how Hibernate works, which is useful for understanding the context of the generated rule.",

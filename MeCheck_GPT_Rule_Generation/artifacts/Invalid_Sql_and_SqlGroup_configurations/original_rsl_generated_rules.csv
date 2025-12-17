@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingSqlInspection.html,The source URL provides information about a rule that checks for unresolved file references in the scripts attributes of the @Sql annotation and the corresponding aliased attributes of the @Sql meta annotations in Spring Testing.,"Rule invalid-sql-and-sqlgroup-configurations {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Sql') OR hasAnnotation(c, '@SqlGroup')) {
+      String[] sqlFiles = getAnnoAttr(c, 'scripts');
+      for (String sqlFile in sqlFiles) {
+        assert ( pathExists(sqlFile) ) {
+          msg(""Unresolved file reference: %s in @Sql or @SqlGroup annotation in class: %s"", sqlFile, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'invalid-sql-and-sqlgroup-configurations' checks each class in the project. If a class has either the @Sql or @SqlGroup annotation, it retrieves the 'scripts' attribute of the annotation, which should contain file paths. It then checks each file path to ensure that it exists. If a file path does not exist, it asserts an error and outputs a message indicating the unresolved file reference and the fully qualified name of the class where the issue was found.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, and it does not introduce any new functions. The rule is designed to check for unresolved file references in the scripts attributes of the @Sql and @SqlGroup annotations, which aligns with the requirement.","1. URL: https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+Summary: This page from Baeldung explains how to use the @Sql annotation in Spring Boot to execute SQL scripts, which is relevant to the rule as it checks for unresolved file references in the scripts attributes of the @Sql annotation.
+
+2. URL: https://stackoverflow.com/questions/38680527/resolving-sql-script-in-spring-boot
+Summary: This StackOverflow thread discusses issues related to resolving SQL scripts in Spring Boot, which is relevant to the rule as it checks for unresolved file references in SQL scripts.",

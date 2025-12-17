@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/ManyToManyCascadeRemove.html,"The content discusses the issue of using CascadeType.REMOVE in @ManyToMany associations in JPA. It explains that cascading the REMOVE operation in such associations can lead to problems as it may propagate beyond the link table, potentially causing a ConstraintViolationException. This is because the other side of the association might still be referenced by other entities.","Rule ManyToManyCascadeRemove {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ManyToMany')) {
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, '@ManyToMany')) {
+          String cascadeType = getAnnoAttr(f, 'cascade');
+          assert ( NOT (cascadeType == 'REMOVE' OR cascadeType == 'ALL') ) {
+            msg(""The field: %s in class: %s has a @ManyToMany association with CascadeType.REMOVE or CascadeType.ALL which can lead to ConstraintViolationException."", getName(f), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'ManyToManyCascadeRemove' checks all classes in the application. For each class, it checks if it has a @ManyToMany annotation. If it does, it then checks all fields of the class. For each field, it checks if it has a @ManyToMany annotation. If it does, it retrieves the 'cascade' attribute of the annotation. It then asserts that the 'cascade' attribute is not 'REMOVE' or 'ALL'. If the assertion fails, it generates a message indicating that the field in the class has a @ManyToMany association with CascadeType.REMOVE or CascadeType.ALL, which can lead to a ConstraintViolationException.",,The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided. The rule logic is sound as it correctly identifies the issue of using CascadeType.REMOVE or CascadeType.ALL in @ManyToMany associations.,"1. https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/ - This article discusses the best practices for using @ManyToMany annotation in JPA and Hibernate. It mentions the issue of CascadeType.REMOVE and suggests using DTO projections or explicit JPQL delete statements instead.
+2. https://www.baeldung.com/hibernate-many-to-many - This tutorial on Baeldung explains how to map a many-to-many association using JPA and Hibernate. It also mentions the potential issues with CascadeType.REMOVE and CascadeType.ALL in @ManyToMany associations.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

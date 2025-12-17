@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'pathClassWithoutResourceMethods' checks for all classes in the project. If a class is annotated with @Path, it asserts that there exists at least one method in the class that is annotated with @Path, @GET, or @POST. If this condition is not met, it generates a message stating that the class annotated with @Path does not have any resource methods."
+}

@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnitMixedFramework.html#locating-this-inspection,"The source URL provides information about a specific inspection in JetBrains that reports JUnit annotated methods when used in a test case from a different JUnit version. The inspection determines the framework version for a test case by checking the framework version of the super class when available. If a super class is not available, it will use the most used framework in the test case.","Rule JUnitMixedFramework {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""Test"")) {
+      String superClass = getFamily(c);
+      String currentVersion = getAnnoAttr(getAnnotated(c, ""Test""), ""version"");
+      String superClassVersion = isEmpty(superClass) ? currentVersion : getAnnoAttr(getAnnotated(superClass, ""Test""), ""version"");
+      assert (currentVersion == superClassVersion) {
+        msg(""JUnit annotated method in class: %s is from a different JUnit version (%s) than its superclass (%s)"", getName(c), currentVersion, superClassVersion);
+      }
+    }
+  }
+}","The rule 'JUnitMixedFramework' checks all classes in the project. If a class has a 'Test' annotation, it retrieves the superclass of the class and the version of the JUnit framework used in the current class and the superclass. If there is no superclass, it uses the version of the current class. It then asserts that the version of the JUnit framework used in the current class is the same as the one used in the superclass. If they are different, it generates a message indicating that the JUnit annotated method in the current class is from a different JUnit version than its superclass.",,The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule logic is sound as it correctly checks for the usage of different JUnit versions in a single test case.,"1. URL: https://www.baeldung.com/junit-5-migration - This page provides a guide on migrating from JUnit 4 to JUnit 5, which is relevant to our rule as it deals with the usage of different JUnit versions in a single test case.
+2. URL: https://www.infoq.com/articles/Mixing-JUnit3-JUnit4/ - This article discusses the challenges and solutions when mixing JUnit 3 and JUnit 4 in the same test case, which is directly related to the rule we generated.",

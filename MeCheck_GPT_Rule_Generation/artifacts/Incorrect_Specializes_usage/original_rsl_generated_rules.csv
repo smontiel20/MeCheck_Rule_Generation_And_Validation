@@ -1,0 +1,24 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiSpecializesInspection.html,"The source URL provides information about the incorrect usage of the @Specializes annotation in the CDI framework. It highlights that a specializing bean must extend another bean, a specializing method must override a @Produces method of its direct superclass, the @Named annotation cannot be used on the specializing and specialized class, two or more classes cannot specialize the same superclass, and a specializing method cannot be static.","Rule incorrect-specializes-usage {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Specializes')) {
+      assert (exists(class superclass in getFamily(c)) (isUniqueSN(superclass))) {
+        msg('Two or more classes cannot specialize the same superclass: %s', getFQN(superclass));
+      }
+      assert (NOT hasAnnotation(c, '@Named')) {
+        msg('@Named annotation cannot be used on the specializing class: %s', getFQN(c));
+      }
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Specializes')) {
+          assert (exists(method superMethod in getMethods(getFamily(c))) (hasAnnotation(superMethod, '@Produces'))) {
+            msg('Specializing method: %s must override a @Produces method of its direct superclass', getName(m));
+          }
+          assert (NOT getType(m).equals('static')) {
+            msg('Specializing method: %s cannot be static', getName(m));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-specializes-usage' checks for classes in the application that have the @Specializes annotation. For each such class, it asserts that there is a unique superclass that it specializes, and that the class does not have the @Named annotation. For each method in the class that has the @Specializes annotation, it asserts that there is a method in the superclass that it overrides which has the @Produces annotation, and that the method is not static. If any of these assertions fail, an appropriate error message is generated.",,,"1. https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#specializes - This is the official specification for the @Specializes annotation in the CDI framework. It provides detailed information about the correct usage of the annotation, which aligns with the rule generated.
+2. https://www.baeldung.com/cdi-specializes - This article provides a practical guide to using the @Specializes annotation in CDI, including examples of incorrect usage that would be caught by the generated rule.",

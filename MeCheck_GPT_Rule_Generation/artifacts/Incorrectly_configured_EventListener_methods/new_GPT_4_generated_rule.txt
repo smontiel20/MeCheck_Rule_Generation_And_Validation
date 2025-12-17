@@ -1,0 +1,11 @@
+Rule incorrectly-configured-eventlistener-methods {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@EventListener')) {
+        assert (getReturnType(m).equals('void') AND (getArg(m).size() == 1 OR getArg(m).size() == 0)) {
+          msg("Method: %s in class: %s is incorrectly configured as an @EventListener method", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

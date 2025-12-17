@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaMissingIdInspection.html,"The source page describes a rule that identifies and reports instances where persistent objects lack an identification property, which is crucial for their unique identification and retrieval in a database.","Rule persistent-entity-misses-primary-key {
+  for (class c in getClasses()) {
+    if (getAnnotated(c, ""@Entity"")) {
+      assert ( exists(field f in getFields(c)) ( hasAnnotation(f, ""@Id"") ) ) {
+        msg(""Persistent entity: %s does not have a primary key"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'persistent-entity-misses-primary-key' checks all classes in the project. If a class is annotated with '@Entity', indicating it is a persistent entity, the rule asserts that there exists a field within the class that is annotated with '@Id'. The '@Id' annotation signifies that the field is a primary key. If such a field does not exist, the rule generates a message reporting that the persistent entity does not have a primary key, along with the fully qualified name of the class.",,"The rule is syntactically correct and adheres to the RSL syntax. It uses only the built-in functions 'getClasses', 'getAnnotated', 'getFields', 'hasAnnotation', and 'getFQN'. The rule logic is sound as it correctly identifies persistent entities and checks for the existence of a primary key.","1. URL: https://www.baeldung.com/jpa-entities
+Summary: This page provides a comprehensive guide on JPA entities, including the importance of the '@Id' annotation for defining the primary key of the entity.
+
+2. URL: https://www.objectdb.com/java/jpa/entity/id
+Summary: This page explains the '@Id' annotation in detail, emphasizing its role in uniquely identifying each entity object in the database.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

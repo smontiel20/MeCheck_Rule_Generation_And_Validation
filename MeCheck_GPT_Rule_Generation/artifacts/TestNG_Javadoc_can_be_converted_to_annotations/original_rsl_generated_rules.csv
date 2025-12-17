@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConvertJavadoc.html,The JetBrains Inspectopedia page provides a quick-fix solution to convert Javadoc annotations in TestNG tests to JDK annotations.,"Rule convertJavadocToAnnotations {
+  for (file javaFile in getFiles()) {
+    if (elementExists(javaFile, ""@Test"")) {
+      for (method testMethod in getMethods(javaFile)) {
+        String javadoc = getAnnoAttr(testMethod, ""Javadoc"");
+        if (NOT isEmpty(javadoc)) {
+          assert ( hasAnnotation(testMethod, ""JDK"") ) {
+            msg(""TestNG test method: %s in file: %s has Javadoc annotation that can be converted to JDK annotation"",
+                getName(testMethod), getName(javaFile));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'convertJavadocToAnnotations' checks each Java file for TestNG test methods. If a test method has a Javadoc annotation, it asserts that the method also has a JDK annotation. If the assertion fails, it generates a message indicating that the Javadoc annotation can be converted to a JDK annotation.",,The rule is syntactically correct and uses only the built-in functions. It checks for the existence of Javadoc annotations in TestNG test methods and asserts the presence of JDK annotations.,"1. URL: https://www.baeldung.com/java-javadoc-to-annotations
+Summary: This article on Baeldung explains how to convert Javadoc comments to annotations in Java. It provides a detailed guide on how to use the 'Java 5 annotation' to replace Javadoc comments.
+
+2. URL: https://www.javatpoint.com/testng-annotations
+Summary: JavaTPoint provides a comprehensive guide on TestNG annotations. It explains the different types of annotations and their usage in TestNG.",

@@ -1,0 +1,15 @@
+Rule convertJavadocToAnnotations {
+  for (file javaFile in getFiles()) {
+    if (elementExists(javaFile, "@Test")) {
+      for (method testMethod in getMethods(javaFile)) {
+        String javadoc = getAnnoAttr(testMethod, "Javadoc");
+        if (NOT isEmpty(javadoc)) {
+          assert ( hasAnnotation(testMethod, "JDK") ) {
+            msg("TestNG test method: %s in file: %s has Javadoc annotation that can be converted to JDK annotation",
+                getName(testMethod), getName(javaFile));
+          }
+        }
+      }
+    }
+  }
+}

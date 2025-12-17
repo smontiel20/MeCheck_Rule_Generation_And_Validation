@@ -1,0 +1,15 @@
+Rule entity-multiple-id-attributes {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "Entity")) {
+      int idCount = 0;
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, "Id")) {
+          idCount = idCount + 1;
+        }
+      }
+      assert (idCount <= 1) {
+        msg("Entity: %s has more than one id attribute", getFQN(c));
+      }
+    }
+  }
+}

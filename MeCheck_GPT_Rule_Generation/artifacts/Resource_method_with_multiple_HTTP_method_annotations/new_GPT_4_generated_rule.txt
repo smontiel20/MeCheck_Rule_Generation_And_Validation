@@ -1,0 +1,13 @@
+Rule resource-method-multiple-http-method-annotations {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      int annotationCount = 0;
+      if (hasAnnotation(m, '@GET')) { annotationCount++; }
+      if (hasAnnotation(m, '@POST')) { annotationCount++; }
+      if (hasAnnotation(m, '@PUT')) { annotationCount++; }
+      assert (annotationCount <= 1) {
+        msg("Resource method: %s in class: %s has multiple HTTP method annotations", getName(m), getFQN(c));
+      }
+    }
+  }
+}

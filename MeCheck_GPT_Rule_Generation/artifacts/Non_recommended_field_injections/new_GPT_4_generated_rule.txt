@@ -1,0 +1,11 @@
+Rule non_recommended_field_injections {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'Autowired')) {
+      for (field f in getFields(c)) {
+        assert (NOT hasAnnotation(f, 'Autowired')) {
+          msg('Field: %s in class: %s is autowired, which is not recommended. Consider using constructor-based dependency injection.', getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}

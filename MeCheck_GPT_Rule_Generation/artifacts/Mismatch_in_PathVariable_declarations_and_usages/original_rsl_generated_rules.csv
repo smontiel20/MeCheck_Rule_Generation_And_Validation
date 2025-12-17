@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MVCPathVariableInspection.html,"The source URL describes a rule that checks for mismatches between @PathVariable parameters declared in the method signature and those present in the URL path. If a mismatch is found, a quick-fix is suggested to add the missing parameter.","Rule pathVariableMismatch {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PathVariable')) {
+        String pathVariableName = getAnnoAttr(m, '@PathVariable', 'value');
+        String urlPath = getAnnoAttr(m, '@RequestMapping', 'value');
+        assert ( urlPath.contains('{'+pathVariableName+'}') ) {
+          msg(""Mismatch in @PathVariable declarations and usages in method: %s of class: %s. The @PathVariable '%s' is not present in the URL path '%s'."",
+              getName(m), getFQN(c), pathVariableName, urlPath);
+        }
+      }
+    }
+  }
+}","The rule 'pathVariableMismatch' checks all classes and their methods. If a method has the '@PathVariable' annotation, it retrieves the name of the path variable and the URL path from the '@RequestMapping' annotation. It then asserts that the URL path contains the path variable name. If it does not, a message is generated indicating the mismatch, including the method name, class fully qualified name, path variable name, and URL path.",,"The rule 'pathVariableMismatch' is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as 'getClasses', 'getMethods', 'hasAnnotation', 'getAnnoAttr', 'contains', and 'msg'. The rule does not introduce any new built-in functions.","1. https://www.baeldung.com/spring-pathvariable-constraints: This page from Baeldung discusses the use of @PathVariable in Spring MVC and how to apply constraints to them. It does not directly address the mismatch issue but provides a good understanding of how @PathVariable is used.
+2. https://stackoverflow.com/questions/3686808/spring-3-requestmapping-get-path-value: This StackOverflow thread discusses how to get the path value from a @RequestMapping annotation in Spring MVC. It indirectly relates to the rule as it deals with the extraction of URL path, which is a part of the rule.",

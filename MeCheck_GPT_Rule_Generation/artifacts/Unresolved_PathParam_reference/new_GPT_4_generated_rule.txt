@@ -1,0 +1,15 @@
+Rule unresolved-path-param-reference {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PathParam')) {
+        String pathParam = getAnnoAttr(m, '@PathParam', 'value');
+        if (NOT isEmpty(pathParam)) {
+          assert ( exists(String url in getFQN(c)) ( url.indexOf(pathParam) != -1 ) ) {
+            msg('@PathParam: %s declared in method: %s of class: %s is not found in the URL path',
+                pathParam, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

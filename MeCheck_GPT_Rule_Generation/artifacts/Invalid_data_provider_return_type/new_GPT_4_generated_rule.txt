@@ -1,0 +1,12 @@
+Rule invalid-data-provider-return-type {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@DataProvider')) {
+        String returnType = getReturnType(m);
+        assert (returnType == 'Object[][]' OR returnType == 'Iterator<Object>') {
+          msg('Method: %s in class: %s marked with @DataProvider annotation does not return Object[][] or Iterator<Object>', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

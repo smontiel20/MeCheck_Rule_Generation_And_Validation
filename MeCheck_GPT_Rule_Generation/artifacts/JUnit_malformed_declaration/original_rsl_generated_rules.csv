@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnitMalformedDeclaration.html,"The source URL provides information about the JUnit Malformed Declaration inspection. This inspection reports JUnit test member declarations that are malformed and are likely not recognized by the JUnit test framework. It includes issues such as test classes that can't be constructed, fields annotated by @RegisterExtension that have the wrong type or are not declared as static when required, static or private inner classes annotated with @Nested, parameterized tests that are defined without a source, and many more.","Rule JUnit_malformed_declaration {
+  for (class c in getClasses()) {
+    if (NOT classExists(getName(c))) {
+      assert (classExists(getName(c))) {
+        msg(""Test class: %s can't be constructed"", getName(c));
+      }
+    }
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, ""@RegisterExtension"") AND (NOT isStatic(f) OR getType(f) != ""ExtensionContext"")) {
+        assert (isStatic(f) AND getType(f) == ""ExtensionContext"") {
+          msg(""Field: %s in class: %s annotated by @RegisterExtension has the wrong type or is not declared as static"", getName(f), getName(c));
+        }
+      }
+    }
+  }
+}","The rule 'JUnit_malformed_declaration' checks for classes and fields in the JUnit framework that are likely to be malformed. It first checks if a class exists, if not, it asserts that the class should exist. Then, it checks for fields in the class that are annotated with '@RegisterExtension'. If such a field is not static or its type is not 'ExtensionContext', it asserts that the field should be static and its type should be 'ExtensionContext'.","The built-in functions used in this rule are: getClasses, classExists, getName, getFields, hasAnnotation, isStatic, getType, and msg. No new functions were introduced.",The rule seems to be correctly checking for the existence of classes and the correct declaration of fields annotated with '@RegisterExtension'. It uses the built-in functions appropriately to perform these checks.,"1. https://www.baeldung.com/junit-5-extensions: This page provides a detailed guide on using JUnit 5 extensions, including the @RegisterExtension annotation. It explains how to correctly declare and use fields annotated with @RegisterExtension, which is relevant to the checks performed by the generated rule.
+2. https://junit.org/junit5/docs/current/user-guide/: The official JUnit 5 user guide provides comprehensive information about writing tests in JUnit 5, including the correct declaration of test classes and fields. This is relevant to the checks performed by the generated rule.",

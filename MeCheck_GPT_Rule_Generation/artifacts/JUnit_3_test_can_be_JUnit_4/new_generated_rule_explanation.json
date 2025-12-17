@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'JUnit3_to_JUnit4_conversion' checks all classes in the project. If a class has an annotation attribute 'Test' from the 'junit.framework' package, it asserts that a corresponding JUnit 4 test class exists. If the assertion fails, it generates a message indicating that the JUnit 3 test class can be converted to JUnit 4."
+}

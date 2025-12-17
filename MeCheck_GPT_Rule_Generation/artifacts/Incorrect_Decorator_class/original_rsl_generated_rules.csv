@@ -1,0 +1,10 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDecoratorInspection.html,The source URL provides information about a JetBrains Inspectopedia rule that checks for incorrect @Decorator bean definitions in CDI. The rule flags @Decorator beans that are final or do not have exactly one delegate attribute (field or parameter) annotated with @Delegate.,"Rule incorrect_decorator_class {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Decorator')) {
+      assert (NOT isFinal(c) AND countDelegateAttributes(c) == 1) {
+        msg('Incorrect @Decorator class: %s. It cannot be final and must have exactly one delegate attribute.', getFQN(c));
+      }
+    }
+  }
+}","The rule 'incorrect_decorator_class' checks all classes in the project. If a class is annotated with '@Decorator', the rule asserts that the class is not final and has exactly one delegate attribute. If these conditions are not met, an error message is generated with the fully qualified name of the class.",,"The rule uses the built-in functions 'getClasses', 'hasAnnotation', 'isFinal', 'countDelegateAttributes', 'getFQN', and 'msg'. It does not introduce any new functions. The rule syntax is valid according to the RSL syntax provided.","1. URL: https://www.baeldung.com/cdi-decorators Summary: This page provides a detailed explanation of decorators in CDI, including how to correctly define a decorator class and its delegate attribute. It also mentions that a decorator class should not be final. 2. URL: https://docs.jboss.org/weld/reference/latest/en-US/html/decorators.html Summary: This official documentation from JBoss provides a comprehensive guide to using decorators in CDI. It explains the requirement for a delegate attribute in a decorator class.",

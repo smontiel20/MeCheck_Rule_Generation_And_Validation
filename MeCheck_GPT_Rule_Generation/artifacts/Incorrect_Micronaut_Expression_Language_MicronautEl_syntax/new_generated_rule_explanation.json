@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect_MicronautEL_syntax' checks each file in the project for elements of Micronaut Expression Language (MicronautEL). For each MicronautEL expression found, it asserts that the expression is not empty and that it corresponds to an existing class, method, or field. If the assertion fails, it generates a message reporting a syntax error in the MicronautEL expression, specifying the expression and the file where it was found."
+}

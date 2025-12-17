@@ -1,0 +1,11 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnit5Converter.html,"The source URL provides information about a JetBrains tool that reports JUnit 4 tests that can be automatically migrated to JUnit 5. It mentions that while default runners are automatically convertible, custom runners, method- and field- rules are not and require manual changes.","Rule JUnit4_to_JUnit5_conversion {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'org.junit.Test')) {
+      assert (NOT exists(method m in getMethods(c)) (hasAnnotation(m, 'org.junit.runners.Parameterized')) OR hasAnnotation(m, 'org.junit.runners.BlockJUnit4ClassRunner')) {
+        msg('Class: %s contains JUnit 4 tests that cannot be automatically migrated to JUnit 5 due to custom runners, method- or field- rules.', getFQN(c));
+      }
+    }
+  }
+}","The rule 'JUnit4_to_JUnit5_conversion' checks all classes in the project. If a class is annotated with 'org.junit.Test', indicating it contains JUnit 4 tests, the rule asserts that there are no methods in the class that are annotated with 'org.junit.runners.Parameterized' or 'org.junit.runners.BlockJUnit4ClassRunner', which are custom runners in JUnit 4. If such methods exist, it means that these tests cannot be automatically migrated to JUnit 5 and a message is displayed with the fully qualified name of the class.",,"The rule is syntactically correct and uses only the built-in functions. It checks for the presence of JUnit 4 tests that cannot be automatically migrated to JUnit 5 due to the use of custom runners, method- or field- rules.","1. URL: https://www.baeldung.com/junit-5-migration - This page provides a comprehensive guide on migrating from JUnit 4 to JUnit 5, including the changes in annotations and assertions, and how to handle tests that cannot be automatically migrated.
+2. URL: https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4 - This is the official JUnit 5 user guide that provides detailed instructions on migrating from JUnit 4 to JUnit 5, including dealing with custom runners and rules.",

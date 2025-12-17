@@ -1,0 +1,12 @@
+Rule IncorrectlyReferencedBeanInDependsOn {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "@DependsOn")) {
+      String[] beanNames = getAnnoAttr(c, "@DependsOn", "value");
+      for (String beanName in beanNames) {
+        assert ( exists(<bean> bean in getElms(getXMLs(), "<bean>")) ( getName(bean) == beanName ) ) {
+          msg("Bean: %s referenced in @DependsOn annotation in class: %s does not exist", beanName, getFQN(c));
+        }
+      }
+    }
+  }
+}

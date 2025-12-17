@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'old_style_junit_test_method_in_junit4_class' checks all classes in the project. If a class does not have the JUnit 4 or JUnit 5 @Test annotation, it checks all methods in the class. If a method starts with 'test' and does not have the @Test annotation, it asserts that the superclass of the class is 'junit.framework.TestCase'. If the superclass is not 'junit.framework.TestCase', it generates a message indicating that the JUnit 3 style test method in the JUnit 4 class cannot be run."
+}

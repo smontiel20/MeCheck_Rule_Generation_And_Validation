@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDataModifyingAnnotationMissing.html,"The JetBrains Inspectopedia page describes a rule that checks if delete or update queries in Spring Data are annotated with the @Modifying annotation. If not, an InvalidDataAccessApiUsageException will be thrown.","Rule modifying-annotation-missing {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), ""update"") OR startsWith(getName(m), ""delete"")) {
+        assert ( hasAnnotation(m, ""@Modifying"") ) {
+          msg(""Method: %s in class: %s is a delete/update query and must be annotated with @Modifying"",
+              getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'modifying-annotation-missing' checks all classes and their methods. If a method name starts with 'update' or 'delete', it asserts that the method is annotated with '@Modifying'. If the method is not annotated with '@Modifying', it generates a message indicating the method and class name, stating that the method must be annotated with '@Modifying' as it is a delete or update query.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for the presence of the @Modifying annotation on methods whose names start with 'update' or 'delete', which aligns with the requirement.","1. URL: https://www.baeldung.com/spring-data-jpa-modifying-annotation
+Summary: This page from Baeldung explains the use of the @Modifying annotation in Spring Data JPA. It mentions that the annotation is needed for delete or update queries, which aligns with the rule generated.
+
+2. URL: https://stackoverflow.com/questions/50757860/spring-data-jpa-modifying-clear-automatically
+Summary: This StackOverflow thread discusses the use of the @Modifying annotation in Spring Data JPA and the exception that is thrown when it is missing, which is the InvalidDataAccessApiUsageException. This supports the rule generated.",

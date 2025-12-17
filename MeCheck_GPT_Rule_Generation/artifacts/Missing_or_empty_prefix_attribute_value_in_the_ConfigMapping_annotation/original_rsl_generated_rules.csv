@@ -1,0 +1,12 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Quarkus,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SmallRyeConfigMappingMissingPrefixInspection.html,The source URL provides information about a specific issue that can occur in the Quarkus framework. It reports missing or empty prefix attribute value in the @io.smallrye.config.ConfigMapping annotation. The IDE requires a correctly specified prefix to look up configuration properties.,"Rule missing-or-empty-prefix-in-configmapping {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@io.smallrye.config.ConfigMapping')) {
+      String prefix = getAnnoAttr(c, '@io.smallrye.config.ConfigMapping', 'prefix');
+      assert (NOT isEmpty(prefix)) {
+        msg(""Missing or empty 'prefix' attribute value in the '@ConfigMapping' annotation in class: %s"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'missing-or-empty-prefix-in-configmapping' checks all classes in the project. If a class has the '@io.smallrye.config.ConfigMapping' annotation, it retrieves the 'prefix' attribute of the annotation. It then asserts that the 'prefix' attribute is not empty. If the 'prefix' attribute is empty, it generates a message indicating that the 'prefix' attribute value in the '@ConfigMapping' annotation is missing or empty in the specific class.",,The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new functions. The rule checks for the existence of the '@io.smallrye.config.ConfigMapping' annotation and the 'prefix' attribute within it. It then checks if the 'prefix' attribute is empty and generates a message if it is.,"1. URL: https://quarkus.io/guides/config-mappings - This guide from the official Quarkus website provides information about the '@ConfigMapping' annotation and its usage. It mentions the 'prefix' attribute and explains its importance in looking up configuration properties.
+2. URL: https://smallrye.io/docs/smallrye-config/mapping/mapping.html - This documentation from SmallRye, the implementation used by Quarkus for MicroProfile Config, provides detailed information about the '@ConfigMapping' annotation and its 'prefix' attribute. It also explains the error that occurs when the 'prefix' attribute is missing or empty.",

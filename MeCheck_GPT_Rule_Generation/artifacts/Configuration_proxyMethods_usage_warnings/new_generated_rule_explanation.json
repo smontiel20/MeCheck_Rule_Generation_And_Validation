@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'configuration-proxy-methods' checks all classes in the project. If a class has the @Configuration annotation and the proxyBeanMethods attribute is set to false, it checks all methods in that class. If a method is not unique (meaning it could be invoked multiple times), it asserts a warning message indicating that the method may not guarantee correct bean injection due to the @Configuration(proxyBeanMethods = false) setting."
+}

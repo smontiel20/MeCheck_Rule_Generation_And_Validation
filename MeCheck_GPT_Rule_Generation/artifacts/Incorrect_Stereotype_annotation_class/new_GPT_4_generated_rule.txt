@@ -1,0 +1,19 @@
+Rule incorrect_stereotype_annotation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Stereotype')) {
+      if (hasAnnotation(c, '@Named')) {
+        String namedValue = getAnnoAttr(c, '@Named', 'value');
+        assert (isEmpty(namedValue)) {
+          msg("Non-empty @Named annotation is not allowed for stereotypes in class: %s", getFQN(c));
+        }
+      }
+      for (⟨annotation⟩ a in getAnnotated(c)) {
+        if (hasAnnoAttr(a, 'Qualifier')) {
+          assert (false) {
+            msg("Qualifier annotations are not allowed for stereotypes in class: %s", getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

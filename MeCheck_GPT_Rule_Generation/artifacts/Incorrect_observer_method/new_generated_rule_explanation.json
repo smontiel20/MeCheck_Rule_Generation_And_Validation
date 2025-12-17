@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-observer-method' checks all classes and their methods. If a method is annotated with '@Observes', it asserts that the method must have only one '@Observes' parameter, it should not have any parameter annotated with '@Disposes', and the method itself should not be annotated with '@Inject' and '@Produces'. If the method does not meet these conditions, it generates a message indicating the incorrect observer method and the class it belongs to."
+}

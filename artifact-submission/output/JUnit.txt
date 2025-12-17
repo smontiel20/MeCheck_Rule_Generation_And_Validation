@@ -1,0 +1,6 @@
+[artifact-submission\dataset\JUnit](afc5bc)	ignoredOrDisabledJunitTest.txt	JUnit class: UrgentTest is annotated with @Ignore or @Disabled, making it a code smell
+[artifact-submission\dataset\JUnit](afc5bc)	ignoredOrDisabledJunitTest.txt	Test method: testIt in class: UrgentTest is annotated with @Ignore or @Disabled, making it a code smell
+[artifact-submission\dataset\JUnit](afc5bc)	ignoredOrDisabledJunitTest.txt	JUnit class: ChillTest is annotated with @Ignore or @Disabled, making it a code smell
+[artifact-submission\dataset\JUnit](afc5bc)	runWithAnnotationExistsInParent.txt	Both parent class: Parent and child class: Parent in the JUnit test hierarchy are annotated with @RunWith, which can lead to unexpected testing behavior.
+[artifact-submission\dataset\JUnit](afc5bc)	runWithAnnotationExistsInParent.txt	Both parent class: MyTest and child class: MyTest in the JUnit test hierarchy are annotated with @RunWith, which can lead to unexpected testing behavior.
+[artifact-submission\dataset\JUnit](afc5bc)	runWithAnnotationExistsInParent.txt	Both parent class: MyOtherTest and child class: MyOtherTest in the JUnit test hierarchy are annotated with @RunWith, which can lead to unexpected testing behavior.

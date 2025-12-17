@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaDataSourceORMDomInspection.html,The source URL provides information about a JetBrains Inspectopedia rule that reports Persistence ORM XML descriptors that cannot be resolved within the configured datasource. It suggests refreshing the datasource or assigning a different one.,"Rule unresolved-database-references {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<persistence-unit>"")) {
+      for (<persistence-unit> unit in getElms(xml, ""<persistence-unit>"")) {
+        String dataSource = getAttr(unit, ""jta-data-source"");
+        if (NOT isEmpty(dataSource)) {
+          assert ( classExists(dataSource) OR isLibraryClass(dataSource) ) {
+            msg(""Data source: %s mentioned in persistence unit: %s, cannot be resolved"",
+                dataSource, getName(unit));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-database-references' checks all XML files for the existence of '<persistence-unit>' elements. For each persistence unit, it retrieves the 'jta-data-source' attribute, which should represent a data source. If the data source is not empty, the rule asserts that the data source either exists as a class or is a library class. If the data source cannot be resolved, it generates a message indicating the data source and the persistence unit where it was mentioned.",,"The generated rule follows the syntax of RSL and uses only the built-in functions. It does not introduce any new functions. The rule checks for unresolved data sources in persistence units within XML files, which aligns with the topic and content provided.","1. https://www.baeldung.com/jpa-persistence-xml: This page provides a comprehensive guide to the persistence.xml file in JPA, including the configuration of the 'persistence-unit' and 'jta-data-source' elements, which are relevant to the generated rule.
+2. https://www.objectdb.com/java/jpa/connection/database: This page discusses how to connect to a database in JPA, including the use of data sources, which is the main focus of the generated rule.",

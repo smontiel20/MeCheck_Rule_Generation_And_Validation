@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-autowiring-in-spring-bean-components' checks all classes in the application. If a class has either the @Cacheable or @CacheConfig annotation, it retrieves the names of the cache attributes. It then asserts that the cache names are not empty. If the cache names are empty, it generates a message indicating that the @Cache* annotation names in the class are incorrect and that at least one cache name should be provided per cache operation."
+}

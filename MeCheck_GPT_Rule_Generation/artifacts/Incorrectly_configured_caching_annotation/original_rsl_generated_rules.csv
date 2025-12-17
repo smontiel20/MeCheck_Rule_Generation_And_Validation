@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheableComponentsInspection.html,"The source URL provides information about the JetBrains Inspectopedia rule that checks for incorrectly configured 'caching' annotations in Spring Core such as @Cacheable, @CacheEvict, @CachePut, @CacheConfig, etc.","Rule incorrectly-configured-caching-annotation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Cacheable') OR hasAnnotation(c, '@CacheEvict') OR hasAnnotation(c, '@CachePut') OR hasAnnotation(c, '@CacheConfig')) {
+      String[] annoAttrs = getAnnoAttrNames(c);
+      for (String attr in annoAttrs) {
+        assert ( hasAnnoAttr(c, attr) ) {
+          msg(""Incorrectly configured caching annotation: %s in class: %s"", attr, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrectly-configured-caching-annotation' checks all classes in the project. If a class has any of the caching annotations (@Cacheable, @CacheEvict, @CachePut, @CacheConfig), it retrieves the names of all attributes of these annotations. For each attribute, it asserts that the attribute is correctly configured. If not, it generates a message indicating the incorrectly configured caching annotation and the class where it is found.",,,"1. URL: https://www.baeldung.com/spring-cache-tutorial
+Summary: This tutorial on Baeldung explains how to use Spring's caching annotations, including @Cacheable, @CacheEvict, @CachePut, and @CacheConfig. It provides examples of correct usage, which can be contrasted with incorrect configurations that the generated rule would catch.
+
+2. URL: https://www.javadevjournal.com/spring-boot/spring-boot-caching/
+Summary: This Java Dev Journal article provides a comprehensive guide to caching in Spring Boot, including the use of annotations like @Cacheable, @CacheEvict, @CachePut, and @CacheConfig. It also discusses common mistakes and how to avoid them, which is relevant to the rule's purpose of detecting incorrectly configured caching annotations.",

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-message-channel' checks all classes in the project. If a class has any of the annotations '@StreamListener', '@SendTo', '@Output', or '@Input', it retrieves the value of the annotation which is expected to be the name of the message channel. If the channel name is not empty, it asserts that there exists a bean in the same family (i.e., in the same context or configuration) as the class, whose name matches the channel name. If such a bean does not exist, it reports an error message indicating the unresolved message channel and the class where it is found."
+}

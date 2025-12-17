@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringImportResource.html,The JetBrains Inspectopedia page describes a rule that checks for unresolved files and directories in the 'locations' attributes of @ImportResource annotations and the corresponding aliased attributes of the @ImportResource meta annotations in Spring Core.,"Rule unresolved-file-references-in-importresource {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""@ImportResource"")) {
+      String[] locations = getAnnoAttr(c, ""@ImportResource"", ""locations"");
+      for (String location in locations) {
+        assert (pathExists(location)) {
+          msg(""Unresolved file or directory: %s in @ImportResource annotation in class: %s"", location, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-file-references-in-importresource' checks each class in the project. If a class has the @ImportResource annotation, it retrieves the 'locations' attribute of the annotation. It then checks each location in the 'locations' attribute to see if the path exists. If the path does not exist, it asserts an error message indicating the unresolved file or directory in the @ImportResource annotation in the class.",,,"https://stackoverflow.com/questions/29302831/spring-importresource-annotation-not-working: This StackOverflow thread discusses issues with the @ImportResource annotation not working, which could be due to unresolved file references. 
+
+https://www.baeldung.com/spring-importannotation: This Baeldung article explains the usage of @ImportResource annotation in Spring, including the 'locations' attribute, which could contain unresolved file references.",

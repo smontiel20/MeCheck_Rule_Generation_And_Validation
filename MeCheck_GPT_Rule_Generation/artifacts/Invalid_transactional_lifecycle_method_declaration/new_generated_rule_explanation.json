@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'invalid-transactional-lifecycle-method-declaration' checks all classes in the project. If a class is annotated with '@Transactional', it checks all methods in that class. If a method is annotated with either '@BeforeTransaction' or '@AfterTransaction', it asserts that the method has no arguments (using the 'isEmpty' function on the method's arguments) and that the return type of the method is 'void'. If these conditions are not met, it reports an error message indicating the invalid transactional lifecycle method declaration, specifying the method name and the fully qualified name of the class."
+}

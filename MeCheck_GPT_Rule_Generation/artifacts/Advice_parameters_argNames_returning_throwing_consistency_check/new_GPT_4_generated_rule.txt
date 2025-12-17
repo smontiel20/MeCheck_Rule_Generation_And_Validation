@@ -1,0 +1,15 @@
+Rule advice-parameters-consistency-check {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@AspectJ')) {
+        String argNames = getAnnoAttr(m, 'argNames');
+        if (NOT isEmpty(argNames)) {
+          assert ( hasParam(m, argNames) ) {
+            msg("The argNames attribute value: %s in @AspectJ annotation does not correspond to the actual method parameter name in method: %s of class: %s",
+                argNames, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

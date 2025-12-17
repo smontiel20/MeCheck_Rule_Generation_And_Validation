@@ -1,0 +1,10 @@
+Rule incorrect-autowiring-in-spring-bean-components {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "@Cacheable") OR hasAnnotation(c, "@CacheConfig")) {
+      String[] cacheNames = getAnnoAttrNames(c);
+      assert (NOT isEmpty(cacheNames)) {
+        msg("Incorrect @Cache* annotation names in class: %s. At least one cache name should be provided per cache operation.", getFQN(c));
+      }
+    }
+  }
+}

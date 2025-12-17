@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Quarkus,https://www.jetbrains.com.cn/en-us/help/inspectopedia/QsUndeclaredPathMimeTypesInspection.html,"The source URL provides information about a potential issue in Quarkus applications where endpoint methods might not have the @Produces or @Consumes annotations. Quarkus uses these annotations to minimize the number of JAX-RS providers included in the native executable, thereby reducing its size. The page suggests annotating methods or the entire class with @Produces or @Consumes and specifying the target MIME types.","Rule undeclared_path_mime_types_inspection {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Path')) {
+        assert ( hasAnnotation(m, '@Produces') OR hasAnnotation(m, '@Consumes') ) {
+          msg('Method: %s in class: %s does not have @Produces or @Consumes annotation', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'undeclared_path_mime_types_inspection' checks all classes and their methods in the application. If a method has the '@Path' annotation, the rule asserts that it should also have either the '@Produces' or '@Consumes' annotation. If this is not the case, it generates a message indicating the method and class that violate this rule.",,,"1. URL: https://quarkus.io/guides/rest-json - This guide from the official Quarkus website provides information on how to use JAX-RS, JSON-B, and RESTEasy to create RESTful web services. It emphasizes the importance of using @Produces and @Consumes annotations to specify the MIME types that a method can consume and produce.
+
+2. URL: https://www.baeldung.com/jax-rs-response - This article on Baeldung explains how to use JAX-RS to build RESTful web services in Java. It discusses the use of @Path, @Produces, and @Consumes annotations in defining the endpoints.",

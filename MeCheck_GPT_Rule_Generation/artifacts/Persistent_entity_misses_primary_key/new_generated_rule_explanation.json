@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'persistent-entity-misses-primary-key' checks all classes in the project. If a class is annotated with '@Entity', indicating it is a persistent entity, the rule asserts that there exists a field within the class that is annotated with '@Id'. The '@Id' annotation signifies that the field is a primary key. If such a field does not exist, the rule generates a message reporting that the persistent entity does not have a primary key, along with the fully qualified name of the class."
+}

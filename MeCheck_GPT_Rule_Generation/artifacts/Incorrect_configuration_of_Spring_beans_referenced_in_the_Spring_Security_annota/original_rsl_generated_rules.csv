@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Security,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringSecurityAnnotationBeanPointersResolveInspection.html,The JetBrains Inspectopedia page describes a rule that checks for unresolved Spring beans that are referenced in Spring Security annotations.,"Rule unresolved-spring-beans-in-annotations {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c)) {
+      for (String beanName in getAnnoAttrNames(c)) {
+        String beanValue = getAnnoAttr(c, beanName);
+        if (NOT isEmpty(beanValue)) {
+          assert ( classExists(beanValue) OR isLibraryClass(beanValue) ) {
+            msg(""Unresolved Spring bean: %s referenced in annotation: %s in class: %s"", beanValue, beanName, getName(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-spring-beans-in-annotations' checks all classes in the project. If a class has any annotations, it retrieves the names of all attributes in the annotations. For each attribute, it gets its value. If the value is not empty, it asserts that the value either exists as a class or is a library class. If the assertion fails, it generates a message indicating that the Spring bean referenced in the annotation does not exist.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for unresolved Spring beans in annotations, which aligns with the topic and content provided.","1. https://www.baeldung.com/spring-security-custom-security-expression: This page from Baeldung discusses how to create custom security expressions in Spring Security, which can involve referencing Spring beans in annotations. It provides a context where the generated rule could be applied to check for unresolved beans.
+2. https://stackoverflow.com/questions/29123016/spring-security-how-to-reference-a-spring-bean-in-a-custom-expression-handler: This StackOverflow thread discusses how to reference a Spring bean in a custom expression handler in Spring Security. The answers provide insights into potential issues that could arise, such as unresolved beans, which the generated rule addresses.",

@@ -1,0 +1,16 @@
+Rule invalid-spring-boot-setup {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "@SpringBootApplication")) {
+      assert (NOT hasAnnotation(c, "@EnableAutoConfiguration")) {
+        msg("Redundant annotation @EnableAutoConfiguration found in class: %s", 
+          getName(c));
+      }
+      assert (NOT hasAnnotation(c, "@ComponentScan")) {
+        msg("Redundant annotation @ComponentScan found in class: %s", 
+          getName(c));
+      }
+    }
+  }
+}
+
+

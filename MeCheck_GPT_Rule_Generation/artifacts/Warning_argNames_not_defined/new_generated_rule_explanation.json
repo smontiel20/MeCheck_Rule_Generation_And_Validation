@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'argNames_not_defined' checks all classes and their methods. If a method has an @AspectJ annotation, it asserts that the method has an 'argNames' attribute. If the 'argNames' attribute is not present, it generates a warning message indicating that the 'argNames' attribute is not defined in the @AspectJ annotation for the specific method of the class."
+}

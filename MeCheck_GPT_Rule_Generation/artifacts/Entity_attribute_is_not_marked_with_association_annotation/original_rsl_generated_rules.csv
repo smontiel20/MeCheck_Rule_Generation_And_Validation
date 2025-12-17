@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/AssociationNotMarkedInspection.html,The JetBrains Inspectopedia page describes a rule that checks for associations in JPA entities that are not marked with corresponding annotations.,"Rule entity-attribute-association-annotation {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (getType(f) == 'Entity') {
+        assert ( hasAnnotation(f, 'OneToOne') OR hasAnnotation(f, 'OneToMany') OR hasAnnotation(f, 'ManyToOne') OR hasAnnotation(f, 'ManyToMany') ) {
+          msg(""Entity attribute: %s in class: %s is not marked with association annotation"",
+              getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'entity-attribute-association-annotation' checks all classes in the project. For each class, it checks all fields. If the type of the field is 'Entity', it asserts that the field has one of the association annotations: 'OneToOne', 'OneToMany', 'ManyToOne', or 'ManyToMany'. If the field does not have any of these annotations, it generates a message indicating that the entity attribute is not marked with an association annotation.",,"The rule is syntactically correct according to the RSL syntax. It uses only the built-in functions: getClasses, getFields, getType, hasAnnotation, getName, and getFQN. The rule does not introduce any new built-in functions.","1. https://www.baeldung.com/jpa-associations: This Baeldung article provides a comprehensive guide to JPA associations, explaining the importance of marking entity attributes with the correct association annotations.
+2. https://www.javatpoint.com/jpa-annotations: This JavaTpoint page provides a list of JPA annotations, including the association annotations that the rule checks for.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

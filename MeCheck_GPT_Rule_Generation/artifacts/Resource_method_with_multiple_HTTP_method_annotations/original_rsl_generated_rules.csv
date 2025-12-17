@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+RESTful Web Service (JAX-RS),https://www.jetbrains.com.cn/en-us/help/inspectopedia/MultipleMethodDesignatorsInspection.html,"The source URL provides information about a common issue in RESTful Web Services where a resource method is annotated with multiple HTTP method annotations such as @GET, @POST, @PUT, etc. This is considered a bad practice as it can lead to confusion and unexpected behavior.","Rule resource-method-multiple-http-method-annotations {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      int annotationCount = 0;
+      if (hasAnnotation(m, '@GET')) { annotationCount++; }
+      if (hasAnnotation(m, '@POST')) { annotationCount++; }
+      if (hasAnnotation(m, '@PUT')) { annotationCount++; }
+      assert (annotationCount <= 1) {
+        msg(""Resource method: %s in class: %s has multiple HTTP method annotations"", getName(m), getFQN(c));
+      }
+    }
+  }
+}","The rule 'resource-method-multiple-http-method-annotations' checks all classes and their methods in the project. For each method, it counts the number of HTTP method annotations (@GET, @POST, @PUT). If a method has more than one such annotation, it asserts a failure and generates a message indicating the method and class with the issue.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as getClasses, getMethods, hasAnnotation, and getName. The rule logic is sound as it checks for multiple HTTP method annotations on a single method, which aligns with the rule's purpose.","1. 'https://www.baeldung.com/jax-rs-annotations': This page provides a comprehensive guide to JAX-RS annotations, including HTTP method annotations. It emphasizes that each resource method should be annotated with exactly one HTTP method annotation.
+2. 'https://stackoverflow.com/questions/25262765/jax-rs-multiple-http-methods-in-a-single-method': This StackOverflow discussion highlights the confusion and potential issues that can arise when a single resource method is annotated with multiple HTTP method annotations.",

@@ -1,0 +1,12 @@
+Rule unresolved-database-references-in-annotations {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "Table") OR hasAnnotation(c, "Column") OR hasAnnotation(c, "JoinColumn") OR hasAnnotation(c, "JoinTable") OR hasAnnotation(c, "NamedQuery") OR hasAnnotation(c, "NativeQuery") OR hasAnnotation(c, "Embeddable")) {
+      String annotationValue = getAnnoAttr(c, "name");
+      if (NOT isEmpty(annotationValue)) {
+        assert ( elementExists(annotationValue) ) {
+          msg("Unresolved database reference: %s in annotation of class: %s", annotationValue, getFQN(c));
+        }
+      }
+    }
+  }
+}

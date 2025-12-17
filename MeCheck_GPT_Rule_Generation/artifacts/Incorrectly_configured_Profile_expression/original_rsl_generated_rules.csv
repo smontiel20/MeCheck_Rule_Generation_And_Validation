@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringProfileExpression.html,The source URL provides information about incorrect @Profile expressions in Spring. It states that Spring profiles must not be empty and '&' and '|' operators must not be mixed without parentheses in Spring profile expressions.,"Rule incorrect-profile-expression {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Profile')) {
+      String profileExpression = getAnnoAttr(c, '@Profile', 'value');
+      if (isEmpty(profileExpression)) {
+        assert (false) {
+          msg('Profile expression in class: %s is empty', getFQN(c));
+        }
+      } else if (indexOf(profileExpression, '&') != -1 AND indexOf(profileExpression, '|') != -1 AND NOT (startsWith(profileExpression, '(') AND endsWith(profileExpression, ')'))) {
+        assert (false) {
+          msg('Profile expression: %s in class: %s mixes '&' and '|' operators without parentheses', profileExpression, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-profile-expression' checks all classes in the project. If a class has the @Profile annotation, it retrieves the value of the annotation which is the profile expression. If the profile expression is empty, it asserts false and generates a message indicating that the profile expression in the class is empty. If the profile expression contains both '&' and '|' operators and does not start and end with parentheses, it asserts false and generates a message indicating that the profile expression in the class mixes '&' and '|' operators without parentheses.",,,"https://www.baeldung.com/spring-profiles: This page from Baeldung provides a comprehensive guide to using @Profile in Spring. It explains how to define and activate profiles, and how to use profile expressions.
+https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-definition-profiles: This is the official Spring documentation for bean definition profiles. It explains how to use the @Profile annotation and how to define profile expressions.",

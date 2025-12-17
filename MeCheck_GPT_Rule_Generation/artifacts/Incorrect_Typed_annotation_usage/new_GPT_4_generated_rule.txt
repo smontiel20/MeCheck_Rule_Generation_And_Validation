@@ -1,0 +1,9 @@
+Rule incorrect-typed-annotation-usage {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Typed')) {
+      assert ( isIterable(getAnnoAttr(c, '@Typed')) AND hasAnnotation(getMethods(c), '@Produces') ) {
+        msg("Incorrect usage of @Typed annotation in class: %s", getFQN(c));
+      }
+    }
+  }
+}

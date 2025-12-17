@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'parameterized_test_class_without_data_provider_method' checks for each class in the project. If a class is annotated with @RunWith(Parameterized.class), it asserts that there exists a method in the class that is annotated with @Parameterized.Parameters, is static, and has a return type of either Iterable or Object[]. If such a method does not exist, it generates a message indicating the fully qualified name of the class and suggesting to create an empty parameter provider method or to change the signature of the incorrect data provider method."
+}

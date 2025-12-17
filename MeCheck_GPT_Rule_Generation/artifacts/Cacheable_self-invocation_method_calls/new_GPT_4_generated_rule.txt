@@ -1,0 +1,15 @@
+Rule cacheable_self_invocation {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Cacheable')) {
+        for (method innerM in getMethods(c)) {
+          if (callExists(m, innerM)) {
+            assert (NOT isUniqueSN(innerM)) {
+              msg("Method: %s in class: %s is a self-invocation and will not lead to actual caching even though it's marked with @Cacheable", getName(innerM), getFQN(c));
+            }
+          }
+        }
+      }
+    }
+  }
+}

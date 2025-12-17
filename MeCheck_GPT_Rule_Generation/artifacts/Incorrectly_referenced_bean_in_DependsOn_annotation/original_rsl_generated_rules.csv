@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringDependsOnUnresolvedBeanInspection.html,The source URL provides information about a rule that reports incorrect bean references in the value parameter of the @DependsOn annotation in Spring Core.,"Rule IncorrectlyReferencedBeanInDependsOn {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""@DependsOn"")) {
+      String[] beanNames = getAnnoAttr(c, ""@DependsOn"", ""value"");
+      for (String beanName in beanNames) {
+        assert ( exists(<bean> bean in getElms(getXMLs(), ""<bean>"")) ( getName(bean) == beanName ) ) {
+          msg(""Bean: %s referenced in @DependsOn annotation in class: %s does not exist"", beanName, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'IncorrectlyReferencedBeanInDependsOn' checks all classes in the project. If a class has the @DependsOn annotation, it retrieves the bean names from the value parameter of the annotation. For each bean name, it asserts that there exists a bean with the same name in the XML configuration files. If such a bean does not exist, it reports an error message indicating the bean name and the fully qualified name of the class where the incorrect reference was found.",,"The generated rule seems to be syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, and it does not introduce any new functions. The rule logic appears to be sound, as it correctly implements the requirement of checking for incorrectly referenced beans in the @DependsOn annotation.","1. URL: https://www.baeldung.com/spring-depends-on
+Summary: This page provides a detailed explanation of the @DependsOn annotation in Spring, including how it can be used to control the startup order of Spring beans. It also mentions the possibility of referencing non-existent beans, which is the issue addressed by the generated rule.
+
+2. URL: https://stackoverflow.com/questions/34930654/depends-on-in-spring-annotation
+Summary: This StackOverflow thread discusses the use of @DependsOn annotation in Spring and highlights some common issues, including incorrect bean references.",

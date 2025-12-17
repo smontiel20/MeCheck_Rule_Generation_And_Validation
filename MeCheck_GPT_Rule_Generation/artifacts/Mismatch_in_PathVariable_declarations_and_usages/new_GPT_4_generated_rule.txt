@@ -1,0 +1,14 @@
+Rule pathVariableMismatch {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PathVariable')) {
+        String pathVariableName = getAnnoAttr(m, '@PathVariable', 'value');
+        String urlPath = getAnnoAttr(m, '@RequestMapping', 'value');
+        assert ( urlPath.contains('{'+pathVariableName+'}') ) {
+          msg("Mismatch in @PathVariable declarations and usages in method: %s of class: %s. The @PathVariable '%s' is not present in the URL path '%s'.",
+              getName(m), getFQN(c), pathVariableName, urlPath);
+        }
+      }
+    }
+  }
+}

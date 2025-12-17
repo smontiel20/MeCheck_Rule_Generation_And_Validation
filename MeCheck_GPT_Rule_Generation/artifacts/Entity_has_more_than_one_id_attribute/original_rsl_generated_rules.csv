@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/MoreThanOneIdInspection.html,The source URL provides a rule for JetBrains Inspectopedia that checks for multiple id attributes in one entity. This is a common issue in JPA where an entity should only have one id attribute.,"Rule entity-multiple-id-attributes {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""Entity"")) {
+      int idCount = 0;
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, ""Id"")) {
+          idCount = idCount + 1;
+        }
+      }
+      assert (idCount <= 1) {
+        msg(""Entity: %s has more than one id attribute"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'entity-multiple-id-attributes' checks all classes in the project. If a class has the 'Entity' annotation, it then checks all fields in that class. If a field has the 'Id' annotation, it increments a counter. Finally, it asserts that the counter is less than or equal to 1, meaning there is at most one id attribute in the entity. If the assertion fails, it outputs a message indicating the fully qualified name of the entity class that has more than one id attribute.",,"The rule 'entity-multiple-id-attributes' is syntactically correct and uses only the built-in functions provided. It follows the structure of the example rules and uses the functions 'getClasses', 'hasAnnotation', 'getFields', and 'getFQN'.","1. https://www.baeldung.com/jpa-entity-identity: This page from Baeldung explains how to properly set up entity identity in JPA, emphasizing that each entity should have a unique id. It also discusses the use of the @Id annotation, which is relevant to the rule.
+2. https://stackoverflow.com/questions/918374/doctrine2-more-than-one-field-as-identifier: This StackOverflow thread discusses the issue of having more than one id field in an entity, which is directly related to the rule. The consensus is that it's generally a bad practice.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Cloud Stream,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCloudStreamMessageChannelInspection.html,"The source URL provides information about a common issue in Spring Cloud Stream where unresolved channel attributes in @StreamListener, @SendTo, @Output, and @Input annotations can lead to a 'bean not found' error at runtime.","Rule unresolved-message-channel {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@StreamListener') OR hasAnnotation(c, '@SendTo') OR hasAnnotation(c, '@Output') OR hasAnnotation(c, '@Input')) {
+      String channelName = getAnnoAttr(c, 'value');
+      if (NOT isEmpty(channelName)) {
+        assert ( exists(⟨bean⟩ b in getFamily(c)) ( getName(b) == channelName ) ) {
+          msg(""Unresolved message channel: %s in class: %s"", channelName, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-message-channel' checks all classes in the project. If a class has any of the annotations '@StreamListener', '@SendTo', '@Output', or '@Input', it retrieves the value of the annotation which is expected to be the name of the message channel. If the channel name is not empty, it asserts that there exists a bean in the same family (i.e., in the same context or configuration) as the class, whose name matches the channel name. If such a bean does not exist, it reports an error message indicating the unresolved message channel and the class where it is found.","The rule uses the following built-in functions: getClasses, hasAnnotation, getAnnoAttr, isEmpty, exists, getFamily, getName, getFQN, and msg. No new functions were introduced.",,"1. URL: https://stackoverflow.com/questions/40969821/spring-cloud-stream-unknown-channel-name
+Summary: This StackOverflow thread discusses a similar issue where a user is getting an 'unknown channel name' error in Spring Cloud Stream. The responses suggest checking the configuration and ensuring that the channel names are correctly defined and resolved.
+
+2. URL: https://github.com/spring-cloud/spring-cloud-stream/issues/1167
+Summary: This GitHub issue in the Spring Cloud Stream repository reports a 'bean not found' error due to an unresolved message channel. The discussion suggests that the issue might be due to incorrect or missing configuration.",

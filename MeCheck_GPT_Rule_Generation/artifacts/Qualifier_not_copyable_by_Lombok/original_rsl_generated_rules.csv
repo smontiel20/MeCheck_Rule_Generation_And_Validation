@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-Lombok,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringQualifierCopyableLombok.html,The source URL describes a potential issue in the Java-Lombok framework where Spring @Qualifier annotations on class fields are ignored by the corresponding Lombok @RequiredArgsConstructor and @AllArgsConstructor annotations. The generated constructors will not receive the @Qualifier annotation without a lombok.copyableAnnotations definition inside the lombok.config file.,"Rule qualifier_not_copyable_by_lombok {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@RequiredArgsConstructor') OR hasAnnotation(c, '@AllArgsConstructor')) {
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, '@Qualifier')) {
+          assert (getAnnoAttr(f, 'lombok.copyableAnnotations') == '@Qualifier') {
+            msg('Field: %s in class: %s has @Qualifier annotation that is not copyable by Lombok', getName(f), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'qualifier_not_copyable_by_lombok' checks all classes in the project. If a class has either @RequiredArgsConstructor or @AllArgsConstructor annotation, it checks all fields of that class. If a field has @Qualifier annotation, it asserts that the field also has a 'lombok.copyableAnnotations' attribute with a value of '@Qualifier'. If this condition is not met, it generates a message indicating that the field has a @Qualifier annotation that is not copyable by Lombok.",,,,

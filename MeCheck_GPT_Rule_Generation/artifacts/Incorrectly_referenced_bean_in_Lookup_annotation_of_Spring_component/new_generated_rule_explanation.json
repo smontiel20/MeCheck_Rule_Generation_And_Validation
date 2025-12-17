@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'IncorrectlyReferencedBeanInLookupAnnotation' checks all classes in the project. If a class has the @Lookup annotation, it retrieves the value of the 'value' attribute of the annotation, which is the name of the bean. If the bean name is not empty, it asserts that the bean class exists or is a library class. If the assertion fails, it generates a message indicating that the bean referenced in the @Lookup annotation does not exist."
+}

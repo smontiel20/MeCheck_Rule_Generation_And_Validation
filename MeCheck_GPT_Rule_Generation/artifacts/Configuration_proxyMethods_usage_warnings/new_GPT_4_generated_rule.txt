@@ -1,0 +1,13 @@
+Rule configuration-proxy-methods {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "@Configuration")) {
+      if (getAnnoAttr(c, "proxyBeanMethods") == "false") {
+        for (method m in getMethods(c)) {
+          assert (NOT isUniqueSN(m)) {
+            msg("Warning: Method: %s in class: %s with @Configuration(proxyBeanMethods = false) may not guarantee correct bean injection.", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

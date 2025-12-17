@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-specializes-usage' checks for classes in the application that have the @Specializes annotation. For each such class, it asserts that there is a unique superclass that it specializes, and that the class does not have the @Named annotation. For each method in the class that has the @Specializes annotation, it asserts that there is a method in the superclass that it overrides which has the @Produces annotation, and that the method is not static. If any of these assertions fail, an appropriate error message is generated."
+}

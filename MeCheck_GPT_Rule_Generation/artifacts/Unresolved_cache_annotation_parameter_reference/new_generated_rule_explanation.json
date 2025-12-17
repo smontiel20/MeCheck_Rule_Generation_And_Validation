@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-cache-annotation-parameter-reference' checks for each class and each method in the class. If the method has one of the specified Micronaut Cache annotations, it retrieves the 'parameters' attribute of the annotation. For each parameter in the 'parameters' attribute, it asserts that the method has a parameter with the same name. If not, it generates a message indicating the undefined parameter in the method of the class."
+}

@@ -1,0 +1,13 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnit5AssertionsConverter.html,"The source URL provides information about a rule that reports any calls to methods from the junit.framework.Assert, org.junit.Assert, or org.junit.Assume classes inside JUnit 5 tests. It suggests migrating to org.junit.jupiter.api.Assertions / org.junit.jupiter.api.Assumptions to avoid dependencies on old JUnit versions.","Rule JUnit5ObsoleteAssertions {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (callExists(m, 'junit.framework.Assert') OR callExists(m, 'org.junit.Assert') OR callExists(m, 'org.junit.Assume')) {
+        assert (NOT callExists(m, 'org.junit.jupiter.api.Assertions') AND NOT callExists(m, 'org.junit.jupiter.api.Assumptions')) {
+          msg('Method: %s in class: %s uses obsolete JUnit assertions. Consider migrating to org.junit.jupiter.api.Assertions / org.junit.jupiter.api.Assumptions.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'JUnit5ObsoleteAssertions' checks all classes and their methods. If a method contains calls to 'junit.framework.Assert', 'org.junit.Assert', or 'org.junit.Assume', it asserts that the method does not contain calls to 'org.junit.jupiter.api.Assertions' and 'org.junit.jupiter.api.Assumptions'. If the assertion fails, it generates a message suggesting migration to 'org.junit.jupiter.api.Assertions' or 'org.junit.jupiter.api.Assumptions'.",,"The rule is syntactically correct and follows the RSL syntax. It uses the built-in functions 'getClasses', 'getMethods', 'callExists', 'getName', and 'getFQN'. The rule does not introduce any new built-in functions.","1. URL: https://www.baeldung.com/junit-5-migration - This page provides a comprehensive guide on migrating from JUnit 4 to JUnit 5, including the replacement of old assertions with the new ones in JUnit 5.
+2. URL: https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions - This is the official JUnit 5 documentation that explains the new assertions and assumptions in JUnit 5.",

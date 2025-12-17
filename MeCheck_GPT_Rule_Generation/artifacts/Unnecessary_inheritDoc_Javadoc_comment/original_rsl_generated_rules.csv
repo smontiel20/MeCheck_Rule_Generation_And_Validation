@@ -1,0 +1,22 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JavaDoc,https://www.jetbrains.com.cn/en-us/help/inspectopedia/UnnecessaryInheritDoc.html,"The source URL describes a rule that identifies unnecessary '{@inheritDoc}' tags in Javadoc comments. The '{@inheritDoc}' tag is redundant if it's the only content in a Javadoc comment because Javadoc automatically inherits the super class's comment if no comment is present. The rule also identifies '{@inheritDoc}' tags in invalid locations, such as fields, and suggests removing the unnecessary Javadoc comment.","Rule unnecessary-inheritdoc {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      String docComment = getDocComment(m);
+      if (docComment == '{@inheritDoc}') {
+        assert ( false ) {
+          msg('Unnecessary {@inheritDoc} in method: %s of class: %s', getName(m), getFQN(c));
+        }
+      }
+    }
+    for (field f in getFields(c)) {
+      String docComment = getDocComment(f);
+      if (docComment.contains('{@inheritDoc}')) {
+        assert ( false ) {
+          msg('Invalid {@inheritDoc} in field: %s of class: %s', getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unnecessary-inheritdoc' checks all classes and their methods and fields. If a method's Javadoc comment contains only '{@inheritDoc}', it asserts false and generates a message indicating the unnecessary '{@inheritDoc}' in the method of the class. Similarly, if a field's Javadoc comment contains '{@inheritDoc}', it asserts false and generates a message indicating the invalid '{@inheritDoc}' in the field of the class.",,"The generated rule appears to be syntactically correct according to the RSL syntax. It uses the built-in functions 'getClasses', 'getMethods', 'getFields', 'getDocComment', 'getName', and 'getFQN' to perform its checks.","1. https://stackoverflow.com/questions/4593983/when-should-we-use-inheritdoc-in-java: This StackOverflow thread discusses the appropriate use of '{@inheritDoc}' in Java, which is relevant to the rule that identifies unnecessary '{@inheritDoc}' tags.
+2. https://www.baeldung.com/javadoc: This Baeldung article provides a comprehensive guide to Javadoc, including the '{@inheritDoc}' tag. It explains how Javadoc comments are inherited, which is relevant to the rule's purpose of identifying unnecessary '{@inheritDoc}' tags.",

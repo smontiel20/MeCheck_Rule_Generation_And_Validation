@@ -1,0 +1,19 @@
+Rule requiredSetterBeanNotInjected {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<bean>")) {
+      for (<bean> bean in getElms(xml, "<bean>")) {
+        String beanClassFQN = getAttr(bean, "class");
+        if (classExists(beanClassFQN)) {
+          class c = locateClassFQN(beanClassFQN);
+          for (method m in getMethods(c)) {
+            if (hasAnnotation(m, "@Required")) {
+              assert ( exists(field f in getFields(c)) ( hasAnnoAttr(f, "Autowired") OR hasAnnoAttr(f, "Inject") ) ) {
+                msg("The @Required setter method: %s in class: %s is not autowired or injected", getName(m), getFQN(c));
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

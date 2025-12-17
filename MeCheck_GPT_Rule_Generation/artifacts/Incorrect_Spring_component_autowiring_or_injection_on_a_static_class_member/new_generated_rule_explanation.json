@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect_static_member_autowiring' checks all classes in the project. If a class is annotated as a Spring Component, it checks all fields and methods of the class. If a field or method is annotated with 'Autowired' or 'Inject', it asserts that the field or method is not static. If the assertion fails, it generates a message indicating that the static field or method should not be autowired or injected."
+}

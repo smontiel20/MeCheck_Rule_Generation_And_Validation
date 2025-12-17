@@ -1,0 +1,12 @@
+Rule unresolved-file-references {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@PropertySource') OR hasAnnotation(c, '@TestPropertySource')) {
+      String[] locations = getAnnoAttr(c, 'locations');
+      for (String location in locations) {
+        assert ( pathExists(location) ) {
+          msg("Unresolved file or directory: %s in class: %s", location, getFQN(c));
+        }
+      }
+    }
+  }
+}

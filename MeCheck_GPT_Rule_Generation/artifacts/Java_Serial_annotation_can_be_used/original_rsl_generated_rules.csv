@@ -1,0 +1,25 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-Serialization Issues,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MissingSerialAnnotation.html,The source URL provides information about the '@Serial' annotation in Java. It explains that this annotation should be used for methods and fields in Serializable and Externalizable classes. The JetBrains tool provides a quick-fix that adds this annotation where it's missing. The page refers to the Javadoc of the java.io.Serial class for more detailed information.,"Rule missing-serial-annotation {
+  for (class c in getClasses()) {
+    if (isIterable(getMethods(c)) OR isIterable(getFields(c))) {
+      for (method m in getMethods(c)) {
+        if (NOT hasAnnotation(m, '@Serial')) {
+          assert (getReturnType(m) == 'Serializable' OR getReturnType(m) == 'Externalizable') {
+            msg(""Method: %s in class: %s should be annotated with '@Serial'"", getName(m), getName(c));
+          }
+        }
+      }
+      for (field f in getFields(c)) {
+        if (NOT hasAnnotation(f, '@Serial')) {
+          assert (getType(f) == 'Serializable' OR getType(f) == 'Externalizable') {
+            msg(""Field: %s in class: %s should be annotated with '@Serial'"", getName(f), getName(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'missing-serial-annotation' checks all classes in the project. For each class, it checks if it has methods or fields. If it does, it iterates over each method and field. If a method or field does not have the '@Serial' annotation, it asserts that the return type of the method or the type of the field is either 'Serializable' or 'Externalizable'. If this assertion fails, it generates a message indicating that the method or field should be annotated with '@Serial'.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for the '@Serial' annotation in methods and fields of 'Serializable' and 'Externalizable' classes, which aligns with the topic and content provided.","1. URL: https://www.baeldung.com/java-serialization
+Summary: This page provides a comprehensive guide to Java Serialization, including a section on the '@Serial' annotation. It explains when and why to use this annotation, which aligns with the generated rule.
+
+2. URL: https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/io/Serial.html
+Summary: This is the official Javadoc for the java.io.Serial interface. It provides detailed information about the '@Serial' annotation, including its usage in Serializable and Externalizable classes.",

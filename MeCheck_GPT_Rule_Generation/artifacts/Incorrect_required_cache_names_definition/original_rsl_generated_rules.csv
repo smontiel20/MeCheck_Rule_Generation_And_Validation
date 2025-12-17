@@ -1,0 +1,11 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheNamesInspection.html,"The source URL provides information about a rule that checks for incorrect @Cache* annotation names in Spring Core. It states that at least one cache name should be provided per cache operation: @Cacheable(""cache_name"") or @Cacheable(cacheNames =""cache_name""). It also mentions that @CacheConfig#cacheNames() can be used for sharing common cache-related settings at the class level.","Rule incorrect-cache-names-definition {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""@Cacheable"") OR hasAnnotation(c, ""@CacheConfig"")) {
+      String[] cacheNames = getAnnoAttrNames(c, ""cacheNames"");
+      assert (NOT isEmpty(cacheNames[0])) {
+        msg(""Incorrect cache name definition in class: %s. At least one cache name should be provided per cache operation."", getFQN(c));
+      }
+    }
+  }
+}","The rule 'incorrect-cache-names-definition' checks all classes in the project. If a class has either the @Cacheable or @CacheConfig annotation, it retrieves the cacheNames attribute from the annotation. It then asserts that the first cache name is not empty. If the assertion fails, it generates a message indicating that the cache name definition in the class is incorrect and that at least one cache name should be provided per cache operation.",,,,

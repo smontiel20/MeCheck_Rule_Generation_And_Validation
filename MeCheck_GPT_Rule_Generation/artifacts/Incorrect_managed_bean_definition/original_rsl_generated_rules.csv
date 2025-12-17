@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiManagedBeanInconsistencyInspection.html,"The source URL provides information about a rule that checks for incorrect bean definition rules in CDI. The rule checks if a top-level Java class can be a simple bean based on several conditions: it is not a parameterized type, it is not a non-static inner class, it is a concrete class or is annotated with @Decorator, it has an appropriate constructor, it does not implement certain interfaces, and it does not extend javax.faces.component.UIComponent.","Rule incorrect-managed-bean-definition {
+  for (class c in getClasses()) {
+    if (NOT hasAnnotation(c, ""Decorator"") AND NOT hasAnnotation(c, ""Initializer"")) {
+      assert (NOT isIterable(c) AND NOT isLibraryClass(c) AND NOT hasField(c, ""javax.servlet.Servlet"") AND NOT hasField(c, ""javax.servlet.Filter"") AND NOT hasField(c, ""javax.servlet.ServletContextListener"") AND NOT hasField(c, ""javax.servlet.http.HttpSessionListener"") AND NOT hasField(c, ""javax.servlet.ServletRequestListener"") AND NOT hasField(c, ""javax.ejb.EnterpriseBean"") AND NOT getType(c) == ""javax.faces.component.UIComponent"") {
+        msg(""Incorrect managed bean definition for class: %s"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'incorrect-managed-bean-definition' checks for each class in the project if it is not annotated with @Decorator or @Initializer, is not iterable, is not a library class, does not implement certain servlet interfaces, and does not extend javax.faces.component.UIComponent. If any of these conditions are met, it reports an incorrect managed bean definition for that class.",,"The generated rule seems to be logically correct and follows the syntax of RSL. It uses the built-in functions correctly to check for the conditions specified in the rule. However, the rule's effectiveness can only be confirmed by running it on a project and checking if it correctly identifies incorrect managed bean definitions.","1. URL: https://www.baeldung.com/cdi-java
+Summary: This page provides a comprehensive guide to CDI in Java. It explains what CDI is, how to use it, and common issues that can occur, such as incorrect bean definitions.
+
+2. URL: https://docs.jboss.org/weld/reference/latest/en-US/html/beanscdi.html
+Summary: This page from the official JBoss documentation provides detailed information about beans in CDI, including how they should be defined and common inconsistencies that can occur.",

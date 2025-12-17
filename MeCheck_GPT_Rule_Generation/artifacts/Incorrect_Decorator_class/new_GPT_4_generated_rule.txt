@@ -1,0 +1,9 @@
+Rule incorrect_decorator_class {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Decorator')) {
+      assert (NOT isFinal(c) AND countDelegateAttributes(c) == 1) {
+        msg('Incorrect @Decorator class: %s. It cannot be final and must have exactly one delegate attribute.', getFQN(c));
+      }
+    }
+  }
+}

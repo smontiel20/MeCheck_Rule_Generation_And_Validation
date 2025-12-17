@@ -1,0 +1,11 @@
+Rule incorrect-scheduled-method-signature {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Scheduled')) {
+        assert (getReturnType(m) == 'void' AND NOT hasParam(m)) {
+          msg("Method: %s in class: %s has incorrect signature for @Scheduled annotation. It should return void and not expect any arguments.", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

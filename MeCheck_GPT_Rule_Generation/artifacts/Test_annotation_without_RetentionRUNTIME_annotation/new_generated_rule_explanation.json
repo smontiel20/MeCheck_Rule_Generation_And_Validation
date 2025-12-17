@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'TestAnnotationWithoutRuntimeRetention' checks for each class in the project if it has the 'Test' annotation. If the class has the 'Test' annotation but does not have the '@Retention(RUNTIME)' annotation, it asserts whether the class has either the 'Retention(CLASS)' or 'Retention(SOURCE)' annotation. If the assertion is true, it generates a message indicating that the 'Test' annotation in the class does not have the '@Retention(RUNTIME)' annotation."
+}

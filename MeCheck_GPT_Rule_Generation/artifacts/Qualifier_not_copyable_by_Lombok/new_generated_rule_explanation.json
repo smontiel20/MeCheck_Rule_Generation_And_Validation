@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'qualifier_not_copyable_by_lombok' checks all classes in the project. If a class has either @RequiredArgsConstructor or @AllArgsConstructor annotation, it checks all fields of that class. If a field has @Qualifier annotation, it asserts that the field also has a 'lombok.copyableAnnotations' attribute with a value of '@Qualifier'. If this condition is not met, it generates a message indicating that the field has a @Qualifier annotation that is not copyable by Lombok."
+}

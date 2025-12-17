@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-file-references' checks all classes in the project. If a class has either a @PropertySource or @TestPropertySource annotation, it retrieves the 'locations' attribute of the annotation, which should be an array of Strings representing file or directory paths. For each location, it asserts that the path exists. If the path does not exist, it generates a message indicating the unresolved file or directory and the fully qualified name of the class where the annotation is located."
+}

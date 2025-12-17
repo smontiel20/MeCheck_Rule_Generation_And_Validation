@@ -1,0 +1,13 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringJavaAutowiredFieldsWarningInspection.html,The source URL provides information about a JetBrains inspection that reports instances of field injections in Spring components. It suggests a quick-fix that involves using constructor-based dependency injection in beans and making assertions for mandatory fields.,"Rule non_recommended_field_injections {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'Autowired')) {
+      for (field f in getFields(c)) {
+        assert (NOT hasAnnotation(f, 'Autowired')) {
+          msg('Field: %s in class: %s is autowired, which is not recommended. Consider using constructor-based dependency injection.', getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'non_recommended_field_injections' checks all classes in the project. If a class has the 'Autowired' annotation, it checks all fields in that class. If a field has the 'Autowired' annotation, it asserts that this is not the case and generates a message indicating that the field is autowired, which is not recommended, and suggests using constructor-based dependency injection instead.",,"The rule 'non_recommended_field_injections' is syntactically correct and uses only the built-in functions provided. It follows the RSL syntax and uses the functions 'getClasses', 'hasAnnotation', 'getFields', 'getName', and 'getFQN'.","1. https://www.baeldung.com/spring-injection-pros-cons: This article discusses the pros and cons of different types of dependency injection in Spring, including field injection. It mentions that field injection is not recommended due to its drawbacks such as difficulty in testing and lack of null safety.
+2. https://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it: This StackOverflow thread explains what field injection is and why it is not recommended. It suggests using constructor injection as an alternative, which aligns with the quick-fix suggested by the JetBrains inspection.",

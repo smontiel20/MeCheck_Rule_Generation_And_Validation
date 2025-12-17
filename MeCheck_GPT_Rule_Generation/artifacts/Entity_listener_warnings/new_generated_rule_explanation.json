@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'entity-listener-warnings' checks all classes in the project. If a class is annotated with 'EntityListener', it asserts that there exists at least one method in the class that is annotated with any of the entity listener methods ('PrePersist', 'PostPersist', 'PreRemove', 'PostRemove', 'PreUpdate', 'PostUpdate', 'PostLoad'). If no such method exists, it reports a warning message indicating that the entity listener class does not have any entity listener methods."
+}

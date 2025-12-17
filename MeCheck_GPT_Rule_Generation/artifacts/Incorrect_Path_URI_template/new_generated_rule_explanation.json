@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-path-uri-template' checks all classes in the project. If a class has the '@Path' annotation, it retrieves the value of the annotation. If the value is not empty, it asserts that the path exists. If the path does not exist, it generates a message indicating the incorrect or unused @Path URI template and the fully qualified name of the class."
+}

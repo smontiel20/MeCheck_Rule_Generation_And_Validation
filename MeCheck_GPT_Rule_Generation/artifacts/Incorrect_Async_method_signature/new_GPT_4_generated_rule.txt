@@ -1,0 +1,12 @@
+Rule incorrect-async-method-signature {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, "Async")) {
+        String returnType = getReturnType(m);
+        assert (returnType == "void" OR returnType == "Future" OR returnType == "ListenableFuture" OR returnType == "CompletableFuture") {
+          msg("Incorrect return type: %s for @Async method: %s in class: %s", returnType, getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

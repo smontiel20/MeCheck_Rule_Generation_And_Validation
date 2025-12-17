@@ -1,0 +1,11 @@
+Rule incorrect-observer-method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Observes')) {
+        assert (getAnnoAttrNames(m, '@Observes').size() == 1 AND NOT hasAnnoAttr(m, '@Disposes') AND NOT hasAnnotation(m, '@Inject') AND NOT hasAnnotation(m, '@Produces')) {
+          msg('Incorrect observer method: %s in class: %s. It must contain only one @Observes parameter, cannot have parameters annotated with @Disposes, and cannot be annotated with @Inject and @Produces.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-managed-bean-definition' checks for each class in the project if it is not annotated with @Decorator or @Initializer, is not iterable, is not a library class, does not implement certain servlet interfaces, and does not extend javax.faces.component.UIComponent. If any of these conditions are met, it reports an incorrect managed bean definition for that class."
+}

@@ -1,0 +1,16 @@
+Rule JUnit_malformed_declaration {
+  for (class c in getClasses()) {
+    if (NOT classExists(getName(c))) {
+      assert (classExists(getName(c))) {
+        msg("Test class: %s can't be constructed", getName(c));
+      }
+    }
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, "@RegisterExtension") AND (NOT isStatic(f) OR getType(f) != "ExtensionContext")) {
+        assert (isStatic(f) AND getType(f) == "ExtensionContext") {
+          msg("Field: %s in class: %s annotated by @RegisterExtension has the wrong type or is not declared as static", getName(f), getName(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'JUnit_malformed_declaration' checks for classes and fields in the JUnit framework that are likely to be malformed. It first checks if a class exists, if not, it asserts that the class should exist. Then, it checks for fields in the class that are annotated with '@RegisterExtension'. If such a field is not static or its type is not 'ExtensionContext', it asserts that the field should be static and its type should be 'ExtensionContext'."
+}

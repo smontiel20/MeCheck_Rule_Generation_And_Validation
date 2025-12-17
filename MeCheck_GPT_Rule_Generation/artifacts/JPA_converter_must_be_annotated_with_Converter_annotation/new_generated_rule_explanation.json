@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'JPA_Converter_Annotation_Check' checks all classes in the project. If the class name ends with 'Converter', it asserts that the class should be annotated with '@Converter'. If the class is not annotated with '@Converter', it generates a message indicating that the class is a JPA converter but is not annotated with '@Converter'."
+}

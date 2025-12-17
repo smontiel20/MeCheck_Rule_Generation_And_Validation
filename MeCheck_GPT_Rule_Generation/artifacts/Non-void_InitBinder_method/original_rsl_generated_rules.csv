@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring MVC,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringMVCInitBinder.html,"The source URL provides information about a specific rule in Spring MVC. The rule states that Controller methods annotated with @InitBinder should be declared as void. If they are not declared as void, it is considered a violation of the rule.","Rule non_void_initbinder_method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@InitBinder')) {
+        assert (getReturnType(m) == 'void') {
+          msg('Method: %s in class: %s is annotated with @InitBinder but not declared as void', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'non_void_initbinder_method' checks all classes and their methods in the Spring MVC application. If a method is annotated with @InitBinder, it asserts that the return type of the method should be 'void'. If the return type is not 'void', it generates a message indicating the method and class where the violation occurred.",,"The rule 'non_void_initbinder_method' is syntactically correct and follows the RSL syntax. It uses the built-in functions getClasses, getMethods, hasAnnotation, getReturnType, getName, and getFQN, which are all part of the RSL language. The rule does not introduce any new built-in functions.","1. URL: https://www.baeldung.com/spring-mvc-custom-data-binder
+Summary: This page explains the use of @InitBinder in Spring MVC and how it should be used in void methods to customize request parameters.
+
+2. URL: https://stackoverflow.com/questions/12858972/what-is-the-use-of-initbinder-in-spring-mvc
+Summary: This StackOverflow thread discusses the use of @InitBinder in Spring MVC. It also mentions that @InitBinder methods should be void.",

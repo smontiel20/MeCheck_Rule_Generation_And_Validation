@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JUnit3StyleTestMethodInJUnit4Class.html,The source URL describes a rule that identifies JUnit 3 style test methods that are located inside a class that does not extend the JUnit 3 TestCase class but contains JUnit 4 or JUnit 5 @Test annotated methods. These test methods cannot be run.,"Rule old_style_junit_test_method_in_junit4_class {
+  for (class c in getClasses()) {
+    if (NOT hasAnnotation(c, 'org.junit.Test')) {
+      for (method m in getMethods(c)) {
+        if (startsWith(getName(m), 'test') AND NOT hasAnnotation(m, 'org.junit.Test')) {
+          assert (getSuperclass(c) == 'junit.framework.TestCase') {
+            msg('JUnit 3 style test method: %s in JUnit 4 class: %s cannot be run', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'old_style_junit_test_method_in_junit4_class' checks all classes in the project. If a class does not have the JUnit 4 or JUnit 5 @Test annotation, it checks all methods in the class. If a method starts with 'test' and does not have the @Test annotation, it asserts that the superclass of the class is 'junit.framework.TestCase'. If the superclass is not 'junit.framework.TestCase', it generates a message indicating that the JUnit 3 style test method in the JUnit 4 class cannot be run.","The built-in functions used in this rule are: getClasses, hasAnnotation, getMethods, startsWith, getName, assert, getSuperclass, getFQN, and msg. No new functions were introduced.",,"1. URL: https://www.baeldung.com/junit-5-migration
+Summary: This page provides a guide on migrating from JUnit 4 to JUnit 5. It mentions that JUnit 3 style test methods that start with 'test' and are located in a class that does not extend the JUnit 3 TestCase class but contains JUnit 4 or JUnit 5 @Test annotated methods cannot be run.
+
+2. URL: https://www.javaworld.com/article/2074569/make-the-most-of-junit-4-with-new-annotations-and-old-assertions.html
+Summary: This page discusses the new annotations in JUnit 4 and how they differ from JUnit 3. It also mentions that JUnit 3 style test methods in a JUnit 4 class cannot be run unless the class extends 'junit.framework.TestCase'.",

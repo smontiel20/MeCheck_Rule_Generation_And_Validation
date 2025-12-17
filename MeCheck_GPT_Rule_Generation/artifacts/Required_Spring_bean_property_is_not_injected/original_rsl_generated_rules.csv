@@ -1,0 +1,24 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringRequiredAnnotationInspection.html,The source URL provides information about a JetBrains Inspectopedia rule that checks for @Required setter bean properties in Spring Core that are not injected or autowired.,"Rule requiredSetterBeanNotInjected {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<bean>"")) {
+      for (<bean> bean in getElms(xml, ""<bean>"")) {
+        String beanClassFQN = getAttr(bean, ""class"");
+        if (classExists(beanClassFQN)) {
+          class c = locateClassFQN(beanClassFQN);
+          for (method m in getMethods(c)) {
+            if (hasAnnotation(m, ""@Required"")) {
+              assert ( exists(field f in getFields(c)) ( hasAnnoAttr(f, ""Autowired"") OR hasAnnoAttr(f, ""Inject"") ) ) {
+                msg(""The @Required setter method: %s in class: %s is not autowired or injected"", getName(m), getFQN(c));
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'requiredSetterBeanNotInjected' checks all XML files for beans. For each bean, it retrieves the fully qualified class name and checks if the class exists. If the class exists, it retrieves all methods of the class. For each method, it checks if the method has the @Required annotation. If the method has the @Required annotation, it asserts that there exists a field in the class that has either the @Autowired or @Inject annotation. If this assertion fails, it generates a message indicating that the @Required setter method is not autowired or injected.",,The rule 'requiredSetterBeanNotInjected' is syntactically correct and uses only the built-in functions provided. It follows the syntax of Rule-Specific Language (RSL) and does not introduce any new built-in functions.,"1. URL: https://www.baeldung.com/spring-required-annotation
+Summary: This page provides a detailed explanation of the @Required annotation in Spring, including how it can be used to enforce dependency injection for bean properties.
+
+2. URL: https://www.javatpoint.com/autowiring-in-spring
+Summary: This page explains the concept of autowiring in Spring, which is a way to automatically inject dependencies into beans. It also discusses the different modes of autowiring and how they can be used.",

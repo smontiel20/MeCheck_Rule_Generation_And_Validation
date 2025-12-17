@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'invalid-transaction-manager-declaration' checks all classes in the application. If a class has the '@Transactional' annotation, it retrieves the 'transactionManager' attribute from the annotation. If the 'transactionManager' attribute is not empty, it asserts that there exists a class in the application with the same name as the 'transactionManager'. If such a class does not exist, it generates a message indicating that the 'PlatformTransactionManager' is not correctly defined in the application context for the '@Transactional' component."
+}

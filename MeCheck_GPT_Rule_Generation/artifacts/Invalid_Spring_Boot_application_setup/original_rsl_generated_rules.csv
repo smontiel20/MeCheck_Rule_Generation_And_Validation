@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Boot,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringBootApplicationSetup.html,The source URL provides information about a common issue in Spring Boot application setup where @SpringBootApplication is in the default package and redundant @EnableAutoConfiguration or @ComponentScan annotations are present. The JetBrains tool provides a quick-fix for this issue by removing the redundant annotations.,"Rule invalid-spring-boot-setup {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@SpringBootApplication')) {
+      if (getFQN(c) == getName(c)) {
+        msg('The @SpringBootApplication is in the default package: %s', getName(c));
+      }
+      if (hasAnnotation(c, '@EnableAutoConfiguration') OR hasAnnotation(c, '@ComponentScan')) {
+        msg('Redundant annotation found in class: %s', getName(c));
+      }
+    }
+  }
+}","The rule 'invalid-spring-boot-setup' checks all classes in the application. If a class has the @SpringBootApplication annotation, it checks if the fully qualified name (FQN) of the class is the same as the class name, which indicates that the class is in the default package. If so, it reports a message. It also checks if the class has either @EnableAutoConfiguration or @ComponentScan annotations, which are redundant when @SpringBootApplication is present. If either of these annotations is found, it reports a message.",,,"1. URL: https://www.baeldung.com/spring-boot-annotations
+Summary: This page provides a comprehensive guide to Spring Boot annotations, including @SpringBootApplication, @EnableAutoConfiguration, and @ComponentScan. It explains that @SpringBootApplication is a convenience annotation that adds all of the following: @Configuration, @EnableAutoConfiguration, and @ComponentScan.
+
+2. URL: https://stackoverflow.com/questions/41867004/what-is-springbootspringapplication-in-spring-boot
+Summary: This StackOverflow thread discusses the @SpringBootApplication annotation and its role in Spring Boot applications. It also mentions that this annotation is typically found in the main class of the application.",

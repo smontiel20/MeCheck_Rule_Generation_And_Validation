@@ -1,0 +1,17 @@
+Rule invalid-spring-boot-setup {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@SpringBootApplication')) {
+      if (getFQN(c) == getName(c)) {
+        msg('The @SpringBootApplication is in the default package: %s', 
+          getName(c));
+      }
+      if (hasAnnotation(c, '@EnableAutoConfiguration') 
+        OR hasAnnotation(c, '@ComponentScan')) 
+      {
+        msg('Redundant annotation found in class: %s', getName(c));
+      }
+    }
+  }
+}
+
+

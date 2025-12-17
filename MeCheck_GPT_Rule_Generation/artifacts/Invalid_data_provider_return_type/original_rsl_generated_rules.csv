@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/DataProviderReturnType.html,"The source URL describes a rule in the Java-TestNG framework that checks for methods marked with the @DataProvider annotation. The rule asserts that these methods should return either an Object[][] or an Iterator<Object>. If any other type is returned, TestNG throws an exception.","Rule invalid-data-provider-return-type {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@DataProvider')) {
+        String returnType = getReturnType(m);
+        assert (returnType == 'Object[][]' OR returnType == 'Iterator<Object>') {
+          msg('Method: %s in class: %s marked with @DataProvider annotation does not return Object[][] or Iterator<Object>', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'invalid-data-provider-return-type' checks all classes and their methods. If a method is marked with the @DataProvider annotation, it checks the return type of the method. The rule asserts that the return type should be either 'Object[][]' or 'Iterator<Object>'. If the return type is anything else, it generates a message indicating the method and class where the issue was found.",,"The rule 'invalid-data-provider-return-type' is syntactically correct and follows the RSL syntax. It uses the built-in functions 'getClasses', 'getMethods', 'hasAnnotation', 'getReturnType', 'getName', and 'getFQN'. No new functions were introduced.","1. URL: https://www.swtestacademy.com/testng-tutorial/ - This page provides a comprehensive tutorial on TestNG, including the use of @DataProvider annotation and its expected return types.
+2. URL: https://www.toolsqa.com/selenium-webdriver/testng-data-provider/ - This page provides a detailed explanation of the @DataProvider annotation in TestNG, including examples of correct and incorrect return types.",

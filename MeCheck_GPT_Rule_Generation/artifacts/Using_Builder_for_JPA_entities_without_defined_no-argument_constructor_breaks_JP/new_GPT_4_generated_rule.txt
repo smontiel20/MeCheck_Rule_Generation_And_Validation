@@ -1,0 +1,9 @@
+Rule lombok-builder-no-arg-constructor {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Builder')) {
+      assert ( exists(method m in getMethods(c)) ( getName(m) == '<init>' AND hasParamType(m, '()V') ) ) {
+        msg("Class: %s uses @Builder but does not have a no-arg constructor", getFQN(c));
+      }
+    }
+  }
+}

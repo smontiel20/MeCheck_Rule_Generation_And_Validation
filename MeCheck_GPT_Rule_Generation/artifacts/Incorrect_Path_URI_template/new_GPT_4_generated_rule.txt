@@ -1,0 +1,12 @@
+Rule incorrect-path-uri-template {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Path')) {
+      String pathValue = getAnnoAttr(c, '@Path', 'value');
+      if (NOT isEmpty(pathValue)) {
+        assert (pathExists(pathValue)) {
+          msg("Incorrect or unused @Path URI template: %s in class: %s", pathValue, getFQN(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Rule interceptor_without_binding_type {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Interceptor')) {
+      assert ( exists(String bindingType in getAnnoAttrNames(c, '@Interceptor')) ( NOT isEmpty(bindingType) ) ) {
+        msg("@Interceptor class: %s does not specify any binding type", getFQN(c));
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+RESTful Web Service (JAX-RS),https://www.jetbrains.com.cn/en-us/help/inspectopedia/PathAnnotation.html,The source page describes a rule that checks for syntax errors and unused URI templates in @Path annotations in RESTful Web Services.,"Rule incorrect-path-uri-template {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Path')) {
+      String pathValue = getAnnoAttr(c, '@Path', 'value');
+      if (NOT isEmpty(pathValue)) {
+        assert (pathExists(pathValue)) {
+          msg(""Incorrect or unused @Path URI template: %s in class: %s"", pathValue, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-path-uri-template' checks all classes in the project. If a class has the '@Path' annotation, it retrieves the value of the annotation. If the value is not empty, it asserts that the path exists. If the path does not exist, it generates a message indicating the incorrect or unused @Path URI template and the fully qualified name of the class.",,"The rule uses only the built-in functions provided, and it follows the syntax of the Rule-Specific Language (RSL). It checks for the existence of a path specified in the @Path annotation, which is relevant to the topic of incorrect @Path URI templates.","1. https://docs.oracle.com/javaee/7/api/javax/ws/rs/Path.html - This page from Oracle's official Java documentation explains the @Path annotation in JAX-RS. It provides details on how the annotation should be used, which is relevant to the rule that checks for incorrect usage of the annotation.
+2. https://www.baeldung.com/jax-rs-path-annotation - This tutorial from Baeldung provides examples of how to use the @Path annotation in JAX-RS. It also explains how the annotation works, which is relevant to understanding the rule that checks for incorrect @Path URI templates.",

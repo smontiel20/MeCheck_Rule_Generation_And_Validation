@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'runWithAnnotationExistsInParent' checks for each class in the project. If a class is annotated with '@RunWith', it then checks for each parent class in the class's hierarchy. If a parent class is also annotated with '@RunWith', it asserts that the parent class should not be annotated with '@RunWith'. If the assertion fails, it generates a message indicating that both the parent and child classes are annotated with '@RunWith', which can lead to unexpected testing behavior."
+}

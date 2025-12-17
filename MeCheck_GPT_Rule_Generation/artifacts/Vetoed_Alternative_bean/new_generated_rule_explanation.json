@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'vetoed-alternative-bean' checks all classes in the application. If a class or its package is annotated with '@Vetoed', it then checks all methods in that class. If any method is annotated with '@Alternative', it asserts false and generates a message indicating that a vetoed @Alternative bean has been detected, specifying the method and class names."
+}

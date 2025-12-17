@@ -1,0 +1,12 @@
+Rule invalid-sql-and-sqlgroup-configurations {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Sql') OR hasAnnotation(c, '@SqlGroup')) {
+      String[] sqlFiles = getAnnoAttr(c, 'scripts');
+      for (String sqlFile in sqlFiles) {
+        assert ( pathExists(sqlFile) ) {
+          msg("Unresolved file reference: %s in @Sql or @SqlGroup annotation in class: %s", sqlFile, getFQN(c));
+        }
+      }
+    }
+  }
+}

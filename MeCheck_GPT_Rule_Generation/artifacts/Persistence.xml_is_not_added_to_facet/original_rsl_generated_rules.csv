@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaConfigDomFacetInspection.html,The source URL provides information about a JetBrains inspection rule that reports missing persistence.xml configuration files and suggests adding the file to the persistence facet.,"Rule persistence_xml_not_added_to_facet {
+  for (file xml in getXMLs()) {
+    if (NOT pathExists(xml, ""persistence.xml"")) {
+      assert (false) {
+        msg(""Missing persistence.xml configuration file in: %s. Consider adding the file to the persistence facet."", getName(xml));
+      }
+    }
+  }
+}","The rule 'persistence_xml_not_added_to_facet' checks each XML file in the project. If the 'persistence.xml' file does not exist in the project, it asserts a failure and generates a message suggesting to add the 'persistence.xml' file to the persistence facet.",,"The generated rule uses the built-in functions 'getXMLs', 'pathExists', and 'getName'. It does not introduce any new functions. The rule is syntactically correct and follows the RSL syntax.","1. URL: https://www.baeldung.com/the-persistence-xml-file-in-jpa
+Summary: This page provides a comprehensive guide on the 'persistence.xml' file in JPA. It explains the structure and usage of the file, which is relevant to the generated rule as it checks for the existence of this file.
+
+2. URL: https://www.objectdb.com/java/jpa/persistence/overview
+Summary: This page provides an overview of the JPA persistence unit. It mentions the 'persistence.xml' file as a crucial part of the persistence unit, which aligns with the purpose of the generated rule.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

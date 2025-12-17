@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-TestNG,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConvertOldAnnotations.html,The source URL provides information about the outdated TestNG annotation @Configuration. It suggests that it is better to configure a test suite with the modern @BeforeXXX / @AfterXXX annotations and provides an example of how to apply this quick-fix.,"Rule old-configuration-annotation-used {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Configuration')) {
+      assert ( NOT hasAnnotation(c, '@Configuration') ) {
+        msg('The class: %s uses the outdated @Configuration annotation. Consider using the modern @BeforeXXX / @AfterXXX annotations.', getFQN(c));
+      }
+    }
+  }
+}","The rule 'old-configuration-annotation-used' checks all classes in the project. If a class has the @Configuration annotation, it asserts that the class should not have this annotation. If the assertion fails, it generates a message indicating that the class uses the outdated @Configuration annotation and suggests using the modern @BeforeXXX / @AfterXXX annotations instead.","The built-in functions used in this rule are: getClasses, hasAnnotation, getFQN. No new functions were introduced.",,"1. URL: https://www.javatpoint.com/testng-annotations
+Summary: This page provides a comprehensive guide to TestNG annotations, including the modern @BeforeXXX / @AfterXXX annotations. It does not specifically mention the outdated @Configuration annotation, but it provides a good reference for understanding the context of the rule.
+
+2. URL: https://www.toolsqa.com/selenium-webdriver/testng-annotations/
+Summary: This page also provides a detailed guide to TestNG annotations. It explains the purpose and usage of each annotation, which can help understand why the @Configuration annotation is outdated and why the @BeforeXXX / @AfterXXX annotations are recommended.",

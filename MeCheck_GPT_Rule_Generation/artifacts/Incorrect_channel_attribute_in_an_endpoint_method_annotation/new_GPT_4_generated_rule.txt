@@ -1,0 +1,14 @@
+Rule incorrect-channel-attribute {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Gateway') OR hasAnnotation(m, '@ServiceActivator') OR hasAnnotation(m, '@Filter')) {
+        String channelAttr = getAnnoAttr(m, 'channel');
+        if (NOT isEmpty(channelAttr)) {
+          assert ( exists(field f in getFields(c)) ( getName(f) == channelAttr ) ) {
+            msg("Incorrect 'channel' attribute: %s in method: %s of class: %s", channelAttr, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

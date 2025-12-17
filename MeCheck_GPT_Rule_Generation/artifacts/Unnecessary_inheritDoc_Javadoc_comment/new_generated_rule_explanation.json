@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unnecessary-inheritdoc' checks all classes and their methods and fields. If a method's Javadoc comment contains only '{@inheritDoc}', it asserts false and generates a message indicating the unnecessary '{@inheritDoc}' in the method of the class. Similarly, if a field's Javadoc comment contains '{@inheritDoc}', it asserts false and generates a message indicating the invalid '{@inheritDoc}' in the field of the class."
+}

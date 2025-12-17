@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'transactional_self_invocation' checks for all classes in the application. If a class has the @Transactional annotation, it checks all methods in that class. If a method also has the @Transactional annotation, it asserts that there is no other method in the same class with the same name and unique serial number (SN). If such a method exists, it means that there is a self-invocation of the method, which does not lead to an actual transaction at runtime even if the invoked method is marked with @Transactional. In such a case, a message is displayed with the name of the method and the fully qualified name (FQN) of the class."
+}

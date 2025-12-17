@@ -1,0 +1,11 @@
+Rule non_void_initbinder_method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@InitBinder')) {
+        assert (getReturnType(m) == 'void') {
+          msg('Method: %s in class: %s is annotated with @InitBinder but not declared as void', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

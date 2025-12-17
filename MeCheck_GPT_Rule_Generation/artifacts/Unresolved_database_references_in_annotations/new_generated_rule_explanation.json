@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-database-references-in-annotations' checks all classes in the project. If a class has any of the specified annotations (Table, Column, JoinColumn, JoinTable, NamedQuery, NativeQuery, Embeddable), it retrieves the value of the annotation. If the annotation value is not empty, it asserts that the element (database reference) exists. If the element does not exist, it generates a message indicating the unresolved database reference in the annotation of the class."
+}

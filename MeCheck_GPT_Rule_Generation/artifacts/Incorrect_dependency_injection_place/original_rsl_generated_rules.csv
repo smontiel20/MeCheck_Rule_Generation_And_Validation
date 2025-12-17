@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiInjectInspection.html,"The source URL provides information about a rule that reports incorrect injection points in the CDI framework. These incorrect injection points include fields, methods, and parameters annotated with @Inject that violate the CDI specification. The requirements for fields are that they cannot be static or final and cannot be annotated with @Produces. The requirements for methods with injection are that they cannot be static or abstract and cannot have parameters with @Disposes and @Observes annotations.","Rule incorrect-injection-place {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, '@Inject')) {
+        assert (NOT (isFinal(f) OR isStatic(f) OR hasAnnotation(f, '@Produces'))) {
+          msg('Field: %s in class: %s is incorrectly injected', getName(f), getFQN(c));
+        }
+      }
+    }
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Inject')) {
+        assert (NOT (isAbstract(m) OR isStatic(m) OR hasParamType(m, '@Disposes') OR hasParamType(m, '@Observes'))) {
+          msg('Method: %s in class: %s is incorrectly injected', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-injection-place' checks all classes in the project. For each class, it checks all fields and methods. If a field is annotated with @Inject, it asserts that the field is not final, not static, and not annotated with @Produces. If the assertion fails, it generates a message indicating the field and class where the incorrect injection occurred. Similarly, for methods annotated with @Inject, it asserts that the method is not abstract, not static, and does not have parameters annotated with @Disposes or @Observes. If the assertion fails, it generates a message indicating the method and class where the incorrect injection occurred.",,"The generated rule appears to be syntactically correct according to the RSL syntax. It uses only the built-in functions provided, and does not introduce any new functions. The rule correctly implements the requirements specified in the source URL.","1. URL: https://www.baeldung.com/cdi-injection-point Summary: This page provides a comprehensive guide to CDI Injection points. It explains how to use @Inject annotation for dependency injection and the rules for its usage, which aligns with the generated rule.
+2. URL: https://docs.jboss.org/weld/reference/latest/en-US/html/injection.html Summary: This page from the official JBoss Weld documentation provides detailed information about injection points in CDI. It explains the restrictions on the use of @Inject, @Produces, @Disposes, and @Observes annotations, which is directly relevant to the generated rule.",

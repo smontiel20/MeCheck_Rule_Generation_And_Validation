@@ -1,0 +1,9 @@
+Rule incorrect-managed-bean-definition {
+  for (class c in getClasses()) {
+    if (NOT hasAnnotation(c, "Decorator") AND NOT hasAnnotation(c, "Initializer")) {
+      assert (NOT isIterable(c) AND NOT isLibraryClass(c) AND NOT hasField(c, "javax.servlet.Servlet") AND NOT hasField(c, "javax.servlet.Filter") AND NOT hasField(c, "javax.servlet.ServletContextListener") AND NOT hasField(c, "javax.servlet.http.HttpSessionListener") AND NOT hasField(c, "javax.servlet.ServletRequestListener") AND NOT hasField(c, "javax.ejb.EnterpriseBean") AND NOT getType(c) == "javax.faces.component.UIComponent") {
+        msg("Incorrect managed bean definition for class: %s", getFQN(c));
+      }
+    }
+  }
+}

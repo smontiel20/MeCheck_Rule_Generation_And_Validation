@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/AroundAdviceStyleInspection.html,"The page describes a rule for using @Around advice in Aspect Oriented Programming (AOP). It states that the method annotated with @Around must call org.aspectj.lang.ProceedingJoinPoint#proceed and return its result. The method must have ProceedingJoinPoint as the first argument and Object as the return type. If these conditions are not met, it is likely a coding error.","Rule around_advice_style_inspection {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Around')) {
+        assert (getArg(m, 0) == 'ProceedingJoinPoint' AND getReturnType(m) == 'Object') {
+          msg('Method: %s in class: %s does not follow @Around advice style. It should have ProceedingJoinPoint as the first argument and Object as the return type.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'around_advice_style_inspection' checks all classes and their methods. If a method is annotated with '@Around', it asserts that the first argument of the method is 'ProceedingJoinPoint' and the return type is 'Object'. If these conditions are not met, it generates a message indicating the method and class that do not follow the @Around advice style.",,,"1. URL: https://www.baeldung.com/spring-aop-advice-tutorial
+Summary: This tutorial on Baeldung explains the different types of advice in Spring AOP, including @Around. It emphasizes the importance of calling proceed() and returning its result in an @Around advice.
+
+2. URL: https://www.javatpoint.com/around-advice-in-spring-aop
+Summary: JavaTPoint provides a detailed guide on using @Around advice in Spring AOP. It also mentions the necessity of having ProceedingJoinPoint as an argument and returning the result of proceed().",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

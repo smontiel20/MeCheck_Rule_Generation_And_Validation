@@ -1,0 +1,34 @@
+Rule stream-handler-method-error {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@StreamListener') OR hasAnnotation(m, '@StreamEmitter')) {
+        String channel = getAnnoAttr(m, '@StreamListener', 'value');
+        if (NOT isEmpty(channel) AND (hasParamType(m, '@Input') OR hasParamType(m, '@Output'))) {
+          assert (false) {
+            msg('Channel defined in @StreamListener value attribute may never be combined with method parameters annotated with @Input or @Output in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (hasAnnotation(m, '@StreamListener') AND isEmpty(channel)) {
+          assert (false) {
+            msg('An input channel must be specified for a method annotated with @StreamListener in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (NOT isEmpty(getReturnType(m)) AND isEmpty(channel)) {
+          assert (false) {
+            msg('An output channel must be specified for a method that can return a value in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (isEmpty(getReturnType(m)) AND NOT isEmpty(channel)) {
+          assert (false) {
+            msg('An output channel cannot be specified for a method that does not return a value in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (NOT isEmpty(getAnnoAttr(m, '@StreamListener', 'condition')) AND NOT isEmpty(getReturnType(m))) {
+          assert (false) {
+            msg('@StreamListener condition attribute cannot be set for methods that return a value in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

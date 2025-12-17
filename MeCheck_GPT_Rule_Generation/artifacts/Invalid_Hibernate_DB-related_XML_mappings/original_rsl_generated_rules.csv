@@ -1,0 +1,22 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaQueryApiInspection.html,The source URL provides information about a JetBrains inspection tool that reports unresolved symbols in named and native queries and related API methods. It specifically identifies issues with unknown named queries and unknown query parameters.,"Rule invalid-hibernate-db-xml-mappings {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<named-query>"")) {
+      for (<named-query> namedQuery in getElms(xml, ""<named-query>"")) {
+        String queryName = getAttr(namedQuery, ""name"");
+        assert ( callExists(queryName) ) {
+          msg(""Unknown named query: %s in xml: %s"", queryName, getName(xml));
+        }
+        if (elementExists(namedQuery, ""<query-param>"")) {
+          for (<query-param> queryParam in getElms(namedQuery, ""<query-param>"")) {
+            String paramName = getAttr(queryParam, ""name"");
+            assert ( hasParam(queryName, paramName) ) {
+              msg(""Unknown query parameter: %s in named query: %s in xml: %s"", paramName, queryName, getName(xml));
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'invalid-hibernate-db-xml-mappings' checks for unresolved symbols in named and native queries in Hibernate XML mappings. It iterates over all XML files and checks for the existence of '<named-query>' elements. For each named query, it asserts that the query name exists as a callable function. If it doesn't, it reports an error message. It also checks for '<query-param>' elements within each named query and asserts that each query parameter exists within the named query. If it doesn't, it reports an error message.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as 'getXMLs', 'elementExists', 'getElms', 'getAttr', 'callExists', 'hasParam', and 'getName'. The rule logic is sound and should correctly identify unresolved symbols in named and native queries in Hibernate XML mappings.","1. URL: https://www.baeldung.com/hibernate-named-query - This page provides a comprehensive guide on using named queries in Hibernate, including how to define them in XML mappings. It also discusses the potential issues that can arise, such as unresolved symbols.
+2. URL: https://www.tutorialspoint.com/hibernate/hibernate_native_sql.htm - This page explains how to use native SQL queries in Hibernate, including how to define query parameters. It also highlights the importance of ensuring that all symbols are correctly resolved.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

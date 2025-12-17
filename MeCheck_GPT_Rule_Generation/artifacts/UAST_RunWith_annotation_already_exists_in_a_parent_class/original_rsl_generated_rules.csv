@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/Junit4RunWithInspection.html,The source URL provides information about a potential issue in JUnit testing where both parent and child classes in a test hierarchy are annotated with @RunWith. This can lead to unexpected testing behavior.,"Rule runWithAnnotationExistsInParent {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@RunWith')) {
+      for (class p in getFamily(c)) {
+        if (hasAnnotation(p, '@RunWith')) {
+          assert (NOT hasAnnotation(p, '@RunWith')) {
+            msg(""Both parent class: %s and child class: %s in the JUnit test hierarchy are annotated with @RunWith, which can lead to unexpected testing behavior."", getFQN(p), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'runWithAnnotationExistsInParent' checks for each class in the project. If a class is annotated with '@RunWith', it then checks for each parent class in the class's hierarchy. If a parent class is also annotated with '@RunWith', it asserts that the parent class should not be annotated with '@RunWith'. If the assertion fails, it generates a message indicating that both the parent and child classes are annotated with '@RunWith', which can lead to unexpected testing behavior.",,"The rule 'runWithAnnotationExistsInParent' is syntactically correct and follows the RSL syntax. It uses the built-in functions 'getClasses', 'hasAnnotation', 'getFamily', 'getFQN', and 'msg', which are all part of the RSL language. The rule does not introduce any new built-in functions.","1. URL: https://www.baeldung.com/junit-5-runwith
+Summary: This page explains the use of @RunWith annotation in JUnit and its potential issues. It also discusses the transition from JUnit 4 to JUnit 5 and how the @RunWith annotation has been replaced by @ExtendWith in JUnit 5.
+
+2. URL: https://stackoverflow.com/questions/21304426/what-does-junits-runwith-do
+Summary: This StackOverflow thread discusses the purpose of the @RunWith annotation in JUnit and how it can affect the execution of tests. It also mentions potential issues when using this annotation incorrectly.",

@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+CDI,https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiNormalScopeInspection.html,"The source URL provides information about a rule in the CDI framework that reports managed beans with public instance fields that are not in the default @Dependent scope. According to the CDI specification, contextual scopes (@RequestScoped, @ApplicationScoped, @SessionScoped, and ConversationScoped) are not allowed for managed beans with public instance fields.","Rule bean-with-non-default-scope-declares-public-fields {
+  for (class c in getClasses()) {
+    if (NOT hasAnnotation(c, '@Dependent')) {
+      for (field f in getFields(c)) {
+        if (getType(f) == 'public') {
+          assert (NOT (hasAnnotation(c, '@RequestScoped') OR hasAnnotation(c, '@ApplicationScoped') OR hasAnnotation(c, '@SessionScoped') OR hasAnnotation(c, 'ConversationScoped'))) {
+            msg('Managed bean: %s with public field: %s is not in the default @Dependent scope', getName(c), getName(f));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'bean-with-non-default-scope-declares-public-fields' checks for each class in the application. If a class does not have the '@Dependent' annotation, it checks for each field in the class. If a field is public, it asserts that the class does not have '@RequestScoped', '@ApplicationScoped', '@SessionScoped', or 'ConversationScoped' annotations. If the assertion fails, it generates a message indicating that the managed bean with the public field is not in the default @Dependent scope.",,The generated rule seems to be logically correct and follows the syntax of RSL. It uses the built-in functions correctly to check for the conditions specified in the JetBrains Inspectopedia page.,"1. https://docs.jboss.org/weld/reference/latest/en-US/html/beanscdi.html - This page provides a detailed explanation of the CDI specification, including the rules for managed beans and their scopes. It confirms that managed beans with public instance fields should not have contextual scopes other than the default @Dependent scope.
+2. https://www.baeldung.com/cdi-scopes - This page provides a practical guide to CDI scopes in Java. It explains the different types of scopes and their usage, including @Dependent, @RequestScoped, @ApplicationScoped, @SessionScoped, and ConversationScoped. It supports the rule that managed beans with public instance fields should not have these scopes.",

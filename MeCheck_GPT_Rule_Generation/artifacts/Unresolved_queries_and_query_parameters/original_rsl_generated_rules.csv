@@ -1,0 +1,23 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaQueryApiInspection.html,The source URL provides information about a JetBrains Inspectopedia rule that reports unresolved symbols in named and native queries and related API methods. It specifically identifies issues with unknown named queries and unknown query parameters.,"Rule unresolved-queries-and-parameters {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, ""NamedQuery"") OR hasAnnotation(m, ""NativeQuery"")) {
+        String queryName = getAnnoAttr(m, ""name"");
+        if (NOT isEmpty(queryName)) {
+          assert ( callExists(queryName) ) {
+            msg(""Unknown named query: %s in method: %s"", queryName, getName(m));
+          }
+        }
+        if (hasParam(m)) {
+          for (String param in getArg(m)) {
+            assert ( hasParamType(m, param) ) {
+              msg(""Unknown query parameter: %s in method: %s"", param, getName(m));
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-queries-and-parameters' checks for unresolved symbols in named and native queries and related API methods. It iterates over all classes and their methods. If a method has either a 'NamedQuery' or 'NativeQuery' annotation, it retrieves the query name from the annotation attribute. If the query name is not empty, it asserts that a call to this query exists. If it does not exist, it reports an 'Unknown named query' error. Furthermore, if the method has parameters, it iterates over these parameters and asserts that each parameter has a corresponding type in the method. If a parameter does not have a corresponding type, it reports an 'Unknown query parameter' error.",,"The rule 'unresolved-queries-and-parameters' is syntactically correct and follows the Rule-Specific Language (RSL) syntax. It uses only the built-in functions provided, such as 'getClasses', 'getMethods', 'hasAnnotation', 'getAnnoAttr', 'isEmpty', 'callExists', 'msg', 'hasParam', 'getArg', and 'hasParamType'.","1. https://www.baeldung.com/jpa-named-queries: This page provides a comprehensive guide on how to use named queries in JPA. It explains how to define and call named queries, which is relevant to the 'unresolved-queries-and-parameters' rule as it checks for the existence of these named queries.
+2. https://www.objectdb.com/java/jpa/query/parameter: This page explains how to use parameters in JPA queries. It discusses the types of parameters and how to set them, which is relevant to the rule as it checks for the existence of these parameters in the method.",

@@ -1,0 +1,10 @@
+Rule superTearDownInFinally {
+  for (class c in getClasses()) {
+    if (hasMethod(c, 'tearDown')) {
+      method m = getMethod(c, 'tearDown');
+      assert (callExists(m, 'super.tearDown()') AND isInsideFinallyBlock(m, 'super.tearDown()')) {
+        msg('super.tearDown() is not called inside a finally block in class: %s', getFQN(c));
+      }
+    }
+  }
+}

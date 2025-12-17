@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringPropertySource.html,The source page describes a rule that checks for unresolved files or directories in @PropertySource and @TestPropertySource annotations in Spring Core.,"Rule unresolved-file-references {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@PropertySource') OR hasAnnotation(c, '@TestPropertySource')) {
+      String[] locations = getAnnoAttr(c, 'locations');
+      for (String location in locations) {
+        assert ( pathExists(location) ) {
+          msg(""Unresolved file or directory: %s in class: %s"", location, getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-file-references' checks all classes in the project. If a class has either a @PropertySource or @TestPropertySource annotation, it retrieves the 'locations' attribute of the annotation, which should be an array of Strings representing file or directory paths. For each location, it asserts that the path exists. If the path does not exist, it generates a message indicating the unresolved file or directory and the fully qualified name of the class where the annotation is located.",,,"1. https://www.baeldung.com/spring-test-property-source: This page from Baeldung explains how to use @TestPropertySource annotation in Spring tests. It provides examples of how to specify file locations in the annotation.
+2. https://www.javadevjournal.com/spring/spring-propertysource/: This page from Java Dev Journal provides a detailed guide on using @PropertySource annotation in Spring. It also provides examples of specifying file locations in the annotation.",

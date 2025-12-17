@@ -1,0 +1,13 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/AssociationFieldHasColumnAnnotation.html,The source URL provides a rule that detects the incorrect use of @Column annotation for association attributes with @OneToOne and @ManyToOne annotations in JPA.,"Rule association-field-has-column-annotation {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, '@OneToOne') OR hasAnnotation(f, '@ManyToOne')) {
+        assert (NOT hasAnnotation(f, '@Column')) {
+          msg(""Field: %s in class: %s has @Column annotation along with @OneToOne or @ManyToOne annotation"", getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'association-field-has-column-annotation' checks all classes and their fields. If a field has either a @OneToOne or @ManyToOne annotation, it asserts that the field should not have a @Column annotation. If the assertion fails, it generates a message indicating the field and class where the incorrect annotation usage was detected.",,"The generated rule is syntactically correct and follows the RSL syntax. It uses the built-in functions getClasses, getFields, hasAnnotation, getName, and getFQN. The rule checks for the incorrect use of @Column annotation with @OneToOne and @ManyToOne annotations, which aligns with the requirement.","1. URL: https://www.baeldung.com/jpa-join-column - This page explains the use of @JoinColumn and @Column annotations in JPA. It mentions that @Column is used for basic mappings, while @JoinColumn is used for associations, which aligns with the rule that @Column should not be used with @OneToOne and @ManyToOne annotations.
+2. URL: https://stackoverflow.com/questions/7161638/why-does-jpa-have-a-column-annotation-if-a-column-is-mapped-by-a-field-getter - This StackOverflow discussion explains the difference between @Column and @JoinColumn and when to use each. It also mentions that @Column is not suitable for association mappings, which supports the rule.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

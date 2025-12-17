@@ -1,0 +1,12 @@
+Rule entity-attribute-association-annotation {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (getType(f) == 'Entity') {
+        assert ( hasAnnotation(f, 'OneToOne') OR hasAnnotation(f, 'OneToMany') OR hasAnnotation(f, 'ManyToOne') OR hasAnnotation(f, 'ManyToMany') ) {
+          msg("Entity attribute: %s in class: %s is not marked with association annotation",
+              getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}

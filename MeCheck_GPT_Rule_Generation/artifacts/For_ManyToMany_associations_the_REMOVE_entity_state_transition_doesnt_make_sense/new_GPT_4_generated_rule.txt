@@ -1,0 +1,14 @@
+Rule ManyToManyCascadeRemove {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@ManyToMany')) {
+      for (field f in getFields(c)) {
+        if (hasAnnotation(f, '@ManyToMany')) {
+          String cascadeType = getAnnoAttr(f, 'cascade');
+          assert ( NOT (cascadeType == 'REMOVE' OR cascadeType == 'ALL') ) {
+            msg("The field: %s in class: %s has a @ManyToMany association with CascadeType.REMOVE or CascadeType.ALL which can lead to ConstraintViolationException.", getName(f), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

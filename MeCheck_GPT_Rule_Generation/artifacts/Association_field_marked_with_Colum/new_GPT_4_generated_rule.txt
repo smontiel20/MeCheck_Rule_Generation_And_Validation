@@ -1,0 +1,11 @@
+Rule association-field-has-column-annotation {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, '@OneToOne') OR hasAnnotation(f, '@ManyToOne')) {
+        assert (NOT hasAnnotation(f, '@Column')) {
+          msg("Field: %s in class: %s has @Column annotation along with @OneToOne or @ManyToOne annotation", getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}

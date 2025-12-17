@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheableMethodCallsInspection.html,"The content discusses the use of @Cacheable annotation in Spring Core. It explains that in proxy mode, only external method calls coming through the proxy are intercepted. Therefore, self-invocation, i.e., a method within the target object calling another method of the target object, will not lead to actual caching at runtime even if the invoked method is marked with @Cacheable.","Rule cacheable_self_invocation {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Cacheable')) {
+        for (method innerM in getMethods(c)) {
+          if (callExists(m, innerM)) {
+            assert (NOT isUniqueSN(innerM)) {
+              msg(""Method: %s in class: %s is a self-invocation and will not lead to actual caching even though it's marked with @Cacheable"", getName(innerM), getFQN(c));
+            }
+          }
+        }
+      }
+    }
+  }
+}","The rule 'cacheable_self_invocation' checks all classes and their methods in the application. If a method is annotated with @Cacheable, it checks for any calls within that method to other methods in the same class (self-invocation). If such a call exists, it asserts that the invoked method is not unique. If the assertion fails, it means that the self-invocation will not lead to actual caching at runtime even though it's marked with @Cacheable, and a message is displayed with the method and class names.",,,"1. URL: https://www.baeldung.com/spring-cache-self-invocation
+Summary: This article on Baeldung explains the issue of self-invocation in Spring caching. It confirms that self-invocations do not trigger the cache aspect, which aligns with the rule generated.
+
+2. URL: https://stackoverflow.com/questions/16899604/spring-cache-cacheable-method-ignored-when-called-from-within-the-same-class
+Summary: This StackOverflow thread discusses a problem where a @Cacheable method is ignored when called from within the same class, which is the issue our rule is designed to detect.",

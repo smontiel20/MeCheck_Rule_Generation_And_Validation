@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'IncorrectlyReferencedBeanInDependsOn' checks all classes in the project. If a class has the @DependsOn annotation, it retrieves the bean names from the value parameter of the annotation. For each bean name, it asserts that there exists a bean with the same name in the XML configuration files. If such a bean does not exist, it reports an error message indicating the bean name and the fully qualified name of the class where the incorrect reference was found."
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'persistent-attribute-type-checks' checks all classes and their fields. If a field has the '@javax.persistence.Column' annotation, it retrieves the expected type from the 'columnDefinition' attribute of the annotation. If the expected type is not empty, it asserts that the actual type of the field matches the expected type. If there is a mismatch, it reports an error message with the field name, class name, expected type, and actual type."
+}

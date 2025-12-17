@@ -1,0 +1,12 @@
+Rule incorrectly-configured-caching-annotation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Cacheable') OR hasAnnotation(c, '@CacheEvict') OR hasAnnotation(c, '@CachePut') OR hasAnnotation(c, '@CacheConfig')) {
+      String[] annoAttrs = getAnnoAttrNames(c);
+      for (String attr in annoAttrs) {
+        assert ( hasAnnoAttr(c, attr) ) {
+          msg("Incorrectly configured caching annotation: %s in class: %s", attr, getFQN(c));
+        }
+      }
+    }
+  }
+}

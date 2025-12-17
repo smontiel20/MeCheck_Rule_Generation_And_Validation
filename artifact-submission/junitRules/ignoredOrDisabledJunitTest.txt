@@ -1,0 +1,16 @@
+Rule ignored_or_disabled_junit_test {
+  for (class c in getClasses()) {
+    assert (NOT hasAnnotation(c, "@Ignore") AND NOT hasAnnotation(c, "@Disabled")) {
+      msg("JUnit class: %s is annotated with @Ignore or @Disabled, making it a code smell",
+        getName(c));
+    }
+    
+
+    for (method m in getMethods(c)) {
+      assert (NOT hasAnnotation(m, "@Ignore") AND NOT hasAnnotation(m, "@Disabled")) {
+        msg("Test method: %s in class: %s is annotated with @Ignore or @Disabled, making it a code smell",
+          getName(m), getFQN(c)); 
+      }
+    }
+  }
+}

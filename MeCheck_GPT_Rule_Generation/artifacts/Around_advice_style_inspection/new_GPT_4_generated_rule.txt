@@ -1,0 +1,11 @@
+Rule around_advice_style_inspection {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Around')) {
+        assert (getArg(m, 0) == 'ProceedingJoinPoint' AND getReturnType(m) == 'Object') {
+          msg('Method: %s in class: %s does not follow @Around advice style. It should have ProceedingJoinPoint as the first argument and Object as the return type.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

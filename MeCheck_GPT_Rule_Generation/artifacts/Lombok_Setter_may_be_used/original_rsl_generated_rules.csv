@@ -1,0 +1,13 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java-Verbose,https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokSetterMayBeUsed.html#locating-this-inspection,The source URL provides information about a JetBrains inspection rule that reports standard setter methods in Java that can be replaced by the Lombok @Setter annotation. The rule only applies when the Lombok library is configured in the project. The page also provides a link to the Lombok site for instructions on how to 'unlombok' or remove the Lombok annotations.,"Rule lombok-setter-may-be-used {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), ""set"") AND hasParamType(m, 0, ""Object"")) {
+        assert ( hasAnnotation(m, ""lombok.Setter"") ) {
+          msg(""Standard setter method: %s in class: %s can be replaced by lombok @Setter annotation"", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'lombok-setter-may-be-used' checks all classes in the project. For each class, it checks all methods. If a method's name starts with 'set' and the method has a parameter of type 'Object', it asserts that the method has the 'lombok.Setter' annotation. If the method does not have this annotation, it generates a message indicating that the standard setter method can be replaced by the Lombok @Setter annotation.",,"The generated rule appears to be syntactically correct according to the RSL syntax. It uses only the built-in functions provided, and does not introduce any new functions. The rule checks for methods that start with 'set' and have a parameter of type 'Object', and asserts that these methods have the 'lombok.Setter' annotation.","1. URL: https://projectlombok.org/features/GetterSetter - This page provides a detailed explanation of the Lombok @Setter annotation and how it can be used to replace standard setter methods in Java.
+2. URL: https://www.baeldung.com/lombok-annotations - This page provides a comprehensive guide to using Lombok annotations, including the @Setter annotation, to reduce boilerplate code in Java.",

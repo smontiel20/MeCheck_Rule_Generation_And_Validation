@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/OneToOneWithLazy.html,"The source URL provides information about a common issue in JPA where specifying FetchType.LAZY for the non-owning side of a @OneToOne association does not affect the loading of the related entity. Despite the FetchType.LAZY specification, the related entity is still loaded as if FetchType.EAGER was defined.","Rule FetchTypeLazyNonOwningOneToOne {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@OneToOne')) {
+      for (field f in getFields(c)) {
+        if (hasAnnoAttr(f, 'fetch', 'FetchType.LAZY')) {
+          assert (NOT isIterable(getType(f))) {
+            msg('The field: %s in class: %s has FetchType.LAZY in a @OneToOne association but it will not affect the loading. The related entity will still be loaded as if FetchType.EAGER is defined.', getName(f), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'FetchTypeLazyNonOwningOneToOne' checks all classes in the project. If a class has a @OneToOne annotation, it checks all fields of that class. If a field has an annotation attribute 'fetch' with value 'FetchType.LAZY', it asserts that the type of the field is not iterable. If the assertion fails, it means that the field has FetchType.LAZY in a @OneToOne association but it will not affect the loading. The related entity will still be loaded as if FetchType.EAGER is defined. The rule then generates a message with the field name and the fully qualified name of the class.",,The generated rule seems to be syntactically correct and follows the RSL syntax. It uses the built-in functions correctly to check for the FetchType.LAZY attribute in @OneToOne associations. The rule should work as expected if there are no syntax errors in the codebase.,"1. https://www.baeldung.com/hibernate-one-to-one: This page explains the @OneToOne annotation in Hibernate, which is a JPA implementation. It mentions that FetchType.LAZY is the default fetch type for @OneToOne and @ManyToOne associations, but it does not specifically address the issue of FetchType.LAZY not affecting the loading of the related entity.
+2. https://stackoverflow.com/questions/1444227/making-a-onetoone-relation-lazy: This StackOverflow thread discusses how to make a @OneToOne relation lazy. Some answers mention that FetchType.LAZY does not always work as expected, which is related to the issue addressed by the rule.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

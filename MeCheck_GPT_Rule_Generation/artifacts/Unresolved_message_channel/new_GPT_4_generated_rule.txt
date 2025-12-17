@@ -1,0 +1,12 @@
+Rule unresolved-message-channel {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@StreamListener') OR hasAnnotation(c, '@SendTo') OR hasAnnotation(c, '@Output') OR hasAnnotation(c, '@Input')) {
+      String channelName = getAnnoAttr(c, 'value');
+      if (NOT isEmpty(channelName)) {
+        assert ( exists(⟨bean⟩ b in getFamily(c)) ( getName(b) == channelName ) ) {
+          msg("Unresolved message channel: %s in class: %s", channelName, getFQN(c));
+        }
+      }
+    }
+  }
+}

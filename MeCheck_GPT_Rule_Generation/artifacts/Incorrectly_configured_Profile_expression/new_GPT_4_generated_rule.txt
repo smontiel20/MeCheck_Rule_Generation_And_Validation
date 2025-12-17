@@ -1,0 +1,16 @@
+Rule incorrect-profile-expression {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Profile')) {
+      String profileExpression = getAnnoAttr(c, '@Profile', 'value');
+      if (isEmpty(profileExpression)) {
+        assert (false) {
+          msg('Profile expression in class: %s is empty', getFQN(c));
+        }
+      } else if (indexOf(profileExpression, '&') != -1 AND indexOf(profileExpression, '|') != -1 AND NOT (startsWith(profileExpression, '(') AND endsWith(profileExpression, ')'))) {
+        assert (false) {
+          msg('Profile expression: %s in class: %s mixes '&' and '|' operators without parentheses', profileExpression, getFQN(c));
+        }
+      }
+    }
+  }
+}

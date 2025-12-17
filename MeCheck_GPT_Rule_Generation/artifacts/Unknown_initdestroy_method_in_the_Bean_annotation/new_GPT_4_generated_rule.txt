@@ -1,0 +1,18 @@
+Rule unknown_init_destroy_method {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Bean')) {
+      String initMethod = getAnnoAttr(c, '@Bean', 'initMethod');
+      String destroyMethod = getAnnoAttr(c, '@Bean', 'destroyMethod');
+      if (NOT isEmpty(initMethod)) {
+        assert (methodExists(c, initMethod)) {
+          msg('Cannot resolve initMethod: %s in class: %s', initMethod, getFQN(c));
+        }
+      }
+      if (NOT isEmpty(destroyMethod)) {
+        assert (methodExists(c, destroyMethod)) {
+          msg('Cannot resolve destroyMethod: %s in class: %s', destroyMethod, getFQN(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Rule incorrect-default-value {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@DefaultValue')) {
+        String defaultValue = getAnnoAttr(m, '@DefaultValue');
+        String paramType = getType(getArg(m, 0));
+        assert (canConvert(defaultValue, paramType)) {
+          msg("The default value: %s of method: %s in class: %s cannot be converted to the specified parameter type: %s",
+              defaultValue, getName(m), getFQN(c), paramType);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SuperTearDownInFinally.html,"The source URL provides information about a specific rule in JUnit 3 testing. The rule states that the 'super.tearDown()' method should be called inside a 'finally' block. If an exception is thrown before 'super.tearDown()' is called, it could lead to inconsistencies and leaks.","Rule superTearDownInFinally {
+  for (class c in getClasses()) {
+    if (hasMethod(c, 'tearDown')) {
+      method m = getMethod(c, 'tearDown');
+      assert (callExists(m, 'super.tearDown()') AND isInsideFinallyBlock(m, 'super.tearDown()')) {
+        msg('super.tearDown() is not called inside a finally block in class: %s', getFQN(c));
+      }
+    }
+  }
+}","The rule 'superTearDownInFinally' checks all classes in the project. If a class has a method named 'tearDown', it checks whether 'super.tearDown()' is called inside this method and whether this call is inside a 'finally' block. If 'super.tearDown()' is not called inside a 'finally' block, it generates a message indicating the fully qualified name of the class where this issue occurs.",,"The rule 'superTearDownInFinally' is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as 'getClasses', 'hasMethod', 'getMethod', 'callExists', 'isInsideFinallyBlock', and 'getFQN'. The rule does not introduce any new built-in functions.","1. URL: https://www.javaworld.com/article/2076261/junit-best-practices.html
+Summary: This article from JavaWorld provides best practices for using JUnit, including the importance of calling 'super.tearDown()' in the 'tearDown' method.
+
+2. URL: https://www.baeldung.com/junit-assert-exception
+Summary: This article from Baeldung explains how to assert exceptions in JUnit tests, which is relevant to the rule as it deals with potential exceptions thrown before 'super.tearDown()' is called.",

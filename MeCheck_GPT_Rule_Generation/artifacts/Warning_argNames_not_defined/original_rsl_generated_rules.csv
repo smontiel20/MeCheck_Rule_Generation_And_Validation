@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ArgNamesWarningsInspection.html,The source URL provides information about a warning inspection in JetBrains that reports if an argNames attribute is not defined in an @AspectJ annotation. It is recommended to define argNames attributes in @AspectJ annotations because the method parameter names may not be available at runtime.,"Rule argNames_not_defined {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@AspectJ')) {
+        assert ( hasAnnoAttr(m, 'argNames') ) {
+          msg(""Warning: argNames attribute not defined in @AspectJ annotation in method: %s of class: %s"", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'argNames_not_defined' checks all classes and their methods. If a method has an @AspectJ annotation, it asserts that the method has an 'argNames' attribute. If the 'argNames' attribute is not present, it generates a warning message indicating that the 'argNames' attribute is not defined in the @AspectJ annotation for the specific method of the class.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, such as getClasses, getMethods, hasAnnotation, hasAnnoAttr, getName, and getFQN. The rule checks for the existence of the 'argNames' attribute in @AspectJ annotations in all methods of all classes, which aligns with the requirement specified in the JetBrains source URL.","1. URL: https://www.baeldung.com/aspectj - This page provides a comprehensive guide to AspectJ, including how to use annotations like @AspectJ. It doesn't specifically address the 'argNames' attribute, but it provides useful context for understanding AspectJ annotations.
+
+2. URL: https://stackoverflow.com/questions/4573911/is-there-a-way-to-avoid-argnames-in-aspectj-annotations - This StackOverflow discussion addresses the use of 'argNames' in AspectJ annotations, including potential issues when 'argNames' is not defined. It provides real-world examples of problems that can occur when 'argNames' is not defined, which aligns with the rule generated.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

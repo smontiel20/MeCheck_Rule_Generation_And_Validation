@@ -1,0 +1,14 @@
+Rule unresolved-spring-beans-in-annotations {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c)) {
+      for (String beanName in getAnnoAttrNames(c)) {
+        String beanValue = getAnnoAttr(c, beanName);
+        if (NOT isEmpty(beanValue)) {
+          assert ( classExists(beanValue) OR isLibraryClass(beanValue) ) {
+            msg("Unresolved Spring bean: %s referenced in annotation: %s in class: %s", beanValue, beanName, getName(c));
+          }
+        }
+      }
+    }
+  }
+}

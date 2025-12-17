@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'persistence_xml_not_added_to_facet' checks each XML file in the project. If the 'persistence.xml' file does not exist in the project, it asserts a failure and generates a message suggesting to add the 'persistence.xml' file to the persistence facet."
+}

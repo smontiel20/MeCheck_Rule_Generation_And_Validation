@@ -1,0 +1,14 @@
+Rule incorrect-endpoint-method-declaration {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<endpoint>")) {
+      for (<endpoint> endpoint in getElms(xml, "<endpoint>")) {
+        String endpointMethod = getAttr(endpoint, "method");
+        if (NOT isEmpty(endpointMethod)) {
+          assert ( exists(method m in getMethods(locateClassFQN(getAttr(endpoint, "class")))) ( getName(m) == endpointMethod ) ) {
+            msg("Incorrect method: %s declared in endpoint: %s", endpointMethod, getName(endpoint));
+          }
+        }
+      }
+    }
+  }
+}

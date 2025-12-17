@@ -1,0 +1,14 @@
+Rule illegal-method-name-dependsOnMethods {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Test')) {
+        String[] dependsOnMethods = getAnnoAttr(m, 'dependsOnMethods');
+        for (String methodName in dependsOnMethods) {
+          assert ( exists(method testMethod in getMethods(c)) ( getName(testMethod) == methodName AND hasAnnotation(testMethod, '@Test') ) ) {
+            msg("Illegal method name: %s passed to 'dependsOnMethods' in @Test annotation in method: %s of class: %s", methodName, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

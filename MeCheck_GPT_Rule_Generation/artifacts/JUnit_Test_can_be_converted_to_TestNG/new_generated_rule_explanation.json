@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'junit_to_testng_conversion' checks all classes in the project. If a class is annotated with 'org.junit.Test' (indicating it's a JUnit test class), it asserts that the class is not also annotated with 'org.testng.annotations.Test' (indicating it's a TestNG test class). If the assertion fails, it means the class is a JUnit test class that can be converted to a TestNG test class, and a message is generated with the fully qualified name of the class."
+}

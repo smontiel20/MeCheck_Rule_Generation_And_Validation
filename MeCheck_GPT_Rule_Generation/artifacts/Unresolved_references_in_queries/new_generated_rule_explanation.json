@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-references-in-queries' checks for each class in the project. If the class has any of the annotations 'AttributeOverride', 'AssociationOverride', 'MapsId', or 'MapKey', it retrieves the attribute name from the annotation. If the attribute name is not empty, it asserts that a field with the same name exists in the class. If the field does not exist, it generates a message indicating the unresolved reference and the class where it was found."
+}

@@ -1,0 +1,16 @@
+Rule persistent-entity-misses-primary-key {
+  for (class c in getClasses()) {
+
+    if (hasAnnotation(c, "@Entity")
+        OR hasAnnotation(c, "@javax.persistence.Entity")) {
+
+      assert (
+        exists(method m in getMethods(c))
+          (hasAnnotation(m, "@Id")
+           OR hasAnnotation(m, "@javax.persistence.Id"))
+      ) {
+        msg("Persistent entity: %s does not have a primary key", getFQN(c));
+      }
+    }
+  }
+}

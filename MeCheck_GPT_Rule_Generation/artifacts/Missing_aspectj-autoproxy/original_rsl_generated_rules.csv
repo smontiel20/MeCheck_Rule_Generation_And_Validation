@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MissingAspectjAutoproxyInspection.html,The source URL provides information about a specific inspection in JetBrains IntelliJ IDEA that checks for missing <aop:aspectj-autoproxy/> elements in the XML configuration of Spring applications using @Aspect annotations in versions earlier than 2.5.,"Rule missing-aspectj-autoproxy {
+  for (file xml in getXMLs()) {
+    if (NOT elementExists(xml, ""<aop:aspectj-autoproxy/>"")) {
+      for (class c in getClasses()) {
+        if (hasAnnotation(c, ""@Aspect"")) {
+          assert (getAnnoAttr(c, ""@Aspect"") >= 2.5) {
+            msg(""@Aspect annotation found in class: %s in Spring version earlier than 2.5 without <aop:aspectj-autoproxy/> in XML configuration"", getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'missing-aspectj-autoproxy' checks all XML files in the project. If an XML file does not contain the <aop:aspectj-autoproxy/> element, the rule then checks all classes. If a class has the @Aspect annotation, the rule asserts that the Spring version is 2.5 or later. If the Spring version is earlier than 2.5, a message is generated indicating that the @Aspect annotation was found in a class without the <aop:aspectj-autoproxy/> element in the XML configuration.",,,,

@@ -1,0 +1,11 @@
+Rule undeclared_path_mime_types_inspection {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Path')) {
+        assert ( hasAnnotation(m, '@Produces') OR hasAnnotation(m, '@Consumes') ) {
+          msg('Method: %s in class: %s does not have @Produces or @Consumes annotation', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

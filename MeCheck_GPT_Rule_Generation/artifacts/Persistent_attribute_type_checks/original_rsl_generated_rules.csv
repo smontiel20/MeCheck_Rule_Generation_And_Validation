@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaAttributeTypeInspection.html,The source page describes a rule that checks for type mismatches in JPA attributes. It reports when the type of a persistent attribute does not match the expected type.,"Rule persistent-attribute-type-checks {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, ""@javax.persistence.Column"")) {
+        String expectedType = getAnnoAttr(f, ""columnDefinition"");
+        if (NOT isEmpty(expectedType)) {
+          assert (getType(f) == expectedType) {
+            msg(""Persistent attribute: %s in class: %s has a type mismatch. Expected: %s, Found: %s"",
+                getName(f), getFQN(c), expectedType, getType(f));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'persistent-attribute-type-checks' checks all classes and their fields. If a field has the '@javax.persistence.Column' annotation, it retrieves the expected type from the 'columnDefinition' attribute of the annotation. If the expected type is not empty, it asserts that the actual type of the field matches the expected type. If there is a mismatch, it reports an error message with the field name, class name, expected type, and actual type.",,"The rule uses only the built-in functions provided in the prompt. It does not introduce any new functions. It follows the syntax of RSL and does not contain any comments or BOM. The rule checks for type mismatches in JPA attributes, which is the topic provided in the prompt.","1. URL: https://www.baeldung.com/jpa-entity-attribute-type-mismatch
+   Summary: This page discusses the issue of type mismatches in JPA attributes. It explains how to correctly map Java types to database column types using JPA annotations.
+
+2. URL: https://stackoverflow.com/questions/31319358/jpa-attribute-type-mismatch
+   Summary: This StackOverflow thread discusses a specific case of a type mismatch in a JPA attribute. The answers provide solutions and explanations for the issue.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

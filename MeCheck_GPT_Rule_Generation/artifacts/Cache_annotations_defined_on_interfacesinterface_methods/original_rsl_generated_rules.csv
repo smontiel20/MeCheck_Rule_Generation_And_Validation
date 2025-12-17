@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheAnnotationsOnInterfaceInspection.html,"The source URL provides information about a common issue in Spring Core where @Cache* annotations are used on interfaces or interface methods. This is problematic because Java annotations are not inherited from interfaces, and the proxying and weaving infrastructure will not be able to recognize the caching settings when using class-based proxies or the weaving-based aspect. As a result, the object will not be wrapped in a caching proxy.","Rule cache_annotations_on_interfaces {
+  for (class c in getClasses()) {
+    if (isInterface(c)) {
+      if (hasAnnotation(c, '@Cache*')) {
+        msg('Interface: %s should not be annotated with @Cache*', getName(c));
+      }
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Cache*')) {
+          msg('Method: %s in interface: %s should not be annotated with @Cache*', getName(m), getName(c));
+        }
+      }
+    }
+  }
+}","The rule 'cache_annotations_on_interfaces' checks all classes in the project. If a class is an interface and it has a @Cache* annotation, a message is generated stating that the interface should not be annotated with @Cache*. The rule also checks all methods in the interface. If a method has a @Cache* annotation, a message is generated stating that the method in the interface should not be annotated with @Cache*.",,,"https://www.baeldung.com/spring-cache-annotations: This page provides a comprehensive guide to using caching in Spring. It explains the use of @Cacheable, @CacheEvict, and @CachePut annotations, and also mentions that these annotations should be used on concrete classes, not interfaces.
+
+https://stackoverflow.com/questions/1079114/where-do-you-put-annotations-in-an-interface-class: This StackOverflow thread discusses where to put annotations in an interface class. The accepted answer states that annotations on interfaces are not inherited, which aligns with the rule generated.",

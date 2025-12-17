@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringLookupInjectionInspection.html,The source page describes a rule that checks for incorrect bean references in the value parameter of the @Lookup annotation in Spring Core.,"Rule IncorrectlyReferencedBeanInLookupAnnotation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Lookup')) {
+      String lookupBean = getAnnoAttr(c, '@Lookup', 'value');
+      if (NOT isEmpty(lookupBean)) {
+        assert ( classExists(lookupBean) OR isLibraryClass(lookupBean) ) {
+          msg(""Bean: %s referenced in @Lookup annotation of class: %s, does not exist"",
+              lookupBean, getName(c));
+        }
+      }
+    }
+  }
+}","The rule 'IncorrectlyReferencedBeanInLookupAnnotation' checks all classes in the project. If a class has the @Lookup annotation, it retrieves the value of the 'value' attribute of the annotation, which is the name of the bean. If the bean name is not empty, it asserts that the bean class exists or is a library class. If the assertion fails, it generates a message indicating that the bean referenced in the @Lookup annotation does not exist.",,,"https://www.baeldung.com/spring-lookup: This page from Baeldung explains the @Lookup annotation in Spring, its usage, and how it can be misused, which can lead to incorrect bean references. 
+
+https://stackoverflow.com/questions/3437897/how-to-use-springs-lookup-method-injection-with-annotations: This StackOverflow thread discusses how to use Spring's @Lookup annotation with annotations and highlights potential issues, including incorrect bean references.",

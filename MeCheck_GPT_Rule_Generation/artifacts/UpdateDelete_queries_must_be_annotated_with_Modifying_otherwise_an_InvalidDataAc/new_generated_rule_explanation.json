@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'modifying-annotation-missing' checks all classes and their methods. If a method name starts with 'update' or 'delete', it asserts that the method is annotated with '@Modifying'. If the method is not annotated with '@Modifying', it generates a message indicating the method and class name, stating that the method must be annotated with '@Modifying' as it is a delete or update query."
+}

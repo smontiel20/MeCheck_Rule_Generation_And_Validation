@@ -1,0 +1,19 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MultipleExceptionsDeclaredOnTestMethod.html,"The JetBrains Inspectopedia page describes a rule that identifies JUnit test methods that declare more than one exception in their throws clause. It suggests that such declarations are verbose and unnecessary as test methods are not called from other project code, and hence, there is no need to handle these exceptions separately. A quick fix is provided to replace the exception declarations with a single exception.","Rule multiple_exceptions_declared_on_test_method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (startsWith(getName(m), ""test"")) {
+        if (getReturnType(m) == 'void') {
+          String[] exceptions = getExceptions(m);
+          assert (length(exceptions) <= 1) {
+            msg(""Test method: %s in class: %s declares more than one exception. Consider replacing with a single exception."", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'multiple_exceptions_declared_on_test_method' checks all classes and their methods. If a method starts with 'test' and its return type is 'void' (indicating it's a test method), it retrieves the exceptions declared in the method's throws clause. If the number of exceptions is more than one, it asserts a failure and generates a message suggesting to replace the multiple exceptions with a single exception.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for JUnit test methods that declare more than one exception and suggests replacing them with a single exception, which aligns with the rule described in the JetBrains Inspectopedia page.","1. URL: https://www.baeldung.com/junit-5-exceptions
+Summary: This page from Baeldung discusses how to test exceptions in JUnit 5. It explains that a test method should ideally throw only one type of exception, which aligns with the rule generated.
+
+2. URL: https://stackoverflow.com/questions/3089151/specifying-multiple-exceptions-thrown-by-java-method-where-one-is-subclass-of-oth
+Summary: A StackOverflow discussion where users discuss the redundancy of declaring multiple exceptions in a method's throws clause, especially when one is a subclass of the other. This supports the rule's assertion that declaring multiple exceptions is verbose and unnecessary.",

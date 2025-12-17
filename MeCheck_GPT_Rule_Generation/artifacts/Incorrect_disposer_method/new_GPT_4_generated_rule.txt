@@ -1,0 +1,11 @@
+Rule incorrect-disposer-method {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Disposes')) {
+        assert (NOT isAbstract(m) AND hasParamType(m, '@Disposes') AND getArg(m) == 1) {
+          msg('Incorrect disposer method: %s in class: %s. It is either abstract, does not have exactly one disposed parameter annotated with @Disposes, or both.', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

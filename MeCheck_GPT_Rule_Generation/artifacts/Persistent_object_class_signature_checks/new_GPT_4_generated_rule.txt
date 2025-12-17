@@ -1,0 +1,15 @@
+Rule persistent-object-class-signature-checks {
+  for (class c in getClasses()) {
+    if (NOT isLibraryClass(c)) {
+      assert (NOT isFinal(c)) {
+        msg("Class: %s is final", getFQN(c));
+      }
+      assert (isUniqueSN(c)) {
+        msg("Class: %s is annotated several times", getFQN(c));
+      }
+      assert (NOT (isEntity(c) AND isEntityListener(c))) {
+        msg("Class: %s is defined as both a persistent entity and an entity listener", getFQN(c));
+      }
+    }
+  }
+}

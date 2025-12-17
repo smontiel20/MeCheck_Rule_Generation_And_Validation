@@ -1,0 +1,9 @@
+Rule entity-listener-warnings {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "EntityListener")) {
+      assert ( exists(method m in getMethods(c)) ( hasAnnotation(m, "PrePersist") OR hasAnnotation(m, "PostPersist") OR hasAnnotation(m, "PreRemove") OR hasAnnotation(m, "PostRemove") OR hasAnnotation(m, "PreUpdate") OR hasAnnotation(m, "PostUpdate") OR hasAnnotation(m, "PostLoad") ) ) {
+        msg("Entity listener class: %s does not have any entity listener methods", getFQN(c));
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+Rule IncorrectlyReferencedBeanInLookupAnnotation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Lookup')) {
+      String lookupBean = getAnnoAttr(c, '@Lookup', 'value');
+      if (NOT isEmpty(lookupBean)) {
+        assert ( classExists(lookupBean) OR isLibraryClass(lookupBean) ) {
+          msg("Bean: %s referenced in @Lookup annotation of class: %s, does not exist",
+              lookupBean, getName(c));
+        }
+      }
+    }
+  }
+}

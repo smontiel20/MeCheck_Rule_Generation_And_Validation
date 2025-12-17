@@ -1,0 +1,14 @@
+Rule unresolved-path-variable-reference {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PathVariable')) {
+        String pathVariable = getAnnoAttr(m, '@PathVariable', 'value');
+        if (NOT isEmpty(pathVariable)) {
+          assert ( exists(String url in getAttrs(m, 'RequestMapping', 'value')) ( url contains pathVariable ) ) {
+            msg("Unresolved @PathVariable reference: %s in method: %s of class: %s", pathVariable, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

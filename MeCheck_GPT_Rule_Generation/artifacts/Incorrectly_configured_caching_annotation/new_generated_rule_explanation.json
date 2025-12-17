@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrectly-configured-caching-annotation' checks all classes in the project. If a class has any of the caching annotations (@Cacheable, @CacheEvict, @CachePut, @CacheConfig), it retrieves the names of all attributes of these annotations. For each attribute, it asserts that the attribute is correctly configured. If not, it generates a message indicating the incorrectly configured caching annotation and the class where it is found."
+}

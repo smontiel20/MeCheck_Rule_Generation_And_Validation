@@ -1,0 +1,10 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+RESTful Web Service (JAX-RS),https://www.jetbrains.com.cn/en-us/help/inspectopedia/RestResourceMethodInspection.html,"The source URL describes a rule that checks for classes annotated with @Path but do not have any resource methods. The root resource class should have at least one resource method annotated with @Path or any of the @HttpMethod annotations such as @GET, @POST, etc.","Rule pathClassWithoutResourceMethods {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Path')) {
+      assert ( exists(method m in getMethods(c)) ( hasAnnotation(m, '@Path') OR hasAnnotation(m, '@GET') OR hasAnnotation(m, '@POST') ) ) {
+        msg('Class: %s annotated with @Path does not have any resource methods', getFQN(c));
+      }
+    }
+  }
+}","The rule 'pathClassWithoutResourceMethods' checks for all classes in the project. If a class is annotated with @Path, it asserts that there exists at least one method in the class that is annotated with @Path, @GET, or @POST. If this condition is not met, it generates a message stating that the class annotated with @Path does not have any resource methods.",,,,

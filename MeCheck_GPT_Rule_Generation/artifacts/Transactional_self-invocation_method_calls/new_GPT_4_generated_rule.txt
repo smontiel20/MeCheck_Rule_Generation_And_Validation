@@ -1,0 +1,13 @@
+Rule transactional_self_invocation {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Transactional')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@Transactional')) {
+          assert (NOT exists(method calledMethod in getMethods(c)) (getName(calledMethod) == getName(m) AND isUniqueSN(calledMethod))) {
+            msg('Self-invocation of method: %s in class: %s does not lead to an actual transaction at runtime even if the invoked method is marked with @Transactional.', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

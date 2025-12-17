@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ScheduledMethodInspection.html,"The source URL provides information about a common issue in Spring Core where methods annotated with @Scheduled have incorrect signatures. According to the Spring Documentation, methods to be scheduled must return void and must not expect any arguments. If the method needs to interact with other objects from the Application Context, they should be provided through dependency injection.","Rule incorrect-scheduled-method-signature {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Scheduled')) {
+        assert (getReturnType(m) == 'void' AND NOT hasParam(m)) {
+          msg(""Method: %s in class: %s has incorrect signature for @Scheduled annotation. It should return void and not expect any arguments."", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'incorrect-scheduled-method-signature' checks all classes and their methods in the application. If a method is annotated with @Scheduled, it asserts that the return type of the method is void and the method does not have any parameters. If the assertion fails, it generates a message indicating the method and class where the incorrect signature is found.",,,"https://www.baeldung.com/spring-scheduled-tasks: This page from Baeldung provides a comprehensive guide on how to use @Scheduled annotation in Spring. It emphasizes that the methods to be scheduled must not expect any arguments and must return void.
+
+https://stackoverflow.com/questions/10873993/spring-scheduled-annotation-expected-bean-to-be-of-type-is-actually-of-type: This StackOverflow thread discusses a common issue where the @Scheduled annotation is used incorrectly, leading to unexpected behavior. The accepted answer reiterates that methods with @Scheduled annotation should not expect any arguments and should return void.",

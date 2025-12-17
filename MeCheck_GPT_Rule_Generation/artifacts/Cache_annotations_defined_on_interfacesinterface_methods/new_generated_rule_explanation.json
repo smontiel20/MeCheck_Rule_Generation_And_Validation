@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'cache_annotations_on_interfaces' checks all classes in the project. If a class is an interface and it has a @Cache* annotation, a message is generated stating that the interface should not be annotated with @Cache*. The rule also checks all methods in the interface. If a method has a @Cache* annotation, a message is generated stating that the method in the interface should not be annotated with @Cache*."
+}

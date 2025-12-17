@@ -1,0 +1,22 @@
+Rule unresolved-entity-graph-names {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, "<class>")) {
+      for (<class> class in getElms(xml, "<class>")) {
+        String className = getAttr(class, "name");
+        if (NOT isEmpty(className)) {
+          assert ( classExists(className) OR isLibraryClass(className) ) {
+            msg("Class: %s mentioned in class: %s, does not exist or is not instantiable",
+                className, getName(class));
+          }
+        }
+        if (hasAttr(class, "extends")) {
+          String superClass = getAttr(class, "extends");
+          assert ( classExists(superClass) ) {
+            msg("Super class: %s mentioned in class: %s, does not exist",
+                superClass, getName(class));
+          }
+        }
+      }
+    }
+  }
+}

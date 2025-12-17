@@ -1,0 +1,14 @@
+Rule undefined-group-name {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Test')) {
+        String[] groups = getAnnoAttr(m, 'groups');
+        for (String group in groups) {
+          assert ( exists(String knownGroup in getKnownGroups()) ( group == knownGroup ) ) {
+            msg("Undefined group name: %s in method: %s in class: %s", group, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

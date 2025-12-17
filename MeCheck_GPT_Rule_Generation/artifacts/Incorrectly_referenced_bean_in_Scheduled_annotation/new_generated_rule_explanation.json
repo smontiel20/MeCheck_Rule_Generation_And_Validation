@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrectly_referenced_bean_in_scheduled' checks all classes in the project. If a class has the @Scheduled annotation, it retrieves the 'scheduler' attribute of the annotation, which should be a bean reference. If the scheduler bean is not empty, it asserts that the class of the bean exists or it is a library class. If the assertion fails, it generates a message indicating the incorrectly referenced bean in the @Scheduled annotation."
+}

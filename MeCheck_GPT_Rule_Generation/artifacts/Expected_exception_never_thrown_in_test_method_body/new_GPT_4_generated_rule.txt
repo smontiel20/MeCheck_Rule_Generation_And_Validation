@@ -1,0 +1,15 @@
+Rule expected-exception-never-thrown {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, 'Test')) {
+        String expectedException = getAnnoAttr(m, 'expectedExceptions');
+        if (NOT isEmpty(expectedException)) {
+          assert ( exists(String stmt in getStatements(m)) ( stmt.contains('throw ' + expectedException) ) ) {
+            msg("Expected exception: %s is never thrown in test method: %s in class: %s",
+                expectedException, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

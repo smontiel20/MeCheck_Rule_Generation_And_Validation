@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringTestingTransactionalInspection.html,The source URL provides information about a rule in JetBrains Inspectopedia that reports invalid transactional lifecycle method declarations in Spring testing classes. These methods are annotated with @BeforeTransaction and @AfterTransaction in classes annotated as @Transactional. The rule states that these annotated methods must have no arguments and no return type.,"Rule invalid-transactional-lifecycle-method-declaration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Transactional')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, '@BeforeTransaction') OR hasAnnotation(m, '@AfterTransaction')) {
+          assert (isEmpty(getArg(m)) AND getReturnType(m) == 'void') {
+            msg('Invalid transactional lifecycle method declaration: %s in class: %s. The method must have no arguments and no return type.', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'invalid-transactional-lifecycle-method-declaration' checks all classes in the project. If a class is annotated with '@Transactional', it checks all methods in that class. If a method is annotated with either '@BeforeTransaction' or '@AfterTransaction', it asserts that the method has no arguments (using the 'isEmpty' function on the method's arguments) and that the return type of the method is 'void'. If these conditions are not met, it reports an error message indicating the invalid transactional lifecycle method declaration, specifying the method name and the fully qualified name of the class.",,"The generated rule appears to be syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, and does not introduce any new functions. The rule logic seems to correctly implement the requirement of checking for invalid transactional lifecycle method declarations in Spring testing classes.","1. URL: https://www.baeldung.com/spring-transactional-propagation-isolation
+Summary: This page from Baeldung provides a comprehensive guide to Spring's transaction management, including the use of @Transactional annotation. It does not directly address the rule, but provides useful context about the use of @Transactional in Spring.
+
+2. URL: https://www.javatpoint.com/spring-transaction-management
+Summary: This page from JavaTpoint provides an overview of transaction management in Spring, including the use of @Transactional and @BeforeTransaction. It does not directly address the rule, but provides useful context about the use of these annotations in Spring.",

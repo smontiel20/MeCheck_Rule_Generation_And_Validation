@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/ParameterizedParametersStaticCollection.html,"The source URL provides information about a common issue in JUnit 4 parameterized test classes. These classes are annotated with @RunWith(Parameterized.class) but either do not include a data provider method annotated with @Parameterized.Parameters or this method has an incorrect signature. The data provider method should be public, static, and have a return type of Iterable or Object[]. The page suggests creating an empty parameter provider method or changing the signature of the incorrect data provider method.","Rule parameterized_test_class_without_data_provider_method {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""RunWith"") AND getAnnoAttr(c, ""RunWith"") == ""Parameterized.class"") {
+      assert ( exists(method m in getMethods(c)) ( hasAnnotation(m, ""Parameterized.Parameters"") AND isStatic(m) AND (getReturnType(m) == ""Iterable"" OR getReturnType(m) == ""Object[]"") ) ) {
+        msg(""The class: %s is a JUnit 4 parameterized test class but does not include a data provider method with correct signature. Consider creating an empty parameter provider method or changing the signature of the incorrect data provider method."", getFQN(c));
+      }
+    }
+  }
+}","The rule 'parameterized_test_class_without_data_provider_method' checks for each class in the project. If a class is annotated with @RunWith(Parameterized.class), it asserts that there exists a method in the class that is annotated with @Parameterized.Parameters, is static, and has a return type of either Iterable or Object[]. If such a method does not exist, it generates a message indicating the fully qualified name of the class and suggesting to create an empty parameter provider method or to change the signature of the incorrect data provider method.",,,"1. URL: https://www.baeldung.com/parameterized-tests-junit-5
+Summary: This page provides a comprehensive guide on how to write parameterized tests in JUnit 5. It explains the importance of data provider methods and how they should be structured.
+
+2. URL: https://www.vogella.com/tutorials/JUnit/article.html#parameterized-tests
+Summary: This page provides a tutorial on writing parameterized tests in JUnit. It emphasizes the need for a data provider method and explains the correct signature for such methods.",

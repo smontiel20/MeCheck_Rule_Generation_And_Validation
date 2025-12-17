@@ -1,0 +1,43 @@
+{
+    "rulesets": [
+        {
+            "category": "beans",
+            "dir": "C:\\Mahir\\VT\\Research\\detecting-metadata-bugs\\src\\detecting-metadata-bugs\\rules\\beans",
+            "run": [
+                "beanExists",
+                "beanClassExists",
+                "constructorArgumentField",
+                "constructorArgumentFieldType",
+                "constructorIndexOutOfBound",
+                "methodExists",
+                "setterMethod"
+            ]
+        },
+        {
+            "category": "annotations",
+            "dir": "C:\\Mahir\\VT\\Research\\detecting-metadata-bugs\\src\\detecting-metadata-bugs\\rules\\annotations",
+            "run": [
+                "importXMLIntoAnnotation"
+            ]
+        },
+        {
+            "category": "junits",
+            "dir": "C:\\Mahir\\VT\\Research\\detecting-metadata-bugs\\src\\detecting-metadata-bugs\\rules\\junits",
+            "run": [
+                "runwithNoParameters",
+                "runwithNoSuiteclasses",
+                "runwithNoTest",
+                "suiteclassesNoRunwith",
+                "suiteclassesNoTest",
+                "testParamsNotIterable"
+            ]
+        },
+        {
+            "category": "general",
+            "dir": "C:\\Mahir\\VT\\Research\\detecting-metadata-bugs\\src\\detecting-metadata-bugs\\rules\\general",
+            "run": [
+                "xmlPathCheck"
+            ]
+        }
+    ]
+}

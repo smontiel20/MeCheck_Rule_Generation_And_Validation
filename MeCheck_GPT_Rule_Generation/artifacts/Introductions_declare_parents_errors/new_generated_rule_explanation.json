@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'declare_parents_inspection' checks all classes in the project. If a class has the '@AspectJ' annotation, it then checks all methods within that class. If a method has the 'declare parents' annotation, it retrieves the 'defaultImpl' attribute from the annotation. If 'defaultImpl' is not empty, it asserts that a class with the name 'defaultImpl' exists and that it implements the interface that is the return type of the method. If this assertion fails, it generates a message indicating the inconsistency."
+}

@@ -1,0 +1,10 @@
+Rule invalid-dirtiescontext-mode-configuration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@DirtiesContext')) {
+      String mode = getAnnoAttr(c, '@DirtiesContext', 'mode');
+      assert (mode == 'AFTER_EACH_TEST_METHOD' OR mode == 'AFTER_CLASS' OR mode == 'BEFORE_EACH_TEST_METHOD' OR mode == 'BEFORE_CLASS') {
+        msg('Invalid mode configuration: %s in @DirtiesContext annotation in class: %s', mode, getFQN(c));
+      }
+    }
+  }
+}

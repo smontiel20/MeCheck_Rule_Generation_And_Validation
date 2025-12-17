@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Micronaut Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnUnresolvedPathVariable.html,The source URL describes a rule that identifies @PathVariable parameters that are declared in a method signature but are missing in the URL path or vice versa. It provides a quick-fix solution by adding the missing parameter.,"Rule unresolved-path-variable-reference {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PathVariable')) {
+        String pathVariable = getAnnoAttr(m, '@PathVariable', 'value');
+        if (NOT isEmpty(pathVariable)) {
+          assert ( exists(String url in getAttrs(m, 'RequestMapping', 'value')) ( url contains pathVariable ) ) {
+            msg(""Unresolved @PathVariable reference: %s in method: %s of class: %s"", pathVariable, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-path-variable-reference' checks all classes and their methods. If a method has the '@PathVariable' annotation, it retrieves the value of the path variable. If the path variable is not empty, it asserts that the URL, obtained from the 'RequestMapping' attribute of the method, contains the path variable. If the URL does not contain the path variable, it generates a message indicating the unresolved @PathVariable reference, specifying the path variable, the method, and the class.",,,"https://stackoverflow.com/questions/44848688/pathvariable-in-spring-boot-not-working: This StackOverflow thread discusses issues with @PathVariable in Spring Boot, which is similar to the issue addressed by the rule. The thread provides various solutions and insights into how @PathVariable works.
+
+https://www.baeldung.com/spring-pathvariable-required-optional: This Baeldung article explains how to use @PathVariable in Spring, including making it optional. It provides a good understanding of how @PathVariable works, which is relevant to the rule.",

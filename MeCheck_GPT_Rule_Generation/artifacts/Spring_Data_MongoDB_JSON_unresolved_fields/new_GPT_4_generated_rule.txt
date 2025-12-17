@@ -1,0 +1,12 @@
+Rule unresolved-json-fields {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, 'org.springframework.data.mongodb.repository.Query')) {
+      String queryValue = getAnnoAttr(c, 'org.springframework.data.mongodb.repository.Query', 'value');
+      if (NOT isEmpty(queryValue)) {
+        assert ( exists(field f in getFields(c)) ( queryValue == getName(f) ) ) {
+          msg("Unresolved field: %s in Query annotation in class: %s", queryValue, getFQN(c));
+        }
+      }
+    }
+  }
+}

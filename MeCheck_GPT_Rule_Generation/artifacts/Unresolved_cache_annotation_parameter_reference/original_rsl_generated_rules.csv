@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Micronaut Data,https://www.jetbrains.com.cn/en-us/help/inspectopedia/MnCacheAnnotationParameters.html,"The source URL provides information about a specific issue in Micronaut Cache annotations where the value of the parameters attribute contains names of undefined method parameters. The annotations affected include io.micronaut.cache.annotation.Cacheable, io.micronaut.cache.annotation.CachePut, and io.micronaut.cache.annotation.CacheInvalidate.","Rule unresolved-cache-annotation-parameter-reference {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, 'io.micronaut.cache.annotation.Cacheable') OR hasAnnotation(m, 'io.micronaut.cache.annotation.CachePut') OR hasAnnotation(m, 'io.micronaut.cache.annotation.CacheInvalidate')) {
+        String[] params = getAnnoAttr(m, 'parameters');
+        for (String param in params) {
+          assert ( hasParam(m, param) ) {
+            msg('Undefined parameter: %s in method: %s of class: %s', param, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'unresolved-cache-annotation-parameter-reference' checks for each class and each method in the class. If the method has one of the specified Micronaut Cache annotations, it retrieves the 'parameters' attribute of the annotation. For each parameter in the 'parameters' attribute, it asserts that the method has a parameter with the same name. If not, it generates a message indicating the undefined parameter in the method of the class.",,The rule syntax is valid according to the RSL syntax. The rule uses only the built-in functions and does not introduce any new functions. The rule checks for the existence of parameters specified in the 'parameters' attribute of Micronaut Cache annotations in the method parameters.,,

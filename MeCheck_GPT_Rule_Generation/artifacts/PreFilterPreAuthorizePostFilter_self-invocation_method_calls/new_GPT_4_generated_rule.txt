@@ -1,0 +1,15 @@
+Rule self_invocation_method_calls {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@PreFilter') OR hasAnnotation(m, '@PreAuthorize') OR hasAnnotation(m, '@PostFilter')) {
+        for (method innerM in getMethods(c)) {
+          if (callExists(innerM, getName(m))) {
+            assert (NOT isIterable(innerM)) {
+              msg('Method: %s in class: %s is self-invoked and may not work at runtime', getName(m), getFQN(c));
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'association-field-has-column-annotation' checks all classes and their fields. If a field has either a @OneToOne or @ManyToOne annotation, it asserts that the field should not have a @Column annotation. If the assertion fails, it generates a message indicating the field and class where the incorrect annotation usage was detected."
+}

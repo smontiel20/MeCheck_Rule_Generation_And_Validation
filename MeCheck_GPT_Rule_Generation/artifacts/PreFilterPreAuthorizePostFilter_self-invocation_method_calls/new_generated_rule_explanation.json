@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'self_invocation_method_calls' checks all classes and their methods. If a method is annotated with @PreFilter, @PreAuthorize, or @PostFilter, it checks all other methods in the same class. If any of these methods call the annotated method, an assertion is made to ensure that the calling method is not iterable. If it is, a message is displayed indicating that the method is self-invoked and may not work at runtime."
+}

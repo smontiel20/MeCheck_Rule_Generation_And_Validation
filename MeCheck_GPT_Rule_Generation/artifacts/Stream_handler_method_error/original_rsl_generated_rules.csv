@@ -1,0 +1,35 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Cloud Stream,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCloudStreamInconsistencyInspection.html,"The source URL provides information about the Spring Cloud Stream Inconsistency Inspection. It reports inconsistency errors in stream handler methods. Input and output stream handler methods annotated with @StreamListener or @StreamEmitter have various constraints. Violation of these constraints results in errors at runtime. For example, a channel defined in @StreamListener value attribute may never be combined with method parameters annotated with @Input or @Output. An input channel must be specified for a method annotated with @StreamListener. An output channel must be specified for a method that can return a value. An output channel cannot be specified for a method that does not return a value. @StreamListener condition attribute cannot be set for methods that return a value.","Rule stream-handler-method-error {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@StreamListener') OR hasAnnotation(m, '@StreamEmitter')) {
+        String channel = getAnnoAttr(m, '@StreamListener', 'value');
+        if (NOT isEmpty(channel) AND (hasParamType(m, '@Input') OR hasParamType(m, '@Output'))) {
+          assert (false) {
+            msg('Channel defined in @StreamListener value attribute may never be combined with method parameters annotated with @Input or @Output in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (hasAnnotation(m, '@StreamListener') AND isEmpty(channel)) {
+          assert (false) {
+            msg('An input channel must be specified for a method annotated with @StreamListener in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (NOT isEmpty(getReturnType(m)) AND isEmpty(channel)) {
+          assert (false) {
+            msg('An output channel must be specified for a method that can return a value in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (isEmpty(getReturnType(m)) AND NOT isEmpty(channel)) {
+          assert (false) {
+            msg('An output channel cannot be specified for a method that does not return a value in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+        if (NOT isEmpty(getAnnoAttr(m, '@StreamListener', 'condition')) AND NOT isEmpty(getReturnType(m))) {
+          assert (false) {
+            msg('@StreamListener condition attribute cannot be set for methods that return a value in method: %s of class: %s', getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'stream-handler-method-error' checks for inconsistency errors in stream handler methods in all classes. It checks if a method is annotated with @StreamListener or @StreamEmitter. If so, it retrieves the value of the 'value' attribute of the @StreamListener annotation. It then checks if this value is not empty and if the method has parameters annotated with @Input or @Output. If both conditions are true, it asserts false and reports an error message. The rule also checks if a method is annotated with @StreamListener and if the channel is empty. If so, it asserts false and reports an error message. The rule checks if the method can return a value and if the channel is empty. If so, it asserts false and reports an error message. The rule checks if the method cannot return a value and if the channel is not empty. If so, it asserts false and reports an error message. Finally, the rule checks if the method has a 'condition' attribute in the @StreamListener annotation and if the method can return a value. If both conditions are true, it asserts false and reports an error message.","The rule uses the following built-in functions: getClasses, getMethods, hasAnnotation, getAnnoAttr, isEmpty, hasParamType, getReturnType, getName, getFQN.",,,

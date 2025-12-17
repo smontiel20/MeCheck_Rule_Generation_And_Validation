@@ -1,0 +1,14 @@
+Rule incorrect-bean-scope {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Singleton')) {
+      assert (hasAnnotation(c, '@ApplicationScoped') OR hasAnnotation(c, '@Dependent')) {
+        msg('Singleton bean: %s must be either @ApplicationScoped or @Dependent', getFQN(c));
+      }
+    }
+    if (hasAnnotation(c, '@Stateless') AND hasAnnotation(c, '@Session')) {
+      assert (hasAnnotation(c, '@Dependent')) {
+        msg('Session stateless bean: %s must be @Dependent', getFQN(c));
+      }
+    }
+  }
+}

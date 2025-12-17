@@ -1,0 +1,2 @@
+[artifact-submission\dataset\SpringBoot](afc5bc)	invalidSpringBootSetup.txt	Redundant annotation @ComponentScan found in class: DemoApplicationA
+[artifact-submission\dataset\SpringBoot](afc5bc)	invalidSpringBootSetup.txt	Redundant annotation @EnableAutoConfiguration found in class: DemoApplicationB

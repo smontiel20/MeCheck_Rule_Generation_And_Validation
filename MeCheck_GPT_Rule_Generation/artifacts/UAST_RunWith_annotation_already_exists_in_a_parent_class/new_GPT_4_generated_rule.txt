@@ -1,0 +1,13 @@
+Rule runWithAnnotationExistsInParent {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@RunWith')) {
+      for (class p in getFamily(c)) {
+        if (hasAnnotation(p, '@RunWith')) {
+          assert (NOT hasAnnotation(p, '@RunWith')) {
+            msg("Both parent class: %s and child class: %s in the JUnit test hierarchy are annotated with @RunWith, which can lead to unexpected testing behavior.", getFQN(p), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringConfigurationProxyMethods.html,"The source page discusses a potential issue in Spring Framework 5.2 where disabling proxyBeanMethods in @Configuration can lead to unexpected behavior. When proxyBeanMethods is set to false, proxy instances are not created and method calls are invoked anew each time, returning a new instance. This means there's no guarantee that the correct bean is being injected into the context.","Rule configuration-proxy-methods {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""@Configuration"")) {
+      if (getAnnoAttr(c, ""proxyBeanMethods"") == ""false"") {
+        for (method m in getMethods(c)) {
+          assert (NOT isUniqueSN(m)) {
+            msg(""Warning: Method: %s in class: %s with @Configuration(proxyBeanMethods = false) may not guarantee correct bean injection."", getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'configuration-proxy-methods' checks all classes in the project. If a class has the @Configuration annotation and the proxyBeanMethods attribute is set to false, it checks all methods in that class. If a method is not unique (meaning it could be invoked multiple times), it asserts a warning message indicating that the method may not guarantee correct bean injection due to the @Configuration(proxyBeanMethods = false) setting.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided, and does not introduce any new functions. The rule checks for classes with the @Configuration annotation and the proxyBeanMethods attribute set to false, and asserts a warning if a method in such a class is not unique.","1. URL: https://www.baeldung.com/spring-configuration-annotation
+Summary: This page explains the @Configuration annotation in Spring, including the proxyBeanMethods attribute. It mentions that setting proxyBeanMethods to false can improve startup performance, but does not guarantee that the same instance of a bean will be returned each time a method is called.
+
+2. URL: https://stackoverflow.com/questions/58806796/what-does-the-proxybeanmethods-attribute-do-in-the-configuration-annotation-in
+Summary: This StackOverflow thread discusses the proxyBeanMethods attribute in the @Configuration annotation. It explains that when proxyBeanMethods is set to false, Spring does not create a CGLIB proxy for the configuration class, which can lead to unexpected behavior if methods are called multiple times.",

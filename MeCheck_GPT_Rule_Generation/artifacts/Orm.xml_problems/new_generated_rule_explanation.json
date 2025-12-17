@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'unresolved-db-refs-in-orm' checks for unresolved references to any database objects inside `orm.xml` configuration files. It iterates over all XML files and checks if there are any elements named 'entity' or 'table'. If such elements exist, it retrieves their 'table' or 'name' attribute respectively and checks if a class with that name exists or if it is a library class. If neither is the case, it asserts an error message indicating that the referenced table or entity does not exist."
+}

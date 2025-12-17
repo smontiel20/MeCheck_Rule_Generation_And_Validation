@@ -1,0 +1,12 @@
+Rule JUnitMixedFramework {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, "Test")) {
+      String superClass = getFamily(c);
+      String currentVersion = getAnnoAttr(getAnnotated(c, "Test"), "version");
+      String superClassVersion = isEmpty(superClass) ? currentVersion : getAnnoAttr(getAnnotated(superClass, "Test"), "version");
+      assert (currentVersion == superClassVersion) {
+        msg("JUnit annotated method in class: %s is from a different JUnit version (%s) than its superclass (%s)", getName(c), currentVersion, superClassVersion);
+      }
+    }
+  }
+}

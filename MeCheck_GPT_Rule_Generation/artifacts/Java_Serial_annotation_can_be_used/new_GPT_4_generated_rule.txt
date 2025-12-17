@@ -1,0 +1,20 @@
+Rule missing-serial-annotation {
+  for (class c in getClasses()) {
+    if (isIterable(getMethods(c)) OR isIterable(getFields(c))) {
+      for (method m in getMethods(c)) {
+        if (NOT hasAnnotation(m, '@Serial')) {
+          assert (getReturnType(m) == 'Serializable' OR getReturnType(m) == 'Externalizable') {
+            msg("Method: %s in class: %s should be annotated with '@Serial'", getName(m), getName(c));
+          }
+        }
+      }
+      for (field f in getFields(c)) {
+        if (NOT hasAnnotation(f, '@Serial')) {
+          assert (getType(f) == 'Serializable' OR getType(f) == 'Externalizable') {
+            msg("Field: %s in class: %s should be annotated with '@Serial'", getName(f), getName(c));
+          }
+        }
+      }
+    }
+  }
+}

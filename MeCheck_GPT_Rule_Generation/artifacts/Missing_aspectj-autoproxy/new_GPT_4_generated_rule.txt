@@ -1,0 +1,13 @@
+Rule missing-aspectj-autoproxy {
+  for (file xml in getXMLs()) {
+    if (NOT elementExists(xml, "<aop:aspectj-autoproxy/>")) {
+      for (class c in getClasses()) {
+        if (hasAnnotation(c, "@Aspect")) {
+          assert (getAnnoAttr(c, "@Aspect") >= 2.5) {
+            msg("@Aspect annotation found in class: %s in Spring version earlier than 2.5 without <aop:aspectj-autoproxy/> in XML configuration", getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}

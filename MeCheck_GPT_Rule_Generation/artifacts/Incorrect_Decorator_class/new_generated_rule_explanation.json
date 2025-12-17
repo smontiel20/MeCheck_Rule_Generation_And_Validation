@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect_decorator_class' checks all classes in the project. If a class is annotated with '@Decorator', the rule asserts that the class is not final and has exactly one delegate attribute. If these conditions are not met, an error message is generated with the fully qualified name of the class."
+}

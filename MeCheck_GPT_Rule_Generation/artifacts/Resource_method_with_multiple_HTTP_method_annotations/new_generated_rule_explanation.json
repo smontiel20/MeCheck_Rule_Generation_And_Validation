@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'resource-method-multiple-http-method-annotations' checks all classes and their methods in the project. For each method, it counts the number of HTTP method annotations (@GET, @POST, @PUT). If a method has more than one such annotation, it asserts a failure and generates a message indicating the method and class with the issue."
+}

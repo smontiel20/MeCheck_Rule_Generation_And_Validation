@@ -1,0 +1,20 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/AopLanguageInspection.html,"The source URL provides information about AOP language inspection, which includes reporting issues in AOP pointcut expressions, unresolved references, incompatible number of arguments to pointcut, and unresolved pointcuts.","Rule pointcut-expression-errors {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, 'Pointcut')) {
+        String pointcutExpression = getAnnoAttr(m, 'value');
+        if (NOT isEmpty(pointcutExpression)) {
+          assert ( callExists(pointcutExpression) OR classExists(pointcutExpression) ) {
+            msg(""Pointcut expression: %s in method: %s of class: %s is unresolved or has incompatible arguments"",
+                pointcutExpression, getName(m), getFQN(c));
+          }
+        }
+      }
+    }
+  }
+}","The rule 'pointcut-expression-errors' checks all classes and their methods. If a method has a 'Pointcut' annotation, it retrieves the pointcut expression from the annotation's 'value' attribute. If the pointcut expression is not empty, it asserts that the expression either exists as a method call or a class. If the assertion fails, it means the pointcut expression is unresolved or has incompatible arguments, and a message is generated with the details.",,"The rule 'pointcut-expression-errors' is syntactically correct and follows the RSL syntax. It uses the built-in functions: getClasses, getMethods, hasAnnotation, getAnnoAttr, isEmpty, callExists, classExists, getName, and getFQN. No new built-in functions are introduced.","1. URL: https://www.baeldung.com/spring-aop-pointcut-tutorial
+Summary: This page provides a tutorial on Spring AOP pointcuts, explaining how to define pointcut expressions and how they can be used to match methods and join points in AOP. It also discusses common issues that can occur, such as unresolved pointcuts and incompatible arguments.
+
+2. URL: https://stackoverflow.com/questions/11946478/spring-aop-pointcut-expression-is-not-working
+Summary: This StackOverflow thread discusses issues related to Spring AOP pointcut expressions not working, including unresolved references and incompatible number of arguments.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

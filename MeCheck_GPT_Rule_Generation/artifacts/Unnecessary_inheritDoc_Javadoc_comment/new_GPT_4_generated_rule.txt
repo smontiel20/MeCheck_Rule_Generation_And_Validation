@@ -1,0 +1,20 @@
+Rule unnecessary-inheritdoc {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      String docComment = getDocComment(m);
+      if (docComment == '{@inheritDoc}') {
+        assert ( false ) {
+          msg('Unnecessary {@inheritDoc} in method: %s of class: %s', getName(m), getFQN(c));
+        }
+      }
+    }
+    for (field f in getFields(c)) {
+      String docComment = getDocComment(f);
+      if (docComment.contains('{@inheritDoc}')) {
+        assert ( false ) {
+          msg('Invalid {@inheritDoc} in field: %s of class: %s', getName(f), getFQN(c));
+        }
+      }
+    }
+  }
+}

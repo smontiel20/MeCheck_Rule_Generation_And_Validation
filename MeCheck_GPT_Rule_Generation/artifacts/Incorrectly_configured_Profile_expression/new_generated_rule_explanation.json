@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'incorrect-profile-expression' checks all classes in the project. If a class has the @Profile annotation, it retrieves the value of the annotation which is the profile expression. If the profile expression is empty, it asserts false and generates a message indicating that the profile expression in the class is empty. If the profile expression contains both '&' and '|' operators and does not start and end with parentheses, it asserts false and generates a message indicating that the profile expression in the class mixes '&' and '|' operators without parentheses."
+}

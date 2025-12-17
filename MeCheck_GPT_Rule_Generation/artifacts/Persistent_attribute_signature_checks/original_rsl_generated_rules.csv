@@ -1,0 +1,24 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/JpaAttributeMemberSignatureInspection.html,"The source URL provides information about a rule in JetBrains Inspectopedia that checks for JPA specification errors. These errors include multiple attributes configured for a method or field, illegal attribute usage in Embeddable objects, persistent attribute metadata not specified on a field or property getter, and absence of setter or getter with property-based access.","Rule persistent-attribute-signature-checks {
+  for (class c in getClasses()) {
+    for (field f in getFields(c)) {
+      if (hasAnnotation(f, 'Embeddable')) {
+        assert (NOT exists(String attr in getAnnoAttrNames(f)) (hasField(c, attr))) {
+          msg('Illegal attribute: %s is used in Embeddable object: %s', attr, getName(f));
+        }
+      }
+      if (hasAnnotation(f, 'Persistent')) {
+        assert (getType(f) == 'field' OR hasMethod(c, 'get' + upperCase(getName(f)))) {
+          msg('Persistent attribute metadata is specified not on a field or property getter: %s', getName(f));
+        }
+        assert (hasMethod(c, 'set' + upperCase(getName(f)))) {
+          msg('No setter with property-based access for: %s', getName(f));
+        }
+      }
+    }
+  }
+}","The rule 'persistent-attribute-signature-checks' checks for each class in the application. For each field in the class, it checks if the field has an 'Embeddable' annotation. If it does, the rule asserts that no attribute name in the annotation exists as a field in the class. If such an attribute exists, it reports an error message. The rule also checks if the field has a 'Persistent' annotation. If it does, the rule asserts that the field type is 'field' or there is a getter method for the field in the class. If not, it reports an error message. The rule also asserts that there is a setter method for the field in the class. If not, it reports an error message.",,The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided and does not introduce any new functions. The rule checks for the conditions specified in the JetBrains Inspectopedia page.,"1. URL: https://www.baeldung.com/jpa-entities
+Summary: This page provides a comprehensive guide on JPA entities, including the use of annotations such as @Embeddable and @Persistent. It also discusses the importance of getter and setter methods in JPA entities.
+
+2. URL: https://www.javatpoint.com/jpa-tutorial
+Summary: This tutorial covers various aspects of JPA, including the use of annotations, fields, and methods in JPA entities. It also explains how to define and use persistent attributes in JPA entities.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

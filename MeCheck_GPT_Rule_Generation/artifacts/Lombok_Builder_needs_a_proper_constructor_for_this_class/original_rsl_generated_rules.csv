@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokBuilderAllArgsInspection.html,The source URL provides a rule that checks if an all-args constructor exists for @lombok.Builder in JPA entities.,"Rule lombok-builder-all-args-constructor {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@lombok.Builder')) {
+      assert ( exists(method m in getConstructors(c)) (getArg(m) == getType(c)) ) {
+        msg(""Class: %s annotated with @lombok.Builder does not have a proper all-args constructor"", getFQN(c));
+      }
+    }
+  }
+}","This rule, named 'lombok-builder-all-args-constructor', iterates over all classes in the project. If a class is annotated with '@lombok.Builder', it asserts that there exists a constructor method in the class that takes all fields of the class as arguments. If such a constructor does not exist, it generates a message indicating that the class does not have a proper all-args constructor.",,"The rule is syntactically correct according to the Rule-Specific Language (RSL) syntax. It uses only the built-in functions provided, and does not introduce any new functions. The rule checks for the existence of an all-args constructor in classes annotated with '@lombok.Builder', which aligns with the requirement.","1. URL: https://www.baeldung.com/lombok-builder
+Summary: This page provides a comprehensive guide on using Lombok's @Builder annotation. It explains the need for a constructor with all arguments when using @Builder, which is what our rule checks for.
+
+2. URL: https://stackoverflow.com/questions/40620000/lombok-builder-and-jpa-default-constructor
+Summary: This StackOverflow discussion highlights issues that can arise when using Lombok's @Builder annotation with JPA entities, specifically the need for a default constructor. Our rule complements this by checking for an all-args constructor.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

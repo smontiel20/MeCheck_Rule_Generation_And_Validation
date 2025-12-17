@@ -1,0 +1,15 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Spring Core,https://www.jetbrains.com.cn/en-us/help/inspectopedia/SpringCacheNamesInspection.html,"The source URL provides information about a rule that checks for incorrect @Cache* annotation names in Spring bean components. It specifies that at least one cache name should be provided per cache operation: @Cacheable(""cache_name"") or @Cacheable(cacheNames =""cache_name""). It also mentions that @CacheConfig#cacheNames() can be used for sharing common cache-related settings at the class level.","Rule incorrect-autowiring-in-spring-bean-components {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, ""@Cacheable"") OR hasAnnotation(c, ""@CacheConfig"")) {
+      String[] cacheNames = getAnnoAttrNames(c);
+      assert (NOT isEmpty(cacheNames)) {
+        msg(""Incorrect @Cache* annotation names in class: %s. At least one cache name should be provided per cache operation."", getFQN(c));
+      }
+    }
+  }
+}","The rule 'incorrect-autowiring-in-spring-bean-components' checks all classes in the application. If a class has either the @Cacheable or @CacheConfig annotation, it retrieves the names of the cache attributes. It then asserts that the cache names are not empty. If the cache names are empty, it generates a message indicating that the @Cache* annotation names in the class are incorrect and that at least one cache name should be provided per cache operation.","The rule uses the following built-in functions: getClasses, hasAnnotation, getAnnoAttrNames, NOT, isEmpty, msg, getFQN. No new functions were introduced.",,"1. URL: https://www.baeldung.com/spring-cache-tutorial
+Summary: This tutorial on Baeldung explains how to use Spring's caching annotations, including @Cacheable and @CacheConfig. It provides examples of how to correctly use these annotations, which can help in understanding the rule.
+
+2. URL: https://www.javatpoint.com/spring-caching
+Summary: JavaTPoint provides a comprehensive guide on Spring Caching, including the use of @Cacheable and @CacheConfig annotations. It also explains how to provide cache names, which is directly related to the rule.",

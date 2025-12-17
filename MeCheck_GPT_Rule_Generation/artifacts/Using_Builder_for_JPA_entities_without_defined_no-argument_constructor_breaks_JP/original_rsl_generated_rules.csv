@@ -1,0 +1,11 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/LombokBuilderInspection.html,The source page describes a rule that checks if the @lombok.Builder annotation is used in JPA entities. The use of this annotation without a defined no-argument constructor can break the JPA specification.,"Rule lombok-builder-no-arg-constructor {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Builder')) {
+      assert ( exists(method m in getMethods(c)) ( getName(m) == '<init>' AND hasParamType(m, '()V') ) ) {
+        msg(""Class: %s uses @Builder but does not have a no-arg constructor"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'lombok-builder-no-arg-constructor' checks all classes in the project. If a class has the @Builder annotation, it asserts that there exists a method in the class which is a constructor (name is '<init>') and has no parameters (parameter type is '()V'). If such a method does not exist, it raises an error message stating that the class uses @Builder but does not have a no-argument constructor.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions and does not introduce any new ones. The rule checks for the existence of a no-argument constructor in classes annotated with @Builder, which aligns with the topic and content provided.","1. https://www.baeldung.com/lombok-builder - This page explains the use of @Builder annotation in Lombok and mentions that it does not automatically generate a no-arg constructor.
+2. https://stackoverflow.com/questions/49802254/jpa-entity-with-lombok-builder-and-noargsconstructor - This StackOverflow thread discusses the issue of using @Builder in JPA entities without a no-arg constructor, which can lead to runtime errors.",

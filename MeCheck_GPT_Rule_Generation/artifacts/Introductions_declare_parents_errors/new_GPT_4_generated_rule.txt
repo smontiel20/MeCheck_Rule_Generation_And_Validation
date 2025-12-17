@@ -1,0 +1,16 @@
+Rule declare_parents_inspection {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@AspectJ')) {
+      for (method m in getMethods(c)) {
+        if (hasAnnotation(m, 'declare parents')) {
+          String defaultImpl = getAnnoAttr(m, 'defaultImpl');
+          if (NOT isEmpty(defaultImpl)) {
+            assert (classExists(defaultImpl) AND implementsInterface(defaultImpl, getReturnType(m))) {
+              msg('Inconsistency in @AspectJ Introduction: defaultImpl: %s does not implement the given interface: %s', defaultImpl, getReturnType(m));
+            }
+          }
+        }
+      }
+    }
+  }
+}

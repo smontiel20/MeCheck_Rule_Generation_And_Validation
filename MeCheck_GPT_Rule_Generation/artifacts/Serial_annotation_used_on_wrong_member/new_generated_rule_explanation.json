@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'serial-annotation-usage' checks all classes in the project. If a class is annotated with '@Serial', it checks all methods and fields of the class. If a method is annotated with '@Serial', it asserts that the return type of the method is 'void' and it has a parameter of type 'java.io.ObjectOutputStream'. If the assertion fails, it generates a message indicating that the method is not suitable to be annotated with '@Serial'. Similarly, if a field is annotated with '@Serial', it asserts that the type of the field is 'long' and its name is 'serialVersionUID'. If the assertion fails, it generates a message indicating that the field is not suitable to be annotated with '@Serial'."
+}

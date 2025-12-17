@@ -1,0 +1,17 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+JUnit,https://www.jetbrains.com.cn/en-us/help/inspectopedia/IgnoredJUnitTest.html#locating-this-inspection,"The source URL provides information about a code smell in JUnit tests, specifically the usage of @Ignore or @Disabled annotations. These annotations are used to disable tests, but their long-term usage, especially without specifying a reason, is considered a bad practice.","Rule ignored_or_disabled_junit_test {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Ignore') OR hasAnnotation(m, '@Disabled')) {
+        assert (NOT isEmpty(getAnnoAttr(m, 'value'))) {
+          msg(""Test method: %s in class: %s is annotated with @Ignore or @Disabled without specifying a reason"",
+              getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'ignored_or_disabled_junit_test' checks all classes and their methods. If a method is annotated with either '@Ignore' or '@Disabled', it asserts that a reason for the annotation is provided. If no reason is provided, it generates a message indicating the method and class where this code smell is found.",,"The rule uses built-in functions to iterate over all classes and their methods. It checks if a method has either '@Ignore' or '@Disabled' annotation using the 'hasAnnotation' function. It then asserts that a reason for the annotation is provided using the 'getAnnoAttr' function. If the assertion fails, it generates a message with the method and class names using the 'getName' and 'getFQN' functions.","1. URL: https://www.baeldung.com/junit-ignore-test
+Summary: This page explains the usage of @Ignore annotation in JUnit tests and why it's considered a bad practice to leave tests ignored for a long time without a valid reason.
+
+2. URL: https://junit.org/junit5/docs/current/user-guide/#writing-tests-disabling
+Summary: This page from the official JUnit 5 user guide explains the usage of @Disabled annotation to disable tests and the importance of providing a reason for disabling.",

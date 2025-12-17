@@ -1,0 +1,11 @@
+Rule migrateAssertToMatcherAssert {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (callExists(m, 'Assert.assertEquals') OR callExists(m, 'Assert.assertTrue')) {
+        assert (NOT callExists(m, 'Assert.assertThat')) {
+          msg('Method: %s in class: %s can be migrated to Hamcrest declarative style Assert.assertThat() call', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

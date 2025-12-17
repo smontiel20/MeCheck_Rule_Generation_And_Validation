@@ -1,0 +1,28 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Hibernate,https://www.jetbrains.com.cn/en-us/help/inspectopedia/HibernateConfigDomInspection.html,"The source URL provides information about a JetBrains inspection tool that checks for errors in Hibernate XML configuration. These errors may include references to non-instantiable classes, classes that do not extend the required class, classes with inappropriate scope, empty tag and attribute values, tag and attribute values that do not match the required pattern (like Java Identifiers), tags that do not include the required children tags or attributes, and tags that define objects with duplicate names.","Rule invalid-hibernate-xml-configuration {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<class>"")) {
+      for (<class> class in getElms(xml, ""<class>"")) {
+        String className = getAttr(class, ""name"");
+        if (NOT isEmpty(className)) {
+          assert ( classExists(className) AND NOT isLibraryClass(className) ) {
+            msg(""Class: %s is either non-instantiable or does not extend the required class or has inappropriate scope"", className);
+          }
+        }
+        if (isEmpty(getAttr(class, ""scope""))) {
+          msg(""Class: %s has an empty scope attribute"", className);
+        }
+        if (NOT elementExists(class, ""<property>"")) {
+          msg(""Class: %s does not include the required children tags or attributes"", className);
+        }
+        if (NOT isUniqueSN(className)) {
+          msg(""Class: %s is defined with a duplicate name"", className);
+        }
+      }
+    }
+  }
+}","The rule 'invalid-hibernate-xml-configuration' checks for errors in Hibernate XML configuration. It iterates over all XML files and checks for each class element. If the class name is not empty, it asserts that the class exists and is not a library class. If the assertion fails, it generates a message indicating that the class is either non-instantiable, does not extend the required class, or has inappropriate scope. It also checks if the scope attribute of the class is empty and generates a message if it is. Furthermore, it checks if the class element includes the required children tags or attributes and generates a message if it does not. Finally, it checks if the class name is unique and generates a message if it is not.",,The generated rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions provided and does not introduce any new functions. The rule checks for various errors in Hibernate XML configuration as specified in the prompt.,"1. URL: https://www.baeldung.com/hibernate-xml-vs-annotations
+Summary: This page discusses the differences between XML and annotation configurations in Hibernate. It mentions that XML configuration can be verbose and prone to errors, which aligns with the rule generated.
+
+2. URL: https://www.tutorialspoint.com/hibernate/hibernate_xml_mappings.htm
+Summary: This page provides a tutorial on Hibernate XML mappings. It includes information on how to define classes, which is relevant to the rule generated that checks for errors in class definitions in Hibernate XML configuration.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

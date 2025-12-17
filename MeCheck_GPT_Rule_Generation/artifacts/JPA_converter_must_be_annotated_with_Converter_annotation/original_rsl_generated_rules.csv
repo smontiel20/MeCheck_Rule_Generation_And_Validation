@@ -1,0 +1,14 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+Java Persistence API (JPA),https://www.jetbrains.com.cn/en-us/help/inspectopedia/ConverterNotAnnotatedInspection.html,The source URL provides a rule that checks for the presence of @Converter annotation on JPA converter.,"Rule JPA_Converter_Annotation_Check {
+  for (class c in getClasses()) {
+    if (getName(c).endsWith('Converter')) {
+      assert ( hasAnnotation(c, '@Converter') ) {
+        msg(""Class: %s is a JPA converter but is not annotated with @Converter"", getFQN(c));
+      }
+    }
+  }
+}","The rule 'JPA_Converter_Annotation_Check' checks all classes in the project. If the class name ends with 'Converter', it asserts that the class should be annotated with '@Converter'. If the class is not annotated with '@Converter', it generates a message indicating that the class is a JPA converter but is not annotated with '@Converter'.","The built-in functions used in this rule are 'getClasses', 'getName', 'endsWith', 'hasAnnotation', and 'getFQN'. No new functions were introduced.",,"1. URL: https://www.baeldung.com/jpa-attribute-converters
+Summary: This page explains how to use JPA Attribute Converter to map a custom model's attribute to a database column. It emphasizes the importance of annotating the converter class with @Converter.
+
+2. URL: https://thorben-janssen.com/jpa-21-how-to-implement-a-custom-basic-type-using-attribute-converter/
+Summary: This page provides a detailed guide on how to implement a custom basic type using Attribute Converter in JPA 2.1. It also highlights the necessity of using the @Converter annotation.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

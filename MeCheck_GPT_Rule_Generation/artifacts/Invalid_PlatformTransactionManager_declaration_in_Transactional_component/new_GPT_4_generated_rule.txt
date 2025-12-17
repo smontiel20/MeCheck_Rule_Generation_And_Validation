@@ -1,0 +1,13 @@
+Rule invalid-transaction-manager-declaration {
+  for (class c in getClasses()) {
+    if (hasAnnotation(c, '@Transactional')) {
+      String transactionManager = getAnnoAttr(c, '@Transactional', 'transactionManager');
+      if (NOT isEmpty(transactionManager)) {
+        assert ( exists(class tm in getClasses()) ( getName(tm) == transactionManager ) ) {
+          msg("PlatformTransactionManager: %s is not correctly defined in the application context for the @Transactional component: %s",
+              transactionManager, getName(c));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+Rule argNames_not_defined {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@AspectJ')) {
+        assert ( hasAnnoAttr(m, 'argNames') ) {
+          msg("Warning: argNames attribute not defined in @AspectJ annotation in method: %s of class: %s", getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}

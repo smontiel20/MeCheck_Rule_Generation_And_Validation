@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation
+Contexts and Dependency Injection (CDI),https://www.jetbrains.com.cn/en-us/help/inspectopedia/CdiDomBeans.html,"The JetBrains Inspectopedia page provides information about the CDI Dom Beans inspection, which reports incorrect bean definitions in beans.xml configuration files.","Rule incorrect-bean-definitions {
+  for (file xml in getXMLs()) {
+    if (elementExists(xml, ""<bean>"")) {
+      for (<bean> bean in getElms(xml, ""<bean>"")) {
+        String beanClassFQN = getAttr(bean, ""class"");
+        if (NOT isEmpty(beanClassFQN)) {
+          assert ( classExists(beanClassFQN) OR isLibraryClass(beanClassFQN) ) {
+            msg(""Incorrect bean definition: %s in bean: %s"", beanClassFQN, getName(bean));
+          }
+        }
+      }
+    }
+  }
+}","This rule, named 'incorrect-bean-definitions', checks all XML files for bean elements. For each bean element, it retrieves the fully qualified name of the bean class. If the bean class name is not empty, it asserts that the class either exists or is a library class. If the assertion fails, it generates a message indicating an incorrect bean definition, specifying the fully qualified name of the bean class and the name of the bean.",,"The rule is syntactically correct and follows the RSL syntax. It uses only the built-in functions: getXMLs, elementExists, getElms, getAttr, isEmpty, classExists, isLibraryClass, and getName. The rule logic is sound as it checks for incorrect bean definitions in XML files, which aligns with the topic and content provided.","1. https://www.baeldung.com/cdi-qualifiers: This page from Baeldung provides a comprehensive guide on CDI qualifiers in Java, including how to define beans in beans.xml files. It also discusses common mistakes and how to avoid them.
+2. https://stackoverflow.com/questions/10604298/cdi-beans-xml-not-found: This StackOverflow thread discusses issues related to incorrect bean definitions in beans.xml files, including missing or incorrect class names.",

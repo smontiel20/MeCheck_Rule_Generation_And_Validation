@@ -1,0 +1,16 @@
+framework,source URL (JetBrains web page),brief_description of the content in the source URL,GPT-4 generated_rule,generated_rule_explanation from GPT-4,new_built-in_functions_explanation if any,PRE_model_validation,3rd-party most relevant URLs and summary for each URL,POST_model validation,SerpAPI-found URLs
+AOP,https://www.jetbrains.com.cn/en-us/help/inspectopedia/PointcutMethodStyleInspection.html,"The source URL provides a rule for validating @Pointcut methods in Aspect Oriented Programming (AOP). The rule checks that these methods have a void return type, do not have a throws clause, and have an empty method body.","Rule pointcut-method-style {
+  for (class c in getClasses()) {
+    for (method m in getMethods(c)) {
+      if (hasAnnotation(m, '@Pointcut')) {
+        assert (getReturnType(m) == 'void' AND NOT hasParamType(m, 'throws') AND isEmpty(getBody(m))) {
+          msg('Method: %s in class: %s is a @Pointcut method but does not follow the style: void return type, no throws clause, and an empty method body', getName(m), getFQN(c));
+        }
+      }
+    }
+  }
+}","The rule 'pointcut-method-style' checks all classes and their methods. If a method has the @Pointcut annotation, it asserts that the method's return type is void, it does not have a throws clause, and its body is empty. If these conditions are not met, it generates a message indicating the method and class that violate the rule.",,"The rule 'pointcut-method-style' is syntactically correct according to the Rule-Specific Language (RSL) syntax. It uses the built-in functions: getClasses, getMethods, hasAnnotation, getReturnType, hasParamType, isEmpty, getBody, getName, and getFQN. No new functions were introduced.","1. URL: https://www.baeldung.com/spring-aop-pointcut-tutorial
+Summary: This page provides a tutorial on using @Pointcut in Spring AOP. It explains the concept and usage of pointcuts but does not specifically address the style rules.
+
+2. URL: https://www.tutorialspoint.com/spring/spring_aop_pointcutadvice.htm
+Summary: This page from TutorialsPoint explains the concept of Pointcut and Advice in Spring AOP. It provides examples of pointcut expressions but does not discuss the method style rules.",,https://stackoverflow.com/questions/31403203/mismatch-in-pathvariable-resolving; https://stackoverflow.com/questions/15431180/configure-error-page-for-pathvariable-type-mismatch; https://github.com/spring-projects/spring-boot/issues/25846

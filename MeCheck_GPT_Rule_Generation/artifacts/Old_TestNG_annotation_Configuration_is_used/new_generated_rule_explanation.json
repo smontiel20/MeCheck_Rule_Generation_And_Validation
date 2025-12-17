@@ -1,0 +1,3 @@
+{
+  "new_generated_rule_explanation": "The rule 'old-configuration-annotation-used' checks all classes in the project. If a class has the @Configuration annotation, it asserts that the class should not have this annotation. If the assertion fails, it generates a message indicating that the class uses the outdated @Configuration annotation and suggests using the modern @BeforeXXX / @AfterXXX annotations instead."
+}
